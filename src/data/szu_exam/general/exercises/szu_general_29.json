@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_29",
+  "title": "字符分类统计",
+  "difficulty": "easy",
+  "description": "输入一行字符，统计其中的大写字母、小写字母、数字、空格和其他字符数。\n\n### 输入\n\n一行 ASCII 文本，不超过 1000 字符，行末换行不参与统计。\n\n### 输出\n\n按大写、小写、数字、空格、其他的顺序输出五个计数。",
+  "source": {
+    "section": "常规题",
+    "number": 29,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "Aa1 ! Zz09",
+      "expected_output": "2 2 3 2 1"
+    },
+    {
+      "input": "",
+      "expected_output": "0 0 0 0 0"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int c, counts[5] = {0};\n    while ((c = getchar()) != EOF && c != '\\n') {\n        if (c >= 'A' && c <= 'Z') counts[0]++;\n        else if (c >= 'a' && c <= 'z') counts[1]++;\n        else if (c >= '0' && c <= '9') counts[2]++;\n        else if (c == ' ') counts[3]++;\n        else counts[4]++;\n    }\n    printf(\"%d %d %d %d %d\\n\", counts[0], counts[1], counts[2], counts[3], counts[4]);\n    return 0;\n}\n"
+}

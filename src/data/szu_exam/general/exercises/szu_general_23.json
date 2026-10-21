@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_23",
+  "title": "汉诺塔",
+  "difficulty": "medium",
+  "description": "用递归实现汉诺塔，把 n 个盘子从 A 柱经 B 柱移到 C 柱，输出移动步骤。\n\n### 输入\n\n整数 n，1 ≤ n ≤ 10。\n\n### 输出\n\n每步一行，格式为 A->C；字母表示实际起点和终点。",
+  "source": {
+    "section": "常规题",
+    "number": 23,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2",
+      "expected_output": "A->B\nA->C\nB->C"
+    },
+    {
+      "input": "1",
+      "expected_output": "A->C"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nvoid hanoi(int n, char from, char via, char to) {\n    if (n == 0) return;\n    hanoi(n - 1, from, to, via);\n    printf(\"%c->%c\\n\", from, to);\n    hanoi(n - 1, via, from, to);\n}\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    hanoi(n, 'A', 'B', 'C');\n    return 0;\n}\n"
+}

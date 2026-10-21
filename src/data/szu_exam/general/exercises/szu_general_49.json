@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_49",
+  "title": "递归求勒让德多项式",
+  "difficulty": "medium",
+  "description": "用递归计算 n 阶勒让德多项式 Pₙ(x)。\n\n### 输入\n\n整数 n（0～15）和实数 x（-1～1）。\n\n### 输出\n\nPₙ(x)，保留六位小数。\n\n### 补充约定\n\nP₀(x)=1，P₁(x)=x，Pₙ(x)=((2n−1)xPₙ₋₁(x)−(n−1)Pₙ₋₂(x))/n。",
+  "source": {
+    "section": "常规题",
+    "number": 49,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2 0.5",
+      "expected_output": "-0.125000"
+    },
+    {
+      "input": "0 0.2",
+      "expected_output": "1.000000"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ndouble legendre(int n, double x) {\n    if (n == 0) return 1;\n    if (n == 1) return x;\n    return ((2*n - 1)*x*legendre(n-1, x) - (n-1)*legendre(n-2, x)) / n;\n}\n\nint main(void) {\n    int n;\n    double x;\n    scanf(\"%d%lf\", &n, &x);\n    printf(\"%.6f\\n\", legendre(n, x));\n    return 0;\n}\n"
+}

@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_44",
+  "title": "连接两个字符串",
+  "difficulty": "easy",
+  "description": "编写函数把两个字符串连接起来，不使用 strcat。\n\n### 输入\n\n两行字符串，每行最多 100 个 ASCII 字符，可含空格。\n\n### 输出\n\n连接后的字符串。\n\n### 补充约定\n\n原目录写作“连接两个字符”，结合后续字符串题，本练习按连接两个字符串实现。",
+  "source": {
+    "section": "常规题",
+    "number": 44,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "Hello \nC",
+      "expected_output": "Hello C"
+    },
+    {
+      "input": "\nworld",
+      "expected_output": "world"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char a[202], b[102];\n    fgets(a, 102, stdin); fgets(b, sizeof(b), stdin);\n    a[strcspn(a, \"\\n\")] = '\\0'; b[strcspn(b, \"\\n\")] = '\\0';\n    int i = 0, j = 0;\n    while (a[i]) i++;\n    do { a[i++] = b[j]; } while (b[j++]);\n    puts(a);\n    return 0;\n}\n"
+}

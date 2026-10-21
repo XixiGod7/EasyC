@@ -70,8 +70,9 @@ def main():
     LOG.info("Starting EasyC application")
     LOG.info("Launching EasyC application")
     demo.launch(
-        # server_name="0.0.0.0",
-        # server_port=7860
+        server_name=os.getenv("GRADIO_SERVER_NAME", "127.0.0.1"),
+        server_port=int(os.getenv("GRADIO_SERVER_PORT", "7860")),
+        share=False,
     )
 
 

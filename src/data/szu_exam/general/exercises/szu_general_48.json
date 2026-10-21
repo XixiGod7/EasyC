@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_48",
+  "title": "最长单词",
+  "difficulty": "medium",
+  "description": "输入一行字符，输出其中最长的单词。\n\n### 输入\n\n一行不超过 1000 字符的 ASCII 文本，以空白字符分词。\n\n### 输出\n\n最长单词；长度相同取第一个，空行输出空行。",
+  "source": {
+    "section": "常规题",
+    "number": 48,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "I love programming in C",
+      "expected_output": "programming"
+    },
+    {
+      "input": "one two",
+      "expected_output": "one"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char line[1002], best[1002] = \"\";\n    if (!fgets(line, sizeof(line), stdin)) line[0] = '\\0';\n    char *word = strtok(line, \" \\t\\r\\n\");\n    while (word) {\n        if (strlen(word) > strlen(best)) strcpy(best, word);\n        word = strtok(NULL, \" \\t\\r\\n\");\n    }\n    puts(best);\n    return 0;\n}\n"
+}

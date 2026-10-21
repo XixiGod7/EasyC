@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_33",
+  "title": "小球反弹的总路程",
+  "difficulty": "easy",
+  "description": "一个球从 100 米高处落下，每次反弹到原高度的一半。求第 n 次落地时共经过多少米。\n\n### 输入\n\n整数 n，1 ≤ n ≤ 30。\n\n### 输出\n\n总路程，保留六位小数。",
+  "source": {
+    "section": "常规题",
+    "number": 33,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1",
+      "expected_output": "100.000000"
+    },
+    {
+      "input": "3",
+      "expected_output": "250.000000"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n;\n    double distance = 100, height = 50;\n    scanf(\"%d\", &n);\n    for (int i = 1; i < n; i++) { distance += 2 * height; height /= 2; }\n    printf(\"%.6f\\n\", distance);\n    return 0;\n}\n"
+}

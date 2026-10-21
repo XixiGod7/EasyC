@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#194d83" />
+    <meta
+      name="description"
+      content="EasyC：从第一行 C 代码开始。在线习题、浏览器编译运行与可选 AI 助教。"
+    />
+    <title>EasyC · C 语言学习伙伴</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="EasyC 首页"
+        ><span class="brand-mark">C<span>_</span></span
+        ><strong>EasyC</strong><span class="brand-divider"></span
+        ><small>让编程学习更轻松</small></a
+      >
+      <nav aria-label="主导航">
+        <a href="#home" data-nav="home">首页</a
+        ><a href="#practice" data-nav="practice">习题练习</a
+        ><a href="#compiler" data-nav="compiler">在线编译</a
+        ><a href="#settings" data-nav="settings">设置</a>
+      </nav>
+      <span class="runtime-badge"><i></i> 浏览器本地运行</span>
+    </header>
+
+    <main>
+      <section id="home-view" class="home-view" aria-labelledby="home-title">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow">从零开始，写下你的第一行 C</span>
+            <h1 id="home-title">你的专属<br /><em>C 语言学习伙伴。</em></h1>
+            <p>
+              从变量到指针，从理解题意到运行代码。<br />把每一次尝试，都变成看得见的进步。
+            </p>
+            <div class="hero-actions">
+              <a href="#practice" class="button primary"
+                >开始练习 <span>→</span></a
+              ><a href="#compiler" class="button secondary">打开编译器</a>
+            </div>
+            <div class="hero-stats">
+              <span><b id="chapter-total">13</b> 个学习专题</span><span><b id="exercise-total">141</b> 道精选习题</span
+              ><span><b>0</b> 环境安装</span>
+            </div>
+          </div>
+          <div class="hero-code" aria-label="C 语言示例">
+            <div class="code-window-bar">
+              <span><i></i><i></i><i></i></span><small>hello.c</small
+              ><span class="code-language">C</span>
+            </div>
+            <pre><span class="syntax-comment">// 每一段旅程，都从 Hello 开始</span>
+<span class="syntax-purple">#include</span> <span class="syntax-green">&lt;stdio.h&gt;</span>
+
+<span class="syntax-blue">int</span> main(<span class="syntax-blue">void</span>) {
+    printf(<span class="syntax-green">"Hello, EasyC!\n"</span>);
+    <span class="syntax-purple">return</span> <span class="syntax-orange">0</span>;
+}</pre>
+            <div class="hero-output">
+              <span>运行结果</span><code>Hello, EasyC!</code
+              ><small><i></i> 运行成功</small>
+            </div>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <a href="#practice" class="feature-card"
+            ><span class="feature-number">01 / PRACTICE</span>
+            <h2>循序渐进，学会思考</h2>
+            <p>从零基础章节到深大考题，结合样例输入输出与参考答案练习。</p>
+            <span class="text-link">探索题库 →</span></a
+          ><a href="#compiler" class="feature-card"
+            ><span class="feature-number">02 / EXPERIMENT</span>
+            <h2>随手一写，即刻验证</h2>
+            <p>代码在浏览器中编译与运行。无需安装工具，专注眼前的问题。</p>
+            <span class="text-link">试着运行 →</span></a
+          ><a href="#settings" class="feature-card"
+            ><span class="feature-number">03 / UNDERSTAND</span>
+            <h2>多问一步，理解更深</h2>
+            <p>可选连接自己的 AI 助教，获取代码解释、问题分析与改进建议。</p>
+            <span class="text-link">配置 AI →</span></a
+          >
+        </div>
+      </section>
+
+      <section
+        id="lab-view"
+        class="lab-view"
+        hidden
+        aria-labelledby="lab-title"
+      >
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" id="lab-eyebrow"
+              >一步一步，把知识写进代码</span
+            >
+            <h1 id="lab-title">习题练习</h1>
+          </div>
+          <label id="example-picker" hidden
+            >示例代码
+            <select id="example-select">
+              <option value="hello">Hello, EasyC</option>
+              <option value="sum">输入与求和</option>
+              <option value="pointer">指针与数组</option>
+            </select></label
+          >
+        </div>
+        <div class="lab-grid">
+          <aside class="exercise-sidebar practice-only">
+            <label class="field-label" for="category-select">题库分类</label>
+            <select id="category-select" aria-label="选择题库分类"></select>
+            <p id="category-description" class="category-description"></p>
+            <label class="field-label" for="chapter-select">章节 / 专题</label
+            ><select id="chapter-select" aria-label="选择章节"></select>
+            <div class="sidebar-heading">
+              <span>本章习题</span><span id="exercise-count"></span>
+            </div>
+            <div id="exercise-list" class="exercise-list"></div>
+          </aside>
+          <article class="question-panel practice-only">
+            <div class="panel-tabs" role="tablist" aria-label="题目与答案">
+              <button
+                class="active"
+                id="question-tab"
+                role="tab"
+                aria-selected="true"
+                aria-controls="question-content"
+              >
+                题目描述</button
+              ><button
+                id="answer-tab"
+                role="tab"
+                aria-selected="false"
+                aria-controls="answer-content"
+              >
+                参考答案
+              </button>
+            </div>
+            <div id="question-content" class="question-content" role="tabpanel">
+              <span id="question-difficulty" class="difficulty"></span>
+              <h2 id="question-title"></h2>
+              <div id="question-description" class="markdown"></div>
+              <p id="question-source" class="question-source" hidden></p>
+              <div id="test-cases"></div>
+            </div>
+            <div
+              id="answer-content"
+              class="question-content"
+              role="tabpanel"
+              hidden
+            >
+              <p class="muted">先尝试独立完成，再对照答案理解思路。</p>
+              <pre id="reference-code" class="reference-code"></pre>
+              <button id="use-answer" class="button secondary small">
+                将答案放入编辑器
+              </button>
+            </div>
+          </article>
+          <article class="workspace">
+            <div class="editor-panel">
+              <div class="panel-heading">
+                <span><span class="file-dot"></span> main.c</span
+                ><small>C · Clang / WebAssembly</small>
+              </div>
+              <div id="code-editor" class="code-editor"></div>
+              <p id="editor-hint" class="editor-hint">Enter 自动缩进 · 括号 / 引号自动配对 · Tab 缩进 · Shift + Tab 反缩进</p>
+              <div class="program-input">
+                <label for="program-input"
+                  >程序输入
+                  <span>一次输入运行所需的值，用空格或换行分隔</span></label
+                ><textarea
+                  id="program-input"
+                  rows="2"
+                  placeholder="例如：21"
+                  aria-label="程序输入"
+                ></textarea>
+              </div>
+              <div class="run-toolbar">
+                <div>
+                  <button class="button primary small" id="run-button">
+                    ▶ 运行代码</button
+                  ><button
+                    class="button secondary small practice-only"
+                    id="test-button"
+                  >
+                    测试样例</button
+                  ><button class="button danger small" id="stop-button" hidden>
+                    停止
+                  </button>
+                </div>
+                <div>
+                  <button class="text-button" id="reset-button">重置</button
+                  ><span class="shortcut">Ctrl + Enter</span>
+                </div>
+              </div>
+            </div>
+            <div class="result-panel">
+              <div class="panel-heading">
+                <span>运行结果</span
+                ><span id="result-status" class="result-status">等待运行</span>
+              </div>
+              <div class="result-body">
+                <p id="runtime-progress" role="status" aria-live="polite">
+                  写好代码，点击「运行代码」。
+                </p>
+                <pre
+                  id="program-output"
+                  aria-label="运行结果"
+                  tabindex="0"
+                ></pre>
+                <div id="sample-results"></div>
+              </div>
+              <div class="ai-panel">
+                <div class="ai-heading">
+                  <h3>AI 助教</h3>
+                  <button id="ai-button" class="button secondary small">
+                    分析代码 ↗
+                  </button>
+                </div>
+                <div id="ai-feedback" class="markdown muted" aria-live="polite">
+                  在设置中配置 AI 服务商、模型和 API Key 后，可以请 AI 帮你分析代码。
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="lab-note">
+          代码在当前浏览器中运行，单次运行限时 5
+          秒。首次运行需要下载编译器，之后使用缓存。草稿自动保存在本机浏览器。
+        </p>
+      </section>
+
+      <section
+        id="settings-view"
+        class="settings-view"
+        hidden
+        aria-labelledby="settings-title"
+      >
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">按自己的节奏，探索更多</span>
+            <h1 id="settings-title">设置</h1>
+          </div>
+        </div>
+        <div class="settings-grid">
+          <article class="settings-card">
+            <span class="feature-number">AI ASSISTANT</span>
+            <h2>连接你的 AI 助教</h2>
+            <p>
+              选择预设服务商，或连接自定义的 OpenAI 兼容接口。AI
+              调用费用按你的服务商账户用量收取。
+            </p>
+            <form id="settings-form">
+              <label class="field-label" for="ai-provider">AI 服务商</label>
+              <select id="ai-provider">
+                <option value="deepseek">DeepSeek（预设）</option>
+                <option value="custom">自定义服务商（OpenAI 兼容）</option>
+              </select>
+              <label class="field-label" for="api-base-url">API 服务地址（Base URL）</label>
+              <input id="api-base-url" type="url" required maxlength="2048" spellcheck="false" autocomplete="off" placeholder="https://api.example.com/v1" aria-describedby="api-address-hint" />
+              <p id="api-address-hint" class="field-hint">填写服务商的公网 HTTPS 地址，包含其要求的 /v1 等前缀；也支持完整的 /chat/completions 地址。切换服务商或修改地址后需重新填写密钥。</p>
+              <label class="field-label" for="api-model">模型名称</label>
+              <input id="api-model" type="text" required maxlength="200" spellcheck="false" autocomplete="off" placeholder="填写服务商提供的模型 ID" />
+              <label class="field-label" for="api-key">API Key</label
+              ><input
+                id="api-key"
+                type="password"
+                autocomplete="off"
+                required
+                minlength="8"
+                maxlength="4096"
+                placeholder="填写当前服务商的密钥"
+              />
+              <p class="field-hint">
+                密钥只保留在当前页面内存中，刷新后需重新填写。地址和模型可在本机记住。
+              </p>
+              <div class="settings-actions">
+                <button class="button primary small" type="submit">
+                  保存本次设置</button
+                ><button class="button secondary small" id="test-api" type="button">检测连通性</button
+                ><button class="text-button" id="cancel-api-test" type="button" hidden>取消检测</button
+                ><button class="text-button" id="clear-key" type="button">
+                  清除密钥
+                </button>
+              </div>
+              <p id="settings-status" class="settings-message" role="status" aria-live="polite"></p>
+              <p id="api-test-status" class="settings-message" role="status" aria-live="polite"></p>
+              <p class="field-hint">检测使用当前填写的配置，向所选模型发送一条简短测试消息，不包含你的代码；可能产生少量调用费用。</p>
+            </form>
+            <a
+              id="provider-key-link"
+              href="https://platform.deepseek.com/api_keys"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-link"
+              >前往 DeepSeek 获取密钥 ↗</a
+            >
+          </article>
+          <article class="settings-card environment-card">
+            <span class="feature-number">YOUR WORKSPACE</span>
+            <h2>轻量，也足够认真</h2>
+            <dl>
+              <div>
+                <dt>网站托管</dt>
+                <dd>Cloudflare 免费服务</dd>
+              </div>
+              <div>
+                <dt>编译环境</dt>
+                <dd>浏览器内 Clang 16 / WebAssembly</dd>
+              </div>
+              <div>
+                <dt>题库来源</dt>
+                <dd>零基础练习 + 深大考题 · 141 题</dd>
+              </div>
+              <div>
+                <dt>代码与草稿</dt>
+                <dd>在你的浏览器本地保存</dd>
+              </div>
+            </dl>
+            <p class="field-hint">
+              支持标准 C 学习练习，不提供原生 Linux
+              系统环境。点击「分析代码」时，代码、题目与运行结果会经本站接口发送给你配置的
+              AI 服务商。
+            </p>
+            <a
+              href="/vendor/wasmer-0.19.1/LICENSE"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-link"
+              >Wasmer 运行时许可 ↗</a
+            >
+          </article>
+        </div>
+      </section>
+      <div id="load-error" class="load-error" role="alert" hidden></div>
+    </main>
+    <footer class="site-footer">
+      <span><strong>EasyC</strong> · 让每一行代码都有收获</span
+      ><a
+        href="https://github.com/XixiGod7/EasyC"
+        target="_blank"
+        rel="noopener noreferrer"
+        >查看项目 ↗</a
+      >
+    </footer>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

@@ -1,21 +1,13 @@
-FROM python:3.10-slim
+FROM python:3.10-slim-bookworm
 
 WORKDIR /app
 
-# 完全清理并重写 sources.list
-RUN rm -f /etc/apt/sources.list.d/* && \
-    echo "deb https://mirrors.aliyun.com/debian/ bookworm main contrib non-free non-free-firmware" > /etc/apt/sources.list && \
-    echo "deb https://mirrors.aliyun.com/debian/ bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
-    echo "deb https://mirrors.aliyun.com/debian-security bookworm-security main contrib non-free non-free-firmware" >> /etc/apt/sources.list && \
-    apt-get clean && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        gcc \
-        libc6-dev \
-    && apt-get clean \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gcc libc6-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
-    && pip config set install.trusted-host mirrors.aliyun.com
+    && useradd --create-home --uid 10001 easyc \
+    && mkdir -p /app/logs /tmp/compile \
+    && chown easyc:easyc /app/logs /tmp/compile
 
 # 先复制 requirements.txt
 COPY requirements.txt .
@@ -23,11 +15,18 @@ COPY requirements.txt .
 # 安装 Python 依赖
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 复制其余项目文件
-COPY . .
+COPY src ./src
+COPY prompts ./prompts
 
 # 环境变量设置
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/app/src \
+    PYTHONUNBUFFERED=1 \
+    PYTHONUTF8=1 \
+    GRADIO_SERVER_NAME=0.0.0.0 \
+    GRADIO_SERVER_PORT=7860 \
+    GRADIO_ANALYTICS_ENABLED=False
+
+USER easyc
 
 EXPOSE 7860
 

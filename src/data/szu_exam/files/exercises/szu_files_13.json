@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_files",
+  "id": "szu_files_13",
+  "title": "职工工资文件与删除记录",
+  "difficulty": "hard",
+  "description": "employee 文件中每名职工的数据包含姓名、职工号、性别、年龄、住址、工资、健康状况、文化程度。提取职工号、工资信息建立简明工资文件，再删除一名指定职工，将结果写回。\n\n### 输入\n\n第一行 n（1～100）；随后 n 行姓名、职工号、性别（M/F）、年龄、住址、工资、健康状况、文化程度，所有文本字段无空白，长度至多 31 字符。最后输入要删除的职工号。\n\n### 输出\n\n先输出完整工资文件的职工号、工资；再输出一行 AFTER；之后输出删除后的工资文件。工资两位小数；无剩余记录输出 EMPTY。保持原顺序。\n\n### 在线练习说明\n\n本题读写浏览器沙箱中的临时文件。原题涉及的已有文件由程序按输入内容初始化；运行后把目标文件内容打印到标准输出，用于检查样例。每次运行的文件互相独立，结束后不保留。",
+  "source": {
+    "section": "文件题",
+    "number": 13,
+    "image": "6.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2\nAlice 1 F 30 Shenzhen 8000 Healthy Bachelor\nBob 2 M 28 Guangzhou 7500 Healthy Master\n1",
+      "expected_output": "1 8000.00\n2 7500.00\nAFTER\n2 7500.00"
+    },
+    {
+      "input": "1\nAlice 1 F 30 Shenzhen 8000 Healthy Bachelor\n1",
+      "expected_output": "1 8000.00\nAFTER\nEMPTY"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\nFILE *open_file(const char *path, const char *mode) {\n    FILE *file = fopen(path, mode);\n    if (!file) { perror(path); exit(1); }\n    return file;\n}\nvoid show_file(const char *path) {\n    FILE *file = open_file(path, \"r\");\n    int ch;\n    while ((ch = fgetc(file)) != EOF) putchar(ch);\n    fclose(file);\n}\nvoid copy_file(const char *source, const char *target) {\n    FILE *in = open_file(source, \"rb\"), *out = open_file(target, \"wb\");\n    int ch;\n    while ((ch = fgetc(in)) != EOF) fputc(ch, out);\n    fclose(in); fclose(out);\n}\n\ntypedef struct { char name[32], address[32], health[32], education[32], sex; int num, age; double salary; } Employee;\n\nint main(void) {\n    int n, delete_number;\n    scanf(\"%d\", &n);\n    FILE *file = open_file(\"employee\", \"w\");\n    for (int i = 0; i < n; i++) {\n        Employee e;\n        scanf(\"%31s%d %c%d%31s%lf%31s%31s\", e.name, &e.num, &e.sex, &e.age, e.address, &e.salary, e.health, e.education);\n        fprintf(file, \"%s %d %c %d %s %.2f %s %s\\n\", e.name, e.num, e.sex, e.age, e.address, e.salary, e.health, e.education);\n    }\n    fclose(file);\n    scanf(\"%d\", &delete_number);\n    FILE *source = open_file(\"employee\", \"r\"), *wages = open_file(\"wages\", \"w\");\n    for (int i = 0; i < n; i++) {\n        Employee e;\n        if (fscanf(source, \"%31s%d %c%d%31s%lf%31s%31s\", e.name, &e.num, &e.sex, &e.age, e.address, &e.salary, e.health, e.education) != 8) return 1;\n        fprintf(wages, \"%d %.2f\\n\", e.num, e.salary);\n    }\n    fclose(source); fclose(wages);\n    show_file(\"wages\"); puts(\"AFTER\");\n    wages = open_file(\"wages\", \"r\");\n    FILE *updated = open_file(\"wages.tmp\", \"w\");\n    int number, count = 0;\n    double salary;\n    while (fscanf(wages, \"%d%lf\", &number, &salary) == 2) {\n        if (number != delete_number) { fprintf(updated, \"%d %.2f\\n\", number, salary); count++; }\n    }\n    fclose(wages); fclose(updated);\n    if (remove(\"wages\") != 0 || rename(\"wages.tmp\", \"wages\") != 0) return 1;\n    if (count) show_file(\"wages\"); else puts(\"EMPTY\");\n    return 0;\n}\n"
+}

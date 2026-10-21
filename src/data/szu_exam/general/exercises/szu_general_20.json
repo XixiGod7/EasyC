@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_20",
+  "title": "嵌套调用求四数最大值",
+  "difficulty": "easy",
+  "description": "输入 4 个整数，用二元最大值函数的嵌套调用求最大值。\n\n### 输入\n\n四个整数。\n\n### 输出\n\n最大值。",
+  "source": {
+    "section": "常规题",
+    "number": 20,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "3 8 -1 6",
+      "expected_output": "8"
+    },
+    {
+      "input": "-9 -3 -6 -4",
+      "expected_output": "-3"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nint maximum(int a, int b) { return a > b ? a : b; }\n\nint main(void) {\n    int a, b, c, d;\n    scanf(\"%d%d%d%d\", &a, &b, &c, &d);\n    printf(\"%d\\n\", maximum(maximum(a, b), maximum(c, d)));\n    return 0;\n}\n"
+}

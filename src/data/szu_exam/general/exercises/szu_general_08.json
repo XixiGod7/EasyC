@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_08",
+  "title": "三个数从小到大输出",
+  "difficulty": "easy",
+  "description": "输入三个整数，按从小到大顺序输出。\n\n### 输入\n\n三个整数。\n\n### 输出\n\n升序排列后的三个整数。",
+  "source": {
+    "section": "常规题",
+    "number": 8,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "8 -2 3",
+      "expected_output": "-2 3 8"
+    },
+    {
+      "input": "1 1 0",
+      "expected_output": "0 1 1"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int a[3];\n    scanf(\"%d%d%d\", &a[0], &a[1], &a[2]);\n    for (int i = 0; i < 2; i++) for (int j = i + 1; j < 3; j++)\n        if (a[i] > a[j]) { int t = a[i]; a[i] = a[j]; a[j] = t; }\n    printf(\"%d %d %d\\n\", a[0], a[1], a[2]);\n    return 0;\n}\n"
+}

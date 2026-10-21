@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_03",
+  "title": "候选人选票统计",
+  "difficulty": "medium",
+  "description": "有 3 名候选人，每个选民只能投 1 人。先输入候选人姓名，再输入选票，统计各候选人的得票数。\n\n### 输入\n\n先输入 3 个不同的候选人姓名（不含空白，最多 31 字符）；再输入票数 n（0～1000）及 n 个被选人姓名。\n\n### 输出\n\n按候选人输入顺序，每行输出姓名、票数；投给未列出的姓名视为无效票。",
+  "source": {
+    "section": "结构体题",
+    "number": 3,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "Alice Bob Chen\n6\nAlice Bob Alice Chen Alice Other",
+      "expected_output": "Alice 3\nBob 1\nChen 1"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct { char name[32]; int votes; } Candidate;\n\nint main(void) {\n    Candidate candidates[3];\n    for (int i = 0; i < 3; i++) { scanf(\"%31s\", candidates[i].name); candidates[i].votes = 0; }\n    int n;\n    scanf(\"%d\", &n);\n    for (int j = 0; j < n; j++) {\n        char name[32]; scanf(\"%31s\", name);\n        for (int i = 0; i < 3; i++) if (strcmp(name, candidates[i].name) == 0) { candidates[i].votes++; break; }\n    }\n    for (int i = 0; i < 3; i++) printf(\"%s %d\\n\", candidates[i].name, candidates[i].votes);\n    return 0;\n}\n"
+}

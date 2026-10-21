@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_39",
+  "title": "筛法求素数",
+  "difficulty": "medium",
+  "description": "使用埃拉托斯特尼筛法，输出不超过 n 的所有素数。\n\n### 输入\n\n整数 n，2 ≤ n ≤ 10000。\n\n### 输出\n\n按升序输出素数，空格分隔。",
+  "source": {
+    "section": "常规题",
+    "number": 39,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "20",
+      "expected_output": "2 3 5 7 11 13 17 19"
+    },
+    {
+      "input": "2",
+      "expected_output": "2"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, composite[10001] = {0};\n    scanf(\"%d\", &n);\n    for (int p = 2; p <= n / p; p++)\n        if (!composite[p]) for (int k = p*p; k <= n; k += p) composite[k] = 1;\n    for (int p = 2; p <= n; p++) if (!composite[p]) printf(\"%d \", p);\n    putchar('\\n');\n    return 0;\n}\n"
+}

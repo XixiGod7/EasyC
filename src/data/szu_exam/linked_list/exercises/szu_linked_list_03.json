@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_linked_list",
+  "id": "szu_linked_list_03",
+  "title": "合并链表并按学号排序",
+  "difficulty": "hard",
+  "description": "已有 a、b 两个链表，每个结点包含学号、成绩。合并两个链表并按学号升序排列。\n\n### 输入\n\n先输入 a 的结点数 n（0～100）及 n 行学号、整数成绩，再输入 b 的结点数 m（0～100）及 m 行记录。所有学号互不相同。\n\n### 输出\n\n合并后按学号升序逐行输出学号、成绩；空链表输出 EMPTY。",
+  "source": {
+    "section": "链表题",
+    "number": 3,
+    "image": "4.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2\n3 85\n1 80\n2\n4 95\n2 90",
+      "expected_output": "1 80\n2 90\n3 85\n4 95"
+    },
+    {
+      "input": "0\n0",
+      "expected_output": "EMPTY"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node { int num, score; struct Node *next; } Node;\nNode *read_list(int n) {\n    Node *head = NULL;\n    for (int i = 0; i < n; i++) {\n        Node *node = malloc(sizeof(*node));\n        if (!node) exit(1);\n        scanf(\"%d%d\", &node->num, &node->score);\n        Node **link = &head;\n        while (*link && (*link)->num < node->num) link = &(*link)->next;\n        node->next = *link; *link = node;\n    }\n    return head;\n}\n\nint main(void) {\n    int n, m;\n    scanf(\"%d\", &n); Node *a = read_list(n);\n    scanf(\"%d\", &m); Node *b = read_list(m);\n    Node *head = NULL, **tail = &head;\n    while (a || b) {\n        Node **choice = !b || (a && a->num < b->num) ? &a : &b;\n        *tail = *choice; *choice = (*choice)->next;\n        tail = &(*tail)->next;\n    }\n    *tail = NULL;\n    if (!head) puts(\"EMPTY\");\n    while (head) {\n        printf(\"%d %d\\n\", head->num, head->score);\n        Node *next = head->next; free(head); head = next;\n    }\n    return 0;\n}\n"
+}

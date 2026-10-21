@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_32",
+  "title": "1000 以内的完数",
+  "difficulty": "easy",
+  "description": "输出 1000 以内的所有完数。完数等于它的所有正真因子之和。\n\n### 输入\n\n无输入。\n\n### 输出\n\n按升序输出全部完数。",
+  "source": {
+    "section": "常规题",
+    "number": 32,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "6 28 496"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (int n = 2; n <= 1000; n++) {\n        int sum = 1;\n        for (int d = 2; d <= n / 2; d++) if (n % d == 0) sum += d;\n        if (sum == n) printf(\"%d \", n);\n    }\n    putchar('\\n');\n    return 0;\n}\n"
+}

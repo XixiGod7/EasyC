@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_18",
+  "title": "统计单词数",
+  "difficulty": "easy",
+  "description": "输入一行字符，统计以空格分隔的单词数。\n\n### 输入\n\n一行文本，长度不超过 1000，可含连续空格和首尾空格。\n\n### 输出\n\n单词的个数。",
+  "source": {
+    "section": "常规题",
+    "number": 18,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "  hello   C world  ",
+      "expected_output": "3"
+    },
+    {
+      "input": "   ",
+      "expected_output": "0"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    char s[1002];\n    int count = 0, in_word = 0;\n    if (!fgets(s, sizeof(s), stdin)) s[0] = '\\0';\n    for (int i = 0; s[i] && s[i] != '\\n'; i++) {\n        if (s[i] == ' ') in_word = 0;\n        else if (!in_word) { count++; in_word = 1; }\n    }\n    printf(\"%d\\n\", count);\n    return 0;\n}\n"
+}

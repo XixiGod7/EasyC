@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_14",
+  "title": "数组实现斐波那契数列",
+  "difficulty": "easy",
+  "description": "用数组保存并输出 Fibonacci 数列的前 n 项。\n\n### 输入\n\n整数 n，1 ≤ n ≤ 40。\n\n### 输出\n\n一行输出 n 项。\n\n### 补充约定\n\n数列初值规定为 1、1；以 n 明确原目录未给出的数组长度。",
+  "source": {
+    "section": "常规题",
+    "number": 14,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "8",
+      "expected_output": "1 1 2 3 5 8 13 21"
+    },
+    {
+      "input": "1",
+      "expected_output": "1"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, a[40] = {1, 1};\n    scanf(\"%d\", &n);\n    for (int i = 2; i < n; i++) a[i] = a[i-1] + a[i-2];\n    for (int i = 0; i < n; i++) printf(\"%d%c\", a[i], i + 1 == n ? '\\n' : ' ');\n    return 0;\n}\n"
+}

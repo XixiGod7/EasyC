@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_31",
+  "title": "水仙花数",
+  "difficulty": "easy",
+  "description": "求出所有三位水仙花数，即各位数字的立方和等于其本身的三位数。\n\n### 输入\n\n无输入。\n\n### 输出\n\n按升序输出全部三位水仙花数。",
+  "source": {
+    "section": "常规题",
+    "number": 31,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "153 370 371 407"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (int n = 100; n <= 999; n++) {\n        int a = n / 100, b = n / 10 % 10, c = n % 10;\n        if (n == a*a*a + b*b*b + c*c*c) printf(\"%d \", n);\n    }\n    putchar('\\n');\n    return 0;\n}\n"
+}

@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_files",
+  "id": "szu_files_11",
+  "title": "插入学生记录并存入新文件",
+  "difficulty": "hard",
+  "description": "文件 stu_sort 中的学生记录已按平均分降序排列。输入一名新学生及其三门成绩，计算平均分并按原有顺序插入，保存到新文件 stu_insert。\n\n### 输入\n\n先输入 n（0～100）及 n 行已有记录：学号、姓名、三门成绩、平均分。最后输入新学生的学号、姓名、三门成绩；全部学号不同，已有平均分与三门成绩一致。\n\n### 输出\n\n输出更新后的目标文件内容，各成绩两位小数；同平均分按学号升序。\n\n### 补充约定\n\n原目录第 11、12 题分别要求存入新文件和原文件，保留为两个独立练习。新学生的姓名和学号一并输入，以便构成完整记录。\n\n### 在线练习说明\n\n本题读写浏览器沙箱中的临时文件。原题涉及的已有文件由程序按输入内容初始化；运行后把目标文件内容打印到标准输出，用于检查样例。每次运行的文件互相独立，结束后不保留。",
+  "source": {
+    "section": "文件题",
+    "number": 11,
+    "image": "6.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "3\n3 Chen 100 100 100 100\n1 Alice 80 90 100 90\n2 Bob 60 70 80 70\n4 Dan 80 80 80",
+      "expected_output": "3 Chen 100.00 100.00 100.00 100.00\n1 Alice 80.00 90.00 100.00 90.00\n4 Dan 80.00 80.00 80.00 80.00\n2 Bob 60.00 70.00 80.00 70.00"
+    },
+    {
+      "input": "0\n1 Alice 10 20 30",
+      "expected_output": "1 Alice 10.00 20.00 30.00 20.00"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\nFILE *open_file(const char *path, const char *mode) {\n    FILE *file = fopen(path, mode);\n    if (!file) { perror(path); exit(1); }\n    return file;\n}\nvoid show_file(const char *path) {\n    FILE *file = open_file(path, \"r\");\n    int ch;\n    while ((ch = fgetc(file)) != EOF) putchar(ch);\n    fclose(file);\n}\nvoid copy_file(const char *source, const char *target) {\n    FILE *in = open_file(source, \"rb\"), *out = open_file(target, \"wb\");\n    int ch;\n    while ((ch = fgetc(in)) != EOF) fputc(ch, out);\n    fclose(in); fclose(out);\n}\n\ntypedef struct { int num; char name[32]; double score[3], average; } Student;\nStudent read_student(FILE *file) {\n    Student s;\n    if (fscanf(file, \"%d%31s%lf%lf%lf%lf\", &s.num, s.name, &s.score[0], &s.score[1], &s.score[2], &s.average) != 6) exit(1);\n    return s;\n}\nvoid write_student(FILE *file, Student s) {\n    fprintf(file, \"%d %s %.2f %.2f %.2f %.2f\\n\", s.num, s.name, s.score[0], s.score[1], s.score[2], s.average);\n}\nint before(Student a, Student b) {\n    return a.average > b.average || (a.average == b.average && a.num < b.num);\n}\n\nint main(void) {\n    int n;\n    Student students[101], inserted;\n    scanf(\"%d\", &n);\n    FILE *file = open_file(\"stu_sort\", \"w\");\n    for (int i = 0; i < n; i++) write_student(file, read_student(stdin));\n    fclose(file);\n    scanf(\"%d%31s%lf%lf%lf\", &inserted.num, inserted.name, &inserted.score[0], &inserted.score[1], &inserted.score[2]);\n    inserted.average = (inserted.score[0] + inserted.score[1] + inserted.score[2]) / 3;\n    file = open_file(\"stu_sort\", \"r\");\n    for (int i = 0; i < n; i++) students[i] = read_student(file);\n    fclose(file);\n    int position = n;\n    while (position > 0 && before(inserted, students[position - 1])) {\n        students[position] = students[position - 1]; position--;\n    }\n    students[position] = inserted;\n    file = open_file(\"stu_insert\", \"w\");\n    for (int i = 0; i <= n; i++) write_student(file, students[i]);\n    fclose(file);\n    show_file(\"stu_insert\");\n    return 0;\n}\n"
+}

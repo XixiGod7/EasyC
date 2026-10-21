@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_linked_list",
+  "id": "szu_linked_list_01",
+  "title": "建立三个学生的简单链表",
+  "difficulty": "medium",
+  "description": "建立一个由 3 个学生结点组成的链表，并输出各结点的数据。\n\n### 输入\n\n3 行，每行学号、姓名、整数成绩；姓名不含空白，最多 31 字符。\n\n### 输出\n\n按输入顺序，每行输出一个学生的学号、姓名和成绩。",
+  "source": {
+    "section": "链表题",
+    "number": 1,
+    "image": "4.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 Alice 80\n2 Bob 90\n3 Chen 85",
+      "expected_output": "1 Alice 80\n2 Bob 90\n3 Chen 85"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node {\n    int num, score;\n    char name[32];\n    struct Node *next;\n} Node;\n\nNode *read_node(void) {\n    Node *node = malloc(sizeof(*node));\n    if (!node) exit(1);\n    scanf(\"%d%31s%d\", &node->num, node->name, &node->score);\n    node->next = NULL;\n    return node;\n}\n\nNode *creat(int count) {\n    Node *head = NULL, **tail = &head;\n    for (int i = 0; i < count; i++) {\n        *tail = read_node();\n        tail = &(*tail)->next;\n    }\n    return head;\n}\n\nvoid print(Node *head) {\n    if (!head) puts(\"EMPTY\");\n    for (Node *p = head; p; p = p->next) printf(\"%d %s %d\\n\", p->num, p->name, p->score);\n}\n\nvoid destroy(Node *head) {\n    while (head) { Node *next = head->next; free(head); head = next; }\n}\n\nint main(void) {\n    Node *head = creat(3);\n    print(head);\n    destroy(head);\n    return 0;\n}\n"
+}

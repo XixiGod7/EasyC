@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_11",
+  "title": "判断素数",
+  "difficulty": "easy",
+  "description": "输入一个大于 3 的整数 n，判断它是否为素数。\n\n### 输入\n\n整数 n，4 ≤ n ≤ 2147483647。\n\n### 输出\n\n素数输出 YES，否则输出 NO。",
+  "source": {
+    "section": "常规题",
+    "number": 11,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "97",
+      "expected_output": "YES"
+    },
+    {
+      "input": "100",
+      "expected_output": "NO"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, prime = 1;\n    scanf(\"%d\", &n);\n    for (int d = 2; d <= n / d; d++) if (n % d == 0) { prime = 0; break; }\n    puts(prime ? \"YES\" : \"NO\");\n    return 0;\n}\n"
+}

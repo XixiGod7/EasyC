@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_02",
+  "title": "成绩较高的学生",
+  "difficulty": "easy",
+  "description": "输入两个学生的学号、姓名和成绩，输出成绩较高者的信息。\n\n### 输入\n\n两行，每行学号、姓名、实数成绩，姓名不含空白且不超过 31 字符。\n\n### 输出\n\n学号、姓名、成绩（两位小数）；同分时输出先输入者。",
+  "source": {
+    "section": "结构体题",
+    "number": 2,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 Alice 80\n2 Bob 90",
+      "expected_output": "2 Bob 90.00"
+    },
+    {
+      "input": "1 Alice 80\n2 Bob 80",
+      "expected_output": "1 Alice 80.00"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score; } Student;\n\nint main(void) {\n    Student a, b;\n    scanf(\"%d%31s%lf\", &a.num, a.name, &a.score);\n    scanf(\"%d%31s%lf\", &b.num, b.name, &b.score);\n    Student best = a.score >= b.score ? a : b;\n    printf(\"%d %s %.2f\\n\", best.num, best.name, best.score);\n    return 0;\n}\n"
+}

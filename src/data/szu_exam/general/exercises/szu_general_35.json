@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_35",
+  "title": "迭代法求平方根",
+  "difficulty": "medium",
+  "description": "用迭代公式 xₖ₊₁ = (xₖ + a/xₖ)/2 求 √a，直到相邻两次 x 的差小于 10⁻⁵。\n\n### 输入\n\n正实数 a，10⁻⁶ ≤ a ≤ 10⁹。\n\n### 输出\n\n平方根，保留六位小数。",
+  "source": {
+    "section": "常规题",
+    "number": 35,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2",
+      "expected_output": "1.414214"
+    },
+    {
+      "input": "9",
+      "expected_output": "3.000000"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    double a, x, next;\n    scanf(\"%lf\", &a);\n    x = a > 1 ? a : 1;\n    while (1) {\n        next = (x + a / x) / 2;\n        if (fabs(next - x) < 1e-5) break;\n        x = next;\n    }\n    printf(\"%.6f\\n\", next);\n    return 0;\n}\n"
+}
