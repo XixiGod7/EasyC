@@ -3,19 +3,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "npm run build:web && wrangler dev",
     "check": "tsc --noEmit",
-    "test": "node --test cloudflare/auth.test.ts",
-    "build": "wrangler deploy --dry-run --containers-rollout=none --outdir dist",
-    "deploy": "wrangler deploy",
-    "access:setup": "node scripts/setup-access.mjs"
+    "test": "node --test cloudflare/feedback.test.ts web/compiler-core.test.js",
+    "test:compiler": "node scripts/verify-compiler.mjs",
+    "build:web": "node scripts/prepare-web.mjs && vite build",
+    "build": "npm run build:web && wrangler deploy --dry-run --outdir .wrangler/build",
+    "deploy": "npm run build:web && wrangler deploy"
   },
   "dependencies": {
-    "@cloudflare/containers": "0.3.7"
+    "@wasmer/sdk": "0.19.1",
+    "dompurify": "3.4.17",
+    "marked": "18.1.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20261021.1",
     "typescript": "7.0.2",
-    "wrangler": "4.151.3"
+    "wrangler": "4.151.3",
+    "vite": "8.3.4"
   }
 }

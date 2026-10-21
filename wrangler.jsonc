@@ -4,21 +4,10 @@
   "main": "cloudflare/index.ts",
   "compatibility_date": "2026-10-21",
   "workers_dev": true,
-  "observability": { "enabled": true },
-  "containers": [
-    {
-      "class_name": "EasyCContainer",
-      "image": "./Dockerfile",
-      "instance_type": "basic",
-      "max_instances": 1
-    }
-  ],
-  "durable_objects": {
-    "bindings": [
-      { "name": "EASYC_CONTAINER", "class_name": "EasyCContainer" }
-    ]
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"],
   },
-  "exports": {
-    "EasyCContainer": { "type": "durable-object", "storage": "sqlite" }
-  }
 }

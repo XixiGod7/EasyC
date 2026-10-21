@@ -60,3 +60,8 @@ node_modules/
 .dev.vars
 .dev.vars.*
 cloudflare-access.local.txt
+.wasmer/
+web/public/vendor/
+web/public/data/
+output/playwright/
+.playwright-cli/

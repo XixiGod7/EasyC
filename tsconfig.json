@@ -9,5 +9,5 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["cloudflare/index.ts", "cloudflare/auth.ts"]
+  "include": ["cloudflare/index.ts", "cloudflare/feedback.ts"]
 }

@@ -59,9 +59,9 @@ EasyC
 
 ## 🚀 Quick Start
 
-### Cloudflare Containers
+### Cloudflare (free browser edition)
 
-See [Cloudflare deployment instructions](CLOUDFLARE.md) for password-protected deployment and GitHub Actions builds. Requires the Workers Paid plan.
+See [Cloudflare deployment instructions](CLOUDFLARE.md). The browser edition runs C locally with WebAssembly and uses Cloudflare's free hosting. The original Python/Gradio application is also retained.
 
 ### Using Docker (Recommended)
 ```bash

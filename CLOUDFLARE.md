@@ -1,63 +1,55 @@
-# 部署 EasyC 到 Cloudflare
+# Cloudflare 免费部署
 
-EasyC 使用 Python、Gradio 和本地 GCC，因此使用 **Worker + Cloudflare Containers** 部署。
-Worker 校验访问密码，并将所有请求转发给同一个容器，保留 Gradio 的队列和设置。
-这是个人使用的部署方式；同一实例中的 AI 设置和练习选择由应用共享。
+Cloudflare 版本使用静态网页 + 免费 Worker，C 代码在访问者的浏览器里通过 Clang / WebAssembly 编译运行。
+不使用 Containers、Durable Objects、外部编译服务器或付费套餐。原 Python / Gradio 项目仍然保留，可以继续通过 Docker 或本机运行。
 
-## 套餐及资源
+## 功能
 
-- 必须开通 [Workers Paid](https://dash.cloudflare.com/?to=/:account/workers/plans)。
-- [当前基础费用为 5 美元/月](https://developers.cloudflare.com/containers/platform/pricing/)，超出包含额度的容器、网络、Worker 和 Durable Object 用量另计。
-- 配置使用 `basic` 实例（1 GiB 内存），最多一个实例，空闲 2 分钟后休眠。
-- 此配置限制实例数量，不代表账单上限。首次请求和休眠后的请求需要等待应用启动。
-- 容器文件及界面中的设置可能随实例重启丢失。题库随镜像部署，无需数据库。
+- 从原项目 JSON 题库生成 9 章、57 道练习，保留题目、输入输出和参考答案。
+- 在线 C 编辑器，支持语法高亮、程序输入、编译错误、运行输出、5 秒超时和手动停止。
+- 参考答案可放入编辑器，支持运行题目全部样例；需要人工自检的题目不会被误判为失败。
+- 草稿仅存储在当前浏览器，不需要注册账号。
+- 可选 AI 分析使用访问者自己的 DeepSeek API Key，密钥只存在页面内存中，不持久化、不写入日志。
 
-## 本机部署（需要 Docker）
+## 部署
 
-安装 Node.js 24 和运行中的 Docker 引擎后，在项目目录执行：
+需要 Node.js 24，无需安装 Docker、Python 或 GCC：
 
 ```sh
 npm ci
 npm run check
 npm test
+npm run test:compiler
+npm run build
 npx wrangler login
-npm run access:setup
 npm run deploy
-npx wrangler secret bulk .dev.vars
 ```
 
 部署命令会输出 `https://easyc.<你的 Workers 子域名>.workers.dev`。
-首次部署后需要等待数分钟完成容器创建，再打开网址，输入 `cloudflare-access.local.txt` 中的用户名和密码。
-未设置访问凭据时，Worker 返回 503，不会开放编译器。
-本地 `.dev.vars` 和密码文件已由 Git 和 Docker 忽略，切勿提交。
+`wrangler.jsonc` 只配置静态资源和 AI 代理 Worker，不会申请收费容器或开通付费套餐。
 
-## 使用 GitHub Actions 云端构建（本机无需 Docker）
-
-仓库的 `Cloudflare` 工作流会构建 Linux 镜像，并检查首页、题库、编译运行、输入输出、编译错误、执行超时及无密钥时的 AI 提示。
-
-需要部署时，在 GitHub 仓库的 Actions secrets 中配置：
-
-| Secret | 含义 |
-| --- | --- |
-| `CLOUDFLARE_ACCOUNT_ID` | 要部署到的 Cloudflare 账号 ID |
-| `CLOUDFLARE_API_TOKEN` | 具有该账号 Workers 和 Containers 部署权限的 API Token |
-| `EASYC_USERNAME` | 站点访问用户名，例如 `easyc` |
-| `EASYC_PASSWORD` | 随机生成的站点访问密码 |
-
-在 Actions → Cloudflare → Run workflow 中选择包含部署配置的分支，勾选 `deploy` 后运行。
-工作流先验证镜像，验证成功后执行完整部署，并保存访问凭据为 Worker Secrets。
-普通推送只进行验证；部署由手动工作流触发。
-
-## 本地开发及验证
+## 本地预览
 
 ```sh
-npm run access:setup  # 仅首次；不会覆盖已有密码
-npm run dev         # 需要 Docker
+npm run dev
 ```
 
-不启动 Docker 也可以执行 `npm run check`、`npm test` 和 `npm run build`。
-`build` 只验证并打包 Worker，完整镜像验证由 GitHub Actions 完成。
+通过终端给出的 `http://localhost:8787` 地址访问。不能直接双击 HTML 文件：浏览器运行环境需要 HTTPS 或 localhost，并要求跨源隔离响应头。
+构建脚本自动复制 SDK 到静态目录并生成题库；无需手动维护这些生成文件。
 
-Python 单独启动时默认监听 `127.0.0.1:7860`；Docker 设置 `GRADIO_SERVER_NAME=0.0.0.0`。
-AI 功能在界面的「设置」里填写 DeepSeek API Key 后启用；不配置密钥仍可使用题库和编译器。
-为防止访问密码暴露给编译程序，Worker 不会将认证头转发到容器。
+## 免费范围与限制
+
+- [Cloudflare 静态资源请求免费](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/)。AI 代理受 Workers Free 的请求和 CPU 限额约束。
+- [Cloudflare Workers Free 限额](https://developers.cloudflare.com/workers/platform/limits/)由平台管理；保持免费套餐即可，不需要付费订阅。
+- 首次运行 C 程序需要从 Wasmer 下载约 100 MB 的编译器，之后会使用浏览器缓存。网络较慢时需要等待。
+- 使用 Clang 16 / WebAssembly，适合标准 C 学习练习，不等同于原生 Linux GCC 环境，不提供本机操作系统、任意网络或原生系统库访问。
+- [Wasmer JavaScript SDK](https://docs.wasmer.io/runtime/js/)在客户端执行，不使用付费远程计算。
+- 题库和编译器不需要 API Key；如果主动启用 AI，DeepSeek 仍按用户自己的账户计费，网站不会提供共享付费密钥。
+- 点击 AI 分析时，代码、输入、输出和题目经本站 `/api/feedback` 转发到固定的 DeepSeek API。代理只使用当前请求提供的密钥。
+
+## GitHub Actions
+
+`Cloudflare` 工作流在 PR 和主分支推送时执行类型检查、单元测试、打包，以及真实 WebAssembly 编译、输入输出、多个样例、错误处理和超时验证。
+
+若要通过 Actions 部署，在仓库 Actions secrets 中设置 `CLOUDFLARE_ACCOUNT_ID` 和具有 Workers 部署权限的 `CLOUDFLARE_API_TOKEN`，然后手动运行工作流并勾选 `deploy`。
+本次通过本机 Wrangler 授权部署，无需向 GitHub 保存 Cloudflare 令牌。

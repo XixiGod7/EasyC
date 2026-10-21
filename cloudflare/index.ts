@@ -1,25 +1,15 @@
-import { Container } from "@cloudflare/containers";
-import { authorizeRequest, type AccessSecrets } from "./auth";
+import { handleFeedback } from "./feedback";
 
-interface Env extends AccessSecrets {
-  EASYC_CONTAINER: DurableObjectNamespace<EasyCContainer>;
-}
-
-export class EasyCContainer extends Container<Env> {
-  defaultPort = 7860;
-  sleepAfter = "2m";
+interface Env {
+  ASSETS: Fetcher;
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const challenge = await authorizeRequest(request, env);
-    if (challenge) return challenge;
-
-    // Keep Gradio's event queue and in-memory settings on the same instance.
-    const container = env.EASYC_CONTAINER.get(env.EASYC_CONTAINER.idFromName("easyc"));
-    const headers = new Headers(request.headers);
-    // The Python app and submitted C programs never receive the access password.
-    headers.delete("Authorization");
-    return container.fetch(new Request(request, { headers }));
+    const path = new URL(request.url).pathname;
+    if (path === "/api/feedback") return handleFeedback(request);
+    if (path.startsWith("/api/"))
+      return new Response("Not found", { status: 404 });
+    return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;
