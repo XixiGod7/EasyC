@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_25",
+  "title": "static 变量计算阶乘",
+  "difficulty": "medium",
+  "description": "用带 static 局部变量的函数依次计算并输出 1!～5!。\n\n### 输入\n\n无输入。\n\n### 输出\n\n一行输出五个阶乘值。",
+  "source": {
+    "section": "常规题",
+    "number": 25,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "1 2 6 24 120"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nint next_factorial(void) {\n    static int n = 0, product = 1;\n    product *= ++n;\n    return product;\n}\n\nint main(void) {\n    for (int i = 1; i <= 5; i++) printf(\"%d%c\", next_factorial(), i == 5 ? '\\n' : ' ');\n    return 0;\n}\n"
+}

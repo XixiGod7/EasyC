@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_files",
+  "id": "szu_files_09",
+  "title": "学生平均成绩写入 stud",
+  "difficulty": "medium",
+  "description": "输入 5 名学生的学号、姓名和三门课程成绩，计算平均分，把原有数据及平均分保存在文件 stud。\n\n### 输入\n\n5 行，每行学号、姓名、三门实数成绩。\n\n### 输出\n\n读回 stud，每行学号、姓名、三门成绩、平均分，成绩均保留两位小数。\n\n### 在线练习说明\n\n本题读写浏览器沙箱中的临时文件。原题涉及的已有文件由程序按输入内容初始化；运行后把目标文件内容打印到标准输出，用于检查样例。每次运行的文件互相独立，结束后不保留。",
+  "source": {
+    "section": "文件题",
+    "number": 9,
+    "image": "6.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 Alice 80 90 100\n2 Bob 60 70 80\n3 Chen 100 100 100\n4 Dan 75 75 75\n5 Eve 90 80 70",
+      "expected_output": "1 Alice 80.00 90.00 100.00 90.00\n2 Bob 60.00 70.00 80.00 70.00\n3 Chen 100.00 100.00 100.00 100.00\n4 Dan 75.00 75.00 75.00 75.00\n5 Eve 90.00 80.00 70.00 80.00"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\nFILE *open_file(const char *path, const char *mode) {\n    FILE *file = fopen(path, mode);\n    if (!file) { perror(path); exit(1); }\n    return file;\n}\nvoid show_file(const char *path) {\n    FILE *file = open_file(path, \"r\");\n    int ch;\n    while ((ch = fgetc(file)) != EOF) putchar(ch);\n    fclose(file);\n}\nvoid copy_file(const char *source, const char *target) {\n    FILE *in = open_file(source, \"rb\"), *out = open_file(target, \"wb\");\n    int ch;\n    while ((ch = fgetc(in)) != EOF) fputc(ch, out);\n    fclose(in); fclose(out);\n}\n\ntypedef struct { int num; char name[32]; double score[3]; } Student;\ndouble average(const Student *student) { return (student->score[0] + student->score[1] + student->score[2]) / 3; }\nvoid read_students(Student *a, int n) {\n    for (int i = 0; i < n; i++) scanf(\"%d%31s%lf%lf%lf\", &a[i].num, a[i].name, &a[i].score[0], &a[i].score[1], &a[i].score[2]);\n}\nvoid print_student(const Student *s) {\n    printf(\"%d %s %.2f %.2f %.2f\", s->num, s->name, s->score[0], s->score[1], s->score[2]);\n}\n\nint main(void) {\n    Student students[5];\n    read_students(students, 5);\n    FILE *file = open_file(\"stud\", \"w\");\n    for (int i = 0; i < 5; i++) fprintf(file, \"%d %s %.2f %.2f %.2f %.2f\\n\", students[i].num, students[i].name, students[i].score[0], students[i].score[1], students[i].score[2], average(&students[i]));\n    fclose(file);\n    show_file(\"stud\");\n    return 0;\n}\n"
+}

@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_45",
+  "title": "复制字符串（含终止符）",
+  "difficulty": "easy",
+  "description": "不使用 strcpy，把字符串复制到另一个数组，必须同时复制末尾的 '\\0'。\n\n### 输入\n\n一行不超过 100 个 ASCII 字符的文本。\n\n### 输出\n\n复制后的字符串。",
+  "source": {
+    "section": "常规题",
+    "number": 45,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "Hello C",
+      "expected_output": "Hello C"
+    },
+    {
+      "input": "",
+      "expected_output": ""
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char source[102], target[102];\n    if (!fgets(source, sizeof(source), stdin)) source[0] = '\\0';\n    source[strcspn(source, \"\\n\")] = '\\0';\n    int i = 0;\n    do { target[i] = source[i]; } while (source[i++]);\n    puts(target);\n    return 0;\n}\n"
+}

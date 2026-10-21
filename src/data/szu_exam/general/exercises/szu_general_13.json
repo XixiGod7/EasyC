@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_13",
+  "title": "数组逆序输出",
+  "difficulty": "easy",
+  "description": "为 10 个数组元素依次赋值 0～9，并逆序输出。\n\n### 输入\n\n无输入。\n\n### 输出\n\n一行输出逆序结果。",
+  "source": {
+    "section": "常规题",
+    "number": 13,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "9 8 7 6 5 4 3 2 1 0"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int a[10];\n    for (int i = 0; i < 10; i++) a[i] = i;\n    for (int i = 9; i >= 0; i--) printf(\"%d%c\", a[i], i ? ' ' : '\\n');\n    return 0;\n}\n"
+}

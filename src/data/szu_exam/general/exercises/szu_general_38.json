@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_38",
+  "title": "两队比赛名单",
+  "difficulty": "medium",
+  "description": "两队选手分别为 A、B、C 和 X、Y、Z，每人只赛一场。已知 A 不和 X 比赛，C 不和 X、Z 比赛，求比赛名单。\n\n### 输入\n\n无输入。\n\n### 输出\n\n按 A、B、C 的顺序，每行输出一组对阵，格式 A-Z。",
+  "source": {
+    "section": "常规题",
+    "number": 38,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "A-Z\nB-X\nC-Y"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (char a = 'X'; a <= 'Z'; a++)\n        for (char b = 'X'; b <= 'Z'; b++)\n            for (char c = 'X'; c <= 'Z'; c++)\n                if (a != b && a != c && b != c && a != 'X' && c != 'X' && c != 'Z')\n                    printf(\"A-%c\\nB-%c\\nC-%c\\n\", a, b, c);\n    return 0;\n}\n"
+}

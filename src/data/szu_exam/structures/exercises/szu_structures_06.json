@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_06",
+  "title": "指针输出三个学生的信息",
+  "difficulty": "medium",
+  "description": "用结构体数组保存 3 个学生的学号、姓名、住址，使用指针逐一输出。\n\n### 输入\n\n3 行，每行学号、姓名、住址；姓名和住址不含空白，分别最多 31、100 字符。\n\n### 输出\n\n按输入顺序逐行输出学号、姓名、住址。",
+  "source": {
+    "section": "结构体题",
+    "number": 6,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 Alice Shenzhen\n2 Bob Guangzhou\n3 Chen Zhuhai",
+      "expected_output": "1 Alice Shenzhen\n2 Bob Guangzhou\n3 Chen Zhuhai"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32], address[101]; } Student;\n\nint main(void) {\n    Student students[3];\n    for (Student *p = students; p < students + 3; p++) scanf(\"%d%31s%100s\", &p->num, p->name, p->address);\n    for (Student *p = students; p < students + 3; p++) printf(\"%d %s %s\\n\", p->num, p->name, p->address);\n    return 0;\n}\n"
+}

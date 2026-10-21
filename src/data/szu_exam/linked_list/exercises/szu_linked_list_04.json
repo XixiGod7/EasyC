@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_linked_list",
+  "id": "szu_linked_list_04",
+  "title": "删除两个链表的同学号结点",
+  "difficulty": "hard",
+  "description": "已有 a、b 两个链表，每个结点包含学号和姓名。从链表 a 中删除所有在 b 中具有相同学号的结点。\n\n### 输入\n\n先输入 n（0～100）和 a 的 n 行学号、姓名；再输入 m（0～100）和 b 的 m 行学号、姓名。\n\n### 输出\n\n保持 a 原有顺序，逐行输出剩余的学号、姓名；全部删除或原链表为空时输出 EMPTY。",
+  "source": {
+    "section": "链表题",
+    "number": 4,
+    "image": "4.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "3\n1 Alice\n2 Bob\n3 Chen\n2\n2 Other\n4 Dan",
+      "expected_output": "1 Alice\n3 Chen"
+    },
+    {
+      "input": "1\n1 Alice\n1\n1 Bob",
+      "expected_output": "EMPTY"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node { int num; char name[32]; struct Node *next; } Node;\nNode *read_list(int n) {\n    Node *head = NULL, **tail = &head;\n    for (int i = 0; i < n; i++) {\n        Node *node = malloc(sizeof(*node));\n        if (!node) exit(1);\n        scanf(\"%d%31s\", &node->num, node->name);\n        node->next = NULL; *tail = node; tail = &node->next;\n    }\n    return head;\n}\nvoid destroy(Node *head) {\n    while (head) { Node *next = head->next; free(head); head = next; }\n}\n\nint main(void) {\n    int n, m;\n    scanf(\"%d\", &n); Node *a = read_list(n);\n    scanf(\"%d\", &m); Node *b = read_list(m);\n    Node **link = &a;\n    while (*link) {\n        int found = 0;\n        for (Node *p = b; p; p = p->next) if (p->num == (*link)->num) found = 1;\n        if (found) { Node *old = *link; *link = old->next; free(old); }\n        else link = &(*link)->next;\n    }\n    if (!a) puts(\"EMPTY\");\n    for (Node *p = a; p; p = p->next) printf(\"%d %s\\n\", p->num, p->name);\n    destroy(a); destroy(b);\n    return 0;\n}\n"
+}

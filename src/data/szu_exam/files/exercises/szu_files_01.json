@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_files",
+  "id": "szu_files_01",
+  "title": "逐字符保存到文件",
+  "difficulty": "medium",
+  "description": "从键盘输入字符，逐个写入文件，直到输入 '#' 为止。\n\n### 输入\n\n一段 ASCII 文本，遇到首个 # 结束，# 不写入文件。\n\n### 输出\n\n读回并输出文件中保存的内容。\n\n### 在线练习说明\n\n本题读写浏览器沙箱中的临时文件。原题涉及的已有文件由程序按输入内容初始化；运行后把目标文件内容打印到标准输出，用于检查样例。每次运行的文件互相独立，结束后不保留。",
+  "source": {
+    "section": "文件题",
+    "number": 1,
+    "image": "6.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "Hello C!#ignored",
+      "expected_output": "Hello C!"
+    },
+    {
+      "input": "#",
+      "expected_output": ""
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\nFILE *open_file(const char *path, const char *mode) {\n    FILE *file = fopen(path, mode);\n    if (!file) { perror(path); exit(1); }\n    return file;\n}\nvoid show_file(const char *path) {\n    FILE *file = open_file(path, \"r\");\n    int ch;\n    while ((ch = fgetc(file)) != EOF) putchar(ch);\n    fclose(file);\n}\nvoid copy_file(const char *source, const char *target) {\n    FILE *in = open_file(source, \"rb\"), *out = open_file(target, \"wb\");\n    int ch;\n    while ((ch = fgetc(in)) != EOF) fputc(ch, out);\n    fclose(in); fclose(out);\n}\n\nint main(void) {\n    FILE *file = open_file(\"text.txt\", \"w\");\n    int ch;\n    while ((ch = getchar()) != EOF && ch != '#') fputc(ch, file);\n    fclose(file);\n    show_file(\"text.txt\");\n    return 0;\n}\n"
+}

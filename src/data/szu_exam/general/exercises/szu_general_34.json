@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_34",
+  "title": "猴子吃桃",
+  "difficulty": "easy",
+  "description": "猴子每天吃掉现有桃子的一半再多吃一个，第十天早上只剩一个桃子。求第一天共有多少个桃子。\n\n### 输入\n\n无输入。\n\n### 输出\n\n第一天的桃子数。\n\n### 补充约定\n\n原目录只有题名。本练习补充教材常见的十天条件，以明确计算目标。",
+  "source": {
+    "section": "常规题",
+    "number": 34,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "1534"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int peaches = 1;\n    for (int day = 9; day >= 1; day--) peaches = (peaches + 1) * 2;\n    printf(\"%d\\n\", peaches);\n    return 0;\n}\n"
+}

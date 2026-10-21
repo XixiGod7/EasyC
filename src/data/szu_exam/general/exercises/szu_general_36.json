@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_36",
+  "title": "二分法求方程的根",
+  "difficulty": "medium",
+  "description": "用二分法求 2x³ - 4x² + 3x + 6 = 0 在 (-10, 10) 内的根，区间长度小于 10⁻⁸ 时停止。\n\n### 输入\n\n无输入。\n\n### 输出\n\n方程的根，保留六位小数。",
+  "source": {
+    "section": "常规题",
+    "number": 36,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "-0.801207"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ndouble f(double x) { return 2*x*x*x - 4*x*x + 3*x + 6; }\n\nint main(void) {\n    double left = -10, right = 10;\n    while (right - left >= 1e-8) {\n        double middle = (left + right) / 2;\n        if (f(left) * f(middle) <= 0) right = middle;\n        else left = middle;\n    }\n    printf(\"%.6f\\n\", (left + right) / 2);\n    return 0;\n}\n"
+}

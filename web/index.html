@@ -41,7 +41,7 @@
               ><a href="#compiler" class="button secondary">打开编译器</a>
             </div>
             <div class="hero-stats">
-              <span><b>9</b> 个学习章节</span><span><b>57</b> 道精选习题</span
+              <span><b id="chapter-total">13</b> 个学习专题</span><span><b id="exercise-total">141</b> 道精选习题</span
               ><span><b>0</b> 环境安装</span>
             </div>
           </div>
@@ -67,7 +67,7 @@
           <a href="#practice" class="feature-card"
             ><span class="feature-number">01 / PRACTICE</span>
             <h2>循序渐进，学会思考</h2>
-            <p>按章节练习，结合样例输入输出与参考答案，找到解题思路。</p>
+            <p>从零基础章节到深大考题，结合样例输入输出与参考答案练习。</p>
             <span class="text-link">探索题库 →</span></a
           ><a href="#compiler" class="feature-card"
             ><span class="feature-number">02 / EXPERIMENT</span>
@@ -107,7 +107,10 @@
         </div>
         <div class="lab-grid">
           <aside class="exercise-sidebar practice-only">
-            <label class="field-label" for="chapter-select">学习章节</label
+            <label class="field-label" for="category-select">题库分类</label>
+            <select id="category-select" aria-label="选择题库分类"></select>
+            <p id="category-description" class="category-description"></p>
+            <label class="field-label" for="chapter-select">章节 / 专题</label
             ><select id="chapter-select" aria-label="选择章节"></select>
             <div class="sidebar-heading">
               <span>本章习题</span><span id="exercise-count"></span>
@@ -137,6 +140,7 @@
               <span id="question-difficulty" class="difficulty"></span>
               <h2 id="question-title"></h2>
               <div id="question-description" class="markdown"></div>
+              <p id="question-source" class="question-source" hidden></p>
               <div id="test-cases"></div>
             </div>
             <div
@@ -158,21 +162,8 @@
                 <span><span class="file-dot"></span> main.c</span
                 ><small>C · Clang / WebAssembly</small>
               </div>
-              <div class="code-editor">
-                <pre id="line-numbers" aria-hidden="true">1</pre>
-                <div class="editor-canvas">
-                  <pre id="code-highlight" aria-hidden="true"></pre>
-                  <textarea
-                    id="code-editor"
-                    aria-label="C 代码编辑器"
-                    wrap="off"
-                    spellcheck="false"
-                    autocapitalize="off"
-                    autocomplete="off"
-                    autocorrect="off"
-                  ></textarea>
-                </div>
-              </div>
+              <div id="code-editor" class="code-editor"></div>
+              <p id="editor-hint" class="editor-hint">Enter 自动缩进 · 括号 / 引号自动配对 · Tab 缩进 · Shift + Tab 反缩进</p>
               <div class="program-input">
                 <label for="program-input"
                   >程序输入
@@ -227,7 +218,7 @@
                   </button>
                 </div>
                 <div id="ai-feedback" class="markdown muted" aria-live="polite">
-                  配置自己的 DeepSeek API Key 后，可以请 AI 帮你分析代码。
+                  在设置中配置 AI 服务商、模型和 API Key 后，可以请 AI 帮你分析代码。
                 </div>
               </div>
             </div>
@@ -256,30 +247,48 @@
             <span class="feature-number">AI ASSISTANT</span>
             <h2>连接你的 AI 助教</h2>
             <p>
-              题库与 C 编译运行无需密钥。AI 分析为可选功能，DeepSeek
-              接口费用由提供商按你的账户用量收取。
+              选择预设服务商，或连接自定义的 OpenAI 兼容接口。AI
+              调用费用按你的服务商账户用量收取。
             </p>
             <form id="settings-form">
-              <label class="field-label" for="api-key">DeepSeek API Key</label
+              <label class="field-label" for="ai-provider">AI 服务商</label>
+              <select id="ai-provider">
+                <option value="deepseek">DeepSeek（预设）</option>
+                <option value="custom">自定义服务商（OpenAI 兼容）</option>
+              </select>
+              <label class="field-label" for="api-base-url">API 服务地址（Base URL）</label>
+              <input id="api-base-url" type="url" required maxlength="2048" spellcheck="false" autocomplete="off" placeholder="https://api.example.com/v1" aria-describedby="api-address-hint" />
+              <p id="api-address-hint" class="field-hint">填写服务商的公网 HTTPS 地址，包含其要求的 /v1 等前缀；也支持完整的 /chat/completions 地址。切换服务商或修改地址后需重新填写密钥。</p>
+              <label class="field-label" for="api-model">模型名称</label>
+              <input id="api-model" type="text" required maxlength="200" spellcheck="false" autocomplete="off" placeholder="填写服务商提供的模型 ID" />
+              <label class="field-label" for="api-key">API Key</label
               ><input
                 id="api-key"
                 type="password"
                 autocomplete="off"
-                placeholder="sk-…"
+                required
+                minlength="8"
+                maxlength="4096"
+                placeholder="填写当前服务商的密钥"
               />
               <p class="field-hint">
-                密钥只保留在当前页面内存中，刷新页面后需要重新填写。
+                密钥只保留在当前页面内存中，刷新后需重新填写。地址和模型可在本机记住。
               </p>
               <div class="settings-actions">
                 <button class="button primary small" type="submit">
                   保存本次设置</button
+                ><button class="button secondary small" id="test-api" type="button">检测连通性</button
+                ><button class="text-button" id="cancel-api-test" type="button" hidden>取消检测</button
                 ><button class="text-button" id="clear-key" type="button">
                   清除密钥
                 </button>
               </div>
-              <p id="settings-status" role="status"></p>
+              <p id="settings-status" class="settings-message" role="status" aria-live="polite"></p>
+              <p id="api-test-status" class="settings-message" role="status" aria-live="polite"></p>
+              <p class="field-hint">检测使用当前填写的配置，向所选模型发送一条简短测试消息，不包含你的代码；可能产生少量调用费用。</p>
             </form>
             <a
+              id="provider-key-link"
               href="https://platform.deepseek.com/api_keys"
               target="_blank"
               rel="noopener noreferrer"
@@ -301,7 +310,7 @@
               </div>
               <div>
                 <dt>题库来源</dt>
-                <dd>EasyC 原项目 · 9 章 57 题</dd>
+                <dd>零基础练习 + 深大考题 · 141 题</dd>
               </div>
               <div>
                 <dt>代码与草稿</dt>
@@ -310,8 +319,8 @@
             </dl>
             <p class="field-hint">
               支持标准 C 学习练习，不提供原生 Linux
-              系统环境。点击「分析代码」时，代码、题目与运行结果会经本站接口发送给
-              DeepSeek。
+              系统环境。点击「分析代码」时，代码、题目与运行结果会经本站接口发送给你配置的
+              AI 服务商。
             </p>
             <a
               href="/vendor/wasmer-0.19.1/LICENSE"

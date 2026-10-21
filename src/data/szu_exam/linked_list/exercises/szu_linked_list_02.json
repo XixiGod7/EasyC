@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_linked_list",
+  "id": "szu_linked_list_02",
+  "title": "动态链表的创建、删除和插入",
+  "difficulty": "hard",
+  "description": "分别编写 creat、print、del、insert 函数，实现 3 个学生记录的单向动态链表，并由主函数指定删除和插入的数据。\n\n### 输入\n\n前 3 行是按学号升序排列的学生记录（学号、姓名、整数成绩）；接着一个待删除学号；最后一行是待插入记录。学号不重复。\n\n### 输出\n\n删除指定学号并按学号升序插入新结点后，逐行输出全部记录。找不到删除目标时保持原链表。\n\n### 补充约定\n\n原目录未限定插入位置，本练习规定按学号升序插入。",
+  "source": {
+    "section": "链表题",
+    "number": 2,
+    "image": "4.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 Alice 80\n2 Bob 90\n3 Chen 85\n2\n4 Dan 95",
+      "expected_output": "1 Alice 80\n3 Chen 85\n4 Dan 95"
+    },
+    {
+      "input": "1 Alice 80\n2 Bob 90\n3 Chen 85\n1\n0 Eve 70",
+      "expected_output": "0 Eve 70\n2 Bob 90\n3 Chen 85"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node {\n    int num, score;\n    char name[32];\n    struct Node *next;\n} Node;\n\nNode *read_node(void) {\n    Node *node = malloc(sizeof(*node));\n    if (!node) exit(1);\n    scanf(\"%d%31s%d\", &node->num, node->name, &node->score);\n    node->next = NULL;\n    return node;\n}\n\nNode *creat(int count) {\n    Node *head = NULL, **tail = &head;\n    for (int i = 0; i < count; i++) {\n        *tail = read_node();\n        tail = &(*tail)->next;\n    }\n    return head;\n}\n\nvoid print(Node *head) {\n    if (!head) puts(\"EMPTY\");\n    for (Node *p = head; p; p = p->next) printf(\"%d %s %d\\n\", p->num, p->name, p->score);\n}\n\nvoid destroy(Node *head) {\n    while (head) { Node *next = head->next; free(head); head = next; }\n}\n\nNode *del(Node *head, int number) {\n    Node **link = &head;\n    while (*link && (*link)->num != number) link = &(*link)->next;\n    if (*link) { Node *old = *link; *link = old->next; free(old); }\n    return head;\n}\n\nNode *insert(Node *head, Node *node) {\n    Node **link = &head;\n    while (*link && (*link)->num < node->num) link = &(*link)->next;\n    node->next = *link;\n    *link = node;\n    return head;\n}\n\nint main(void) {\n    Node *head = creat(3);\n    int number;\n    scanf(\"%d\", &number);\n    head = del(head, number);\n    head = insert(head, read_node());\n    print(head);\n    destroy(head);\n    return 0;\n}\n"
+}

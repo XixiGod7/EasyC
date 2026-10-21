@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_51",
+  "title": "十六进制转十进制",
+  "difficulty": "easy",
+  "description": "输入一个十六进制数，输出其十进制值。\n\n### 输入\n\n一个非负十六进制整数，可有 0x 前缀，数值不超过 0xFFFFFFFF。\n\n### 输出\n\n对应的十进制整数。\n\n### 补充约定\n\n原目录该项有“输出 16 进制，输出 10 进制”的简写，本练习明确为读入十六进制、输出十进制。",
+  "source": {
+    "section": "常规题",
+    "number": 51,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "0xFF",
+      "expected_output": "255"
+    },
+    {
+      "input": "1a3",
+      "expected_output": "419"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    unsigned long long n;\n    scanf(\"%llx\", &n);\n    printf(\"%llu\\n\", n);\n    return 0;\n}\n"
+}

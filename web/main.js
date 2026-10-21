@@ -2,19 +2,14 @@ import "./style.css";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { compiler } from "./browser-compiler.js";
+import { createCodeEditor } from "./code-editor.js";
+import { DEFAULT_AI_CONFIG, normalizeAiConfig, validateApiKey } from "../shared/ai-config.ts";
+import { readAiResponse } from "./ai-client.js";
 
 const $ = (id) => document.getElementById(id);
 const renderMarkdown = (node, text) => {
   node.innerHTML = DOMPurify.sanitize(marked.parse(String(text)));
 };
-const escapeHtml = (text) =>
-  text.replace(
-    /[&<>"']/g,
-    (char) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        char
-      ],
-  );
 const examples = {
   hello:
     '#include <stdio.h>\n\nint main(void) {\n    printf("Hello, EasyC!\\n");\n    return 0;\n}\n',
@@ -28,7 +23,10 @@ const state = {
   mode: "home",
   exercise: null,
   chapters: [],
+  categories: [],
   key: "",
+  aiConfig: { ...DEFAULT_AI_CONFIG },
+  testController: null,
   output: "",
   controller: null,
   aiController: null,
@@ -49,45 +47,13 @@ function writeStorage(key, value) {
 const draftKey = () =>
   `easyc:draft:${state.mode === "practice" ? state.exercise?.id : "compiler"}`;
 
-function highlight() {
-  const code = $("code-editor").value;
-  const token =
-    /\/\*[\s\S]*?\*\/|\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|^\s*#[^\n]*|\b(?:int|float|double|char|void|long|short|unsigned|signed|const|static|struct|typedef|enum|return|if|else|for|while|do|switch|case|break|continue|sizeof|NULL)\b|\b\d+(?:\.\d+)?\b/gm;
-  let html = "",
-    offset = 0;
-  for (const match of code.matchAll(token)) {
-    html += escapeHtml(code.slice(offset, match.index));
-    const text = match[0];
-    const style =
-      text.startsWith("//") || text.startsWith("/*")
-        ? "comment"
-        : /^["']/.test(text)
-          ? "green"
-          : /^\s*#/.test(text)
-            ? "purple"
-            : /^\d/.test(text)
-              ? "orange"
-              : "blue";
-    html += `<span class="syntax-${style}">${escapeHtml(text)}</span>`;
-    offset = match.index + text.length;
-  }
-  $("code-highlight").innerHTML = html + escapeHtml(code.slice(offset)) + "\n";
-  $("line-numbers").textContent = Array.from(
-    { length: code.split("\n").length },
-    (_, i) => i + 1,
-  ).join("\n");
-  syncScroll();
-}
-function syncScroll() {
-  const editor = $("code-editor");
-  $("code-highlight").style.transform =
-    `translate(${-editor.scrollLeft}px, ${-editor.scrollTop}px)`;
-  $("line-numbers").scrollTop = editor.scrollTop;
-}
-function setCode(code) {
-  $("code-editor").value = code;
-  highlight();
-}
+const editor = createCodeEditor($("code-editor"), {
+  onChange: (code) => writeStorage(draftKey(), code),
+  onRun: () => void run(),
+});
+const setCode = (code) => editor.setCode(code);
+const exerciseNumber = (exercise) =>
+  exercise.source?.number ?? exercise.id.replace("ex", "").replace("_", ".");
 function resetOutput() {
   state.output = "";
   $("program-output").textContent = "";
@@ -95,8 +61,9 @@ function resetOutput() {
   $("runtime-progress").textContent = "写好代码，点击「运行代码」。";
   $("result-status").textContent = "等待运行";
   $("result-status").className = "result-status";
-  $("ai-feedback").textContent =
-    "配置自己的 DeepSeek API Key 后，可以请 AI 帮你分析代码。";
+  $("ai-feedback").textContent = state.key
+    ? `当前模型：${state.aiConfig.model}，点击「分析代码」获取帮助。`
+    : "在设置中配置 AI 服务商、模型和 API Key 后，可以请 AI 帮你分析代码。";
   $("ai-feedback").classList.add("muted");
 }
 function busy(value) {
@@ -129,12 +96,16 @@ function showExercise(exercise) {
   cancel();
   state.exercise = exercise;
   $("question-title").textContent =
-    `${exercise.id.replace("ex", "").replace("_", ".")} ${exercise.title}`;
+    `${exerciseNumber(exercise)} ${exercise.title}`;
   const difficulty = { easy: "基础", medium: "进阶", hard: "挑战" };
   $("question-difficulty").textContent =
     difficulty[exercise.difficulty] ?? exercise.difficulty;
   $("question-difficulty").className = `difficulty ${exercise.difficulty}`;
   renderMarkdown($("question-description"), exercise.description);
+  $("question-source").textContent = exercise.source
+    ? `来源：所提供的深大复习资料 · ${exercise.source.section}第 ${exercise.source.number} 题（${exercise.source.image}）。输入输出与参考解答为练习补充。`
+    : "";
+  $("question-source").hidden = !exercise.source;
   $("reference-code").textContent = exercise.solution;
   $("test-cases").replaceChildren();
   for (const [i, item] of exercise.test_cases.entries()) {
@@ -171,7 +142,8 @@ function showExercise(exercise) {
 }
 function showChapter(chapterId, exerciseId) {
   const chapter =
-    state.chapters.find((item) => item.id === chapterId) ?? state.chapters[0];
+    state.chapters.find((item) => item.id === chapterId) ??
+    state.chapters.find((item) => item.category_id === $("category-select").value);
   if (!chapter) return;
   $("chapter-select").value = chapter.id;
   $("exercise-count").textContent = `${chapter.exercises.length} 题`;
@@ -182,7 +154,7 @@ function showChapter(chapterId, exerciseId) {
     button.dataset.id = exercise.id;
     const number = document.createElement("span");
     number.className = "exercise-number";
-    number.textContent = exercise.id.replace("ex", "").replace("_", ".");
+    number.textContent = exerciseNumber(exercise);
     const title = document.createElement("span");
     title.textContent = exercise.title;
     button.append(number, title);
@@ -193,6 +165,21 @@ function showChapter(chapterId, exerciseId) {
     chapter.exercises.find((item) => item.id === exerciseId) ??
       chapter.exercises[0],
   );
+}
+function showCategory(categoryId, chapterId, exerciseId) {
+  const category = state.categories.find((item) => item.id === categoryId);
+  if (!category) return;
+  $("category-select").value = category.id;
+  $("category-description").textContent = category.description;
+  const chapters = state.chapters.filter((item) => item.category_id === category.id);
+  $("chapter-select").replaceChildren();
+  for (const [i, chapter] of chapters.entries()) {
+    const option = document.createElement("option");
+    option.value = chapter.id;
+    option.textContent = `${i + 1}. ${chapter.title}`;
+    $("chapter-select").append(option);
+  }
+  showChapter(chapters.find((item) => item.id === chapterId)?.id ?? chapters[0]?.id, exerciseId);
 }
 function route() {
   const requested = location.hash.slice(1).split("/")[0] || "home";
@@ -223,7 +210,7 @@ function route() {
     const chapter =
       state.chapters.find((c) => c.exercises.some((e) => e.id === id)) ??
       state.chapters[0];
-    showChapter(chapter?.id, id);
+    showCategory(chapter?.category_id, chapter?.id, id);
   } else if (next === "compiler" && previous !== "compiler") {
     setCode(readStorage(draftKey(), examples.hello));
     $("program-input").value = "";
@@ -310,7 +297,7 @@ async function run(testing = false) {
   $("result-status").className = "result-status busy";
   try {
     const result = await compiler.run({
-      code: $("code-editor").value,
+      code: editor.getCode(),
       input: $("program-input").value,
       cases: testing ? state.exercise.test_cases : undefined,
       signal: controller.signal,
@@ -348,57 +335,41 @@ async function run(testing = false) {
 async function analyze() {
   if (!state.key) {
     $("ai-feedback").innerHTML =
-      '请先在<a href="#settings">设置</a>中填写自己的 DeepSeek API Key。';
+      '请先在<a href="#settings">设置</a>中配置服务商、模型和 API Key，并保存本次设置。';
     return;
   }
   const controller = new AbortController();
   state.aiController?.abort();
   state.aiController = controller;
+  const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(95000)]);
   $("ai-button").disabled = true;
   $("ai-feedback").textContent = "正在分析…";
   $("ai-feedback").classList.remove("muted");
   try {
     const response = await fetch("/api/feedback", {
       method: "POST",
-      signal: controller.signal,
+      signal,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.key}`,
       },
       body: JSON.stringify({
-        code: $("code-editor").value,
+        config: state.aiConfig,
+        code: editor.getCode(),
         input: $("program-input").value,
         output: state.output.slice(0, 16000),
         exercise: state.mode === "practice" ? state.exercise.description : "",
       }),
     });
-    if (!response.ok)
-      throw new Error((await response.json()).error || "AI 服务暂时不可用。");
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = "",
-      content = "";
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split("\n");
-      buffer = lines.pop();
-      for (const line of lines)
-        if (line.startsWith("data:")) {
-          const data = line.slice(5).trim();
-          if (!data || data === "[DONE]") continue;
-          const chunk = JSON.parse(data);
-          content += chunk.choices?.[0]?.delta?.content ?? "";
-        }
-      if (state.aiController === controller)
-        renderMarkdown($("ai-feedback"), content || "正在分析…");
-    }
-    if (!content && state.aiController === controller)
-      $("ai-feedback").textContent = "AI 没有返回内容，请稍后重试。";
+    await readAiResponse(response, {
+      signal,
+      onContent(content) {
+        if (state.aiController === controller) renderMarkdown($("ai-feedback"), content);
+      },
+    });
   } catch (error) {
     if (!controller.signal.aborted && state.aiController === controller)
-      $("ai-feedback").textContent = error.message;
+      $("ai-feedback").textContent = signal.aborted ? "AI 服务响应超时，请稍后重试。" : error.message;
   } finally {
     if (state.aiController === controller) {
       state.aiController = null;
@@ -407,28 +378,84 @@ async function analyze() {
   }
 }
 
-$("code-editor").addEventListener("input", () => {
-  highlight();
-  writeStorage(draftKey(), $("code-editor").value);
-});
-$("code-editor").addEventListener("scroll", syncScroll);
-$("code-editor").addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
-    event.preventDefault();
-    void run();
+function stopAiAnalysis() {
+  state.aiController?.abort();
+  state.aiController = null;
+  $("ai-button").disabled = false;
+}
+function setSettingsMessage(id, message, kind = "") {
+  $(id).textContent = message;
+  $(id).className = `settings-message ${kind}`;
+}
+function abortConnectionTest(message = "") {
+  state.testController?.abort();
+  state.testController = null;
+  $("test-api").disabled = false;
+  $("cancel-api-test").hidden = true;
+  if (message) setSettingsMessage("api-test-status", message);
+}
+function readAiForm() {
+  return {
+    config: normalizeAiConfig({
+      provider: $("ai-provider").value,
+      baseUrl: $("api-base-url").value,
+      model: $("api-model").value,
+    }),
+    key: validateApiKey($("api-key").value),
+  };
+}
+async function testConnection() {
+  let settings;
+  try { settings = readAiForm(); }
+  catch (error) { setSettingsMessage("api-test-status", error.message, "error"); return; }
+  abortConnectionTest();
+  const controller = new AbortController();
+  state.testController = controller;
+  const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(25000)]);
+  $("test-api").disabled = true;
+  $("cancel-api-test").hidden = false;
+  setSettingsMessage("api-test-status", "正在检测服务地址、密钥和模型，请稍候…", "busy");
+  try {
+    const response = await fetch("/api/ai/test", {
+      method: "POST", signal,
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${settings.key}` },
+      body: JSON.stringify({ config: settings.config }),
+    });
+    const result = await response.json().catch(() => ({ error: "检测接口未返回有效数据，请稍后重试。" }));
+    if (!response.ok || result.ok !== true) throw new Error(result.error || "检测失败，服务未返回有效结果。");
+    if (typeof result.model !== "string" || !Number.isFinite(result.latency_ms))
+      throw new Error("检测结果不完整，请稍后重试。");
+    if (state.testController === controller)
+      setSettingsMessage("api-test-status", `连接成功 · ${result.model} · 首次回复 ${result.latency_ms} ms。保存本次设置后用于 AI 助教。`, "success");
+  } catch (error) {
+    if (!controller.signal.aborted && state.testController === controller)
+      setSettingsMessage("api-test-status", signal.aborted ? "检测超时，请检查服务地址或稍后重试。" : error.message, "error");
+  } finally {
+    if (state.testController === controller) abortConnectionTest();
   }
-  if (event.key === "Tab" && !event.shiftKey) {
-    event.preventDefault();
-    const editor = $("code-editor");
-    editor.setRangeText(
-      "    ",
-      editor.selectionStart,
-      editor.selectionEnd,
-      "end",
-    );
-    editor.dispatchEvent(new Event("input"));
-  }
-});
+}
+
+const providerDrafts = {
+  deepseek: { ...DEFAULT_AI_CONFIG },
+  custom: { provider: "custom", baseUrl: "", model: "" },
+};
+let formProvider = "deepseek";
+function showAiConfig(config) {
+  formProvider = config.provider;
+  $("ai-provider").value = config.provider;
+  $("api-base-url").value = config.baseUrl;
+  $("api-base-url").readOnly = config.provider === "deepseek";
+  $("api-model").value = config.model;
+  $("provider-key-link").hidden = config.provider !== "deepseek";
+}
+function clearAiCredential() {
+  stopAiAnalysis();
+  state.key = "";
+  $("api-key").value = "";
+  $("ai-feedback").textContent = "在设置中配置 AI 服务商、模型和 API Key 后，可以请 AI 帮你分析代码。";
+  $("ai-feedback").classList.add("muted");
+}
+
 $("run-button").addEventListener("click", () => void run());
 $("test-button").addEventListener("click", () => void run(true));
 $("stop-button").addEventListener("click", () => {
@@ -443,52 +470,83 @@ $("reset-button").addEventListener("click", () => {
       ? state.exercise.solution_template || emptyProgram
       : examples[$("example-select").value],
   );
-  writeStorage(draftKey(), $("code-editor").value);
+  writeStorage(draftKey(), editor.getCode());
   resetOutput();
 });
 $("chapter-select").addEventListener("change", (e) =>
   showChapter(e.target.value),
 );
+$("category-select").addEventListener("change", (e) => showCategory(e.target.value));
 $("question-tab").addEventListener("click", () => choosePanel(false));
 $("answer-tab").addEventListener("click", () => choosePanel(true));
 $("use-answer").addEventListener("click", () => {
   cancel();
   setCode(state.exercise.solution);
   writeStorage(draftKey(), state.exercise.solution);
-  $("code-editor").focus();
+  editor.focus();
 });
 $("example-select").addEventListener("change", (e) => {
   cancel();
   setCode(examples[e.target.value]);
-  writeStorage(draftKey(), $("code-editor").value);
+  writeStorage(draftKey(), editor.getCode());
   $("program-input").value = e.target.value === "sum" ? "21 21" : "";
   resetOutput();
 });
 $("ai-button").addEventListener("click", () => void analyze());
 $("settings-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  state.key = $("api-key").value.trim();
-  $("settings-status").textContent = state.key
-    ? "已保存，仅当前页面有效。"
-    : "请输入有效的 API Key。";
+  try {
+    const settings = readAiForm();
+    stopAiAnalysis();
+    state.key = settings.key;
+    state.aiConfig = settings.config;
+    writeStorage("easyc:ai-config", JSON.stringify(settings.config));
+    setSettingsMessage("settings-status", "设置已保存。密钥仅当前页面有效，服务地址与模型会在本机记住。", "success");
+    $("ai-feedback").textContent = `当前模型：${settings.config.model}，点击「分析代码」获取帮助。`;
+    $("ai-feedback").classList.add("muted");
+  } catch (error) { setSettingsMessage("settings-status", error.message, "error"); }
 });
 $("clear-key").addEventListener("click", () => {
-  state.aiController?.abort();
-  state.key = "";
-  $("api-key").value = "";
-  $("settings-status").textContent = "已清除。";
+  abortConnectionTest("密钥已清除，请重新填写后检测。");
+  clearAiCredential();
+  setSettingsMessage("settings-status", "密钥已清除。");
 });
+$("test-api").addEventListener("click", () => void testConnection());
+$("cancel-api-test").addEventListener("click", () => abortConnectionTest("检测已取消。"));
+$("ai-provider").addEventListener("change", () => {
+  providerDrafts[formProvider] = { provider: formProvider, baseUrl: $("api-base-url").value, model: $("api-model").value };
+  showAiConfig(providerDrafts[$("ai-provider").value]);
+  abortConnectionTest("服务商已切换，请重新检测。");
+  clearAiCredential();
+  setSettingsMessage("settings-status", "请填写该服务商的密钥并保存设置。");
+});
+for (const id of ["api-base-url", "api-model", "api-key"]) {
+  $(id).addEventListener("input", () => {
+    abortConnectionTest($("api-test-status").textContent ? "配置已修改，请重新检测。" : "");
+    if (id === "api-base-url") {
+      clearAiCredential();
+      setSettingsMessage("settings-status", "服务地址已修改，请重新填写密钥并保存。");
+    } else setSettingsMessage("settings-status", "配置已修改，保存后用于 AI 助教。");
+  });
+}
+try {
+  state.aiConfig = normalizeAiConfig(JSON.parse(readStorage("easyc:ai-config", JSON.stringify(DEFAULT_AI_CONFIG))));
+} catch { state.aiConfig = { ...DEFAULT_AI_CONFIG }; }
+showAiConfig(state.aiConfig);
 window.addEventListener("hashchange", route);
 try {
   const response = await fetch("/data/exercises.json");
   if (!response.ok) throw new Error("题库加载失败，请刷新页面重试。");
   const data = await response.json();
   state.chapters = data.chapters;
-  for (const [i, chapter] of state.chapters.entries()) {
+  state.categories = data.categories;
+  $("chapter-total").textContent = state.chapters.length;
+  $("exercise-total").textContent = state.chapters.reduce((count, chapter) => count + chapter.exercises.length, 0);
+  for (const category of state.categories) {
     const option = document.createElement("option");
-    option.value = chapter.id;
-    option.textContent = `${i + 1}. ${chapter.title}`;
-    $("chapter-select").append(option);
+    option.value = category.id;
+    option.textContent = category.title;
+    $("category-select").append(option);
   }
 } catch (error) {
   $("load-error").textContent = error.message;

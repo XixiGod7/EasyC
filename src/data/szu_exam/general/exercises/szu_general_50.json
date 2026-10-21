@@ -1,0 +1,28 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_50",
+  "title": "递归将整数转为字符串",
+  "difficulty": "medium",
+  "description": "使用递归把一个整数转换为十进制字符串，再输出该字符串，不使用 sprintf。\n\n### 输入\n\n一个 32 位有符号整数。\n\n### 输出\n\n转换后的字符串，保留负号。",
+  "source": {
+    "section": "常规题",
+    "number": 50,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "-12345",
+      "expected_output": "-12345"
+    },
+    {
+      "input": "0",
+      "expected_output": "0"
+    },
+    {
+      "input": "-2147483648",
+      "expected_output": "-2147483648"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nvoid convert(long long n, char *text, int *length) {\n    if (n >= 10) convert(n / 10, text, length);\n    text[(*length)++] = (char)('0' + n % 10);\n}\n\nint main(void) {\n    long long n;\n    char text[32];\n    int length = 0;\n    scanf(\"%lld\", &n);\n    if (n < 0) { text[length++] = '-'; n = -n; }\n    convert(n, text, &length);\n    text[length] = '\\0';\n    puts(text);\n    return 0;\n}\n"
+}

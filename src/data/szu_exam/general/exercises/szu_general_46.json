@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_46",
+  "title": "字符串反序输出",
+  "difficulty": "easy",
+  "description": "输入字符串并反序输出。\n\n### 输入\n\n一行不超过 100 个 ASCII 字符的文本。\n\n### 输出\n\n反序后的字符串。",
+  "source": {
+    "section": "常规题",
+    "number": 46,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "abc de",
+      "expected_output": "ed cba"
+    },
+    {
+      "input": "",
+      "expected_output": ""
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char s[102];\n    if (!fgets(s, sizeof(s), stdin)) s[0] = '\\0';\n    s[strcspn(s, \"\\n\")] = '\\0';\n    for (int i = (int)strlen(s) - 1; i >= 0; i--) putchar(s[i]);\n    putchar('\\n');\n    return 0;\n}\n"
+}

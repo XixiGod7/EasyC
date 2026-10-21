@@ -32,6 +32,8 @@ jobs:
       - run: npm run check && npm test && npm run build
       - name: Verify actual WebAssembly compilation and execution
         run: npm run test:compiler
+      - name: Verify all Shenzhen University reference solutions and samples
+        run: npm run test:exercises
   deploy:
     if: github.event_name == 'workflow_dispatch' && inputs.deploy
     needs: verify

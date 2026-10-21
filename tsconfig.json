@@ -7,7 +7,9 @@
     "types": ["@cloudflare/workers-types"],
     "strict": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true
   },
-  "include": ["cloudflare/index.ts", "cloudflare/feedback.ts"]
+  "include": ["cloudflare/**/*.ts", "shared/**/*.ts"],
+  "exclude": ["cloudflare/**/*.test.ts", "shared/**/*.test.ts"]
 }

@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_linked_list",
+  "id": "szu_linked_list_05",
+  "title": "按年龄删除链表结点",
+  "difficulty": "hard",
+  "description": "建立包含学号、姓名、性别和年龄的学生链表，输入一个年龄，删除链表中年龄等于该值的所有结点。\n\n### 输入\n\n第一行 n（0～100）；随后 n 行学号、姓名、性别（M/F）、年龄；最后一行待删除年龄。\n\n### 输出\n\n按原顺序逐行输出剩余记录；无剩余结点输出 EMPTY。",
+  "source": {
+    "section": "链表题",
+    "number": 5,
+    "image": "4.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "3\n1 Alice F 20\n2 Bob M 21\n3 Chen M 20\n20",
+      "expected_output": "2 Bob M 21"
+    },
+    {
+      "input": "0\n20",
+      "expected_output": "EMPTY"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node { int num, age; char name[32], sex; struct Node *next; } Node;\n\nint main(void) {\n    int n, age;\n    Node *head = NULL, **tail = &head;\n    scanf(\"%d\", &n);\n    for (int i = 0; i < n; i++) {\n        Node *node = malloc(sizeof(*node));\n        if (!node) return 1;\n        scanf(\"%d%31s %c%d\", &node->num, node->name, &node->sex, &node->age);\n        node->next = NULL; *tail = node; tail = &node->next;\n    }\n    scanf(\"%d\", &age);\n    Node **link = &head;\n    while (*link) {\n        if ((*link)->age == age) { Node *old = *link; *link = old->next; free(old); }\n        else link = &(*link)->next;\n    }\n    if (!head) puts(\"EMPTY\");\n    while (head) {\n        printf(\"%d %s %c %d\\n\", head->num, head->name, head->sex, head->age);\n        Node *next = head->next; free(head); head = next;\n    }\n    return 0;\n}\n"
+}

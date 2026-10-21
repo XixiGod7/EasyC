@@ -9,6 +9,8 @@ env/
 venv/
 .venv/
 .env
+.env.*
+!.env.example
 
 # 依赖管理
 Pipfile.lock

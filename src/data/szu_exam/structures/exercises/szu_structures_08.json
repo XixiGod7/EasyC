@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_08",
+  "title": "日期结构体与年内序号",
+  "difficulty": "medium",
+  "description": "定义日期结构体，用其保存日期并计算该日在本年中是第几天，注意闰年。\n\n### 输入\n\n合法日期 year、month、day，年份 1～9999。\n\n### 输出\n\n当年内的日期序号。",
+  "source": {
+    "section": "结构体题",
+    "number": 8,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2024 12 31",
+      "expected_output": "366"
+    },
+    {
+      "input": "1900 3 1",
+      "expected_output": "60"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ntypedef struct { int year, month, day; } Date;\n\nint main(void) {\n    Date date;\n    int days[] = {31,28,31,30,31,30,31,31,30,31,30,31};\n    scanf(\"%d%d%d\", &date.year, &date.month, &date.day);\n    if (date.year % 400 == 0 || (date.year % 4 == 0 && date.year % 100 != 0)) days[1] = 29;\n    int result = date.day;\n    for (int i = 0; i < date.month - 1; i++) result += days[i];\n    printf(\"%d\\n\", result);\n    return 0;\n}\n"
+}

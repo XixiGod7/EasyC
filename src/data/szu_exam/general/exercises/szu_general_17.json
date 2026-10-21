@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_17",
+  "title": "矩阵最大元素及位置",
+  "difficulty": "medium",
+  "description": "找出矩阵中的最大元素，输出它及所在行号、列号。\n\n### 输入\n\n第一行 r、c（1～20），随后输入 r×c 个整数。\n\n### 输出\n\n最大值、行号、列号，行列从 1 开始；并列时取按行扫描首次出现者。",
+  "source": {
+    "section": "常规题",
+    "number": 17,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2 3\n-4 9 2\n3 9 1",
+      "expected_output": "9 1 2"
+    },
+    {
+      "input": "1 2\n-8 -3",
+      "expected_output": "-3 1 2"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int r, c, value, maximum = 0, row = 1, column = 1;\n    scanf(\"%d%d\", &r, &c);\n    for (int i = 1; i <= r; i++) for (int j = 1; j <= c; j++) {\n        scanf(\"%d\", &value);\n        if ((i == 1 && j == 1) || value > maximum) { maximum = value; row = i; column = j; }\n    }\n    printf(\"%d %d %d\\n\", maximum, row, column);\n    return 0;\n}\n"
+}

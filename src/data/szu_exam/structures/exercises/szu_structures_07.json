@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_07",
+  "title": "平均成绩最高的学生",
+  "difficulty": "medium",
+  "description": "n 个结构体变量各包含学生学号、姓名和三门课成绩，输出平均成绩最高的学生信息。\n\n### 输入\n\n第一行 n（1～100）；随后 n 行学号、姓名和三门实数成绩。\n\n### 输出\n\n学号、姓名、三门成绩、平均分，所有成绩均保留两位小数；并列取先输入者。",
+  "source": {
+    "section": "结构体题",
+    "number": 7,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2\n1 Alice 80 90 100\n2 Bob 90 95 100",
+      "expected_output": "2 Bob 90.00 95.00 100.00 95.00"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score[3]; } Student;\ndouble average(const Student *student) { return (student->score[0] + student->score[1] + student->score[2]) / 3; }\nvoid read_students(Student *a, int n) {\n    for (int i = 0; i < n; i++) scanf(\"%d%31s%lf%lf%lf\", &a[i].num, a[i].name, &a[i].score[0], &a[i].score[1], &a[i].score[2]);\n}\nvoid print_student(const Student *s) {\n    printf(\"%d %s %.2f %.2f %.2f\", s->num, s->name, s->score[0], s->score[1], s->score[2]);\n}\n\nint main(void) {\n    Student students[100];\n    int n, best = 0;\n    scanf(\"%d\", &n); read_students(students, n);\n    for (int i = 1; i < n; i++) if (average(&students[i]) > average(&students[best])) best = i;\n    print_student(&students[best]);\n    printf(\" %.2f\\n\", average(&students[best]));\n    return 0;\n}\n"
+}

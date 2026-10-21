@@ -1,0 +1,91 @@
+{
+  "id": "szu_files",
+  "title": "文件题",
+  "description": "深大复习资料中的文件题，共 14 题，保留原目录编号。",
+  "exercises": [
+    {
+      "id": "szu_files_01",
+      "title": "逐字符保存到文件",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_01.json"
+    },
+    {
+      "id": "szu_files_02",
+      "title": "复制文件",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_02.json"
+    },
+    {
+      "id": "szu_files_03",
+      "title": "字符串排序后存入文件",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_03.json"
+    },
+    {
+      "id": "szu_files_04",
+      "title": "十名学生的数据存盘",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_04.json"
+    },
+    {
+      "id": "szu_files_05",
+      "title": "显示文件并复制",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_05.json"
+    },
+    {
+      "id": "szu_files_06",
+      "title": "随机读取奇数号学生记录",
+      "difficulty": "hard",
+      "path": "exercises/szu_files_06.json"
+    },
+    {
+      "id": "szu_files_07",
+      "title": "转为大写后存入 test 文件",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_07.json"
+    },
+    {
+      "id": "szu_files_08",
+      "title": "合并两个字母文件",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_08.json"
+    },
+    {
+      "id": "szu_files_09",
+      "title": "学生平均成绩写入 stud",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_09.json"
+    },
+    {
+      "id": "szu_files_10",
+      "title": "按平均分排序生成 stu_sort",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_10.json"
+    },
+    {
+      "id": "szu_files_11",
+      "title": "插入学生记录并存入新文件",
+      "difficulty": "hard",
+      "path": "exercises/szu_files_11.json"
+    },
+    {
+      "id": "szu_files_12",
+      "title": "插入学生记录并更新原文件",
+      "difficulty": "hard",
+      "path": "exercises/szu_files_12.json"
+    },
+    {
+      "id": "szu_files_13",
+      "title": "职工工资文件与删除记录",
+      "difficulty": "hard",
+      "path": "exercises/szu_files_13.json"
+    },
+    {
+      "id": "szu_files_14",
+      "title": "文件中的字符串转为大写",
+      "difficulty": "medium",
+      "path": "exercises/szu_files_14.json"
+    }
+  ]
+}

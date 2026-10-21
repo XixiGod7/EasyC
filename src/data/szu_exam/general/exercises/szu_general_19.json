@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_19",
+  "title": "三个字符串的最大者",
+  "difficulty": "easy",
+  "description": "输入三个字符串，按字典序找出其中最大者。\n\n### 输入\n\n三个不含空白的字符串，每个最多 100 个 ASCII 字符。\n\n### 输出\n\n字典序最大的字符串。",
+  "source": {
+    "section": "常规题",
+    "number": 19,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "apple banana pear",
+      "expected_output": "pear"
+    },
+    {
+      "input": "abc ab abcd",
+      "expected_output": "abcd"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char s[3][101];\n    scanf(\"%100s%100s%100s\", s[0], s[1], s[2]);\n    int best = 0;\n    for (int i = 1; i < 3; i++) if (strcmp(s[i], s[best]) > 0) best = i;\n    puts(s[best]);\n    return 0;\n}\n"
+}
