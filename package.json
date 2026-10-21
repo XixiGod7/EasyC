@@ -1,0 +1,21 @@
+{
+  "name": "easyc-cloudflare",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "check": "tsc --noEmit",
+    "test": "node --test cloudflare/auth.test.ts",
+    "build": "wrangler deploy --dry-run --containers-rollout=none --outdir dist",
+    "deploy": "wrangler deploy",
+    "access:setup": "node scripts/setup-access.mjs"
+  },
+  "dependencies": {
+    "@cloudflare/containers": "0.3.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261021.1",
+    "typescript": "7.0.2",
+    "wrangler": "4.151.3"
+  }
+}

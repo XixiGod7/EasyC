@@ -53,3 +53,10 @@ build/
 zzztmp/
 saved_code/
 zzztmp.ipynb
+
+# Cloudflare / Node.js
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+cloudflare-access.local.txt

@@ -1,0 +1,104 @@
+name: Cloudflare
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy to the configured Cloudflare account (Workers Paid required)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run check && npm test && npm run build
+      - name: Build Linux container
+        run: docker build --platform linux/amd64 --tag easyc:check .
+      - name: Start application and check HTTP
+        run: |
+          docker run --detach --name easyc-check --publish 7860:7860 easyc:check
+          ready=false
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:7860/config > /tmp/easyc-config.json; then
+              ready=true
+              break
+            fi
+            sleep 2
+          done
+          test "$ready" = true
+          curl --fail --silent http://127.0.0.1:7860/ | grep -q 'EasyC'
+      - name: Check exercise data and GCC execution
+        run: |
+          docker exec -i easyc-check python - <<'PY'
+          import asyncio
+          from backend.compiler.local_compiler_service import LocalCompilerService
+          from backend.exercise.exercise_service import ExerciseService
+          from backend.ai.feedback_service import AIFeedbackService
+
+          async def check():
+              compiler = LocalCompilerService()
+              exercises = ExerciseService(compiler)
+              assert len(exercises.get_chapters()) == 9
+              code = '#include <stdio.h>\nint main(void) { int n; scanf("%d", &n); printf("%d", n * 2); return 0; }'
+              result = await compiler.compile_and_run(code, '21')
+              assert result['success'] and '42' in result['output'], result
+              invalid = await compiler.compile_and_run('int main( {')
+              assert not invalid['success'] and invalid['error'], invalid
+              timeout = await compiler.compile_and_run('int main(void) { for (;;) {} }')
+              assert not timeout['success'] and timeout['execution_time'] == 5.0, timeout
+              messages = [chunk async for chunk in AIFeedbackService().get_feedback(code, result)]
+              assert messages and 'API Key' in messages[0]
+              print('Exercise data, GCC, input/output, compile errors, timeout and AI fallback: OK')
+
+          asyncio.run(check())
+          PY
+      - name: Show container logs on failure
+        if: failure()
+        run: docker logs easyc-check || true
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      EASYC_USERNAME: ${{ secrets.EASYC_USERNAME }}
+      EASYC_PASSWORD: ${{ secrets.EASYC_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Require deployment secrets
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$EASYC_USERNAME"
+          test -n "$EASYC_PASSWORD"
+      - name: Deploy Worker and container
+        run: npm run deploy
+      - name: Configure access credentials
+        run: |
+          node --input-type=module -e 'process.stdout.write(JSON.stringify({EASYC_USERNAME: process.env.EASYC_USERNAME, EASYC_PASSWORD: process.env.EASYC_PASSWORD}))' | npx wrangler secret bulk

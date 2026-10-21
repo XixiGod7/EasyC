@@ -59,6 +59,10 @@ EasyC
 
 ## 🚀 Quick Start
 
+### Cloudflare Containers
+
+See [Cloudflare deployment instructions](CLOUDFLARE.md) for password-protected deployment and GitHub Actions builds. Requires the Workers Paid plan.
+
 ### Using Docker (Recommended)
 ```bash
 # Clone the repository
