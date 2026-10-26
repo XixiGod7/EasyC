@@ -96,14 +96,23 @@
             >
             <h1 id="lab-title">习题练习</h1>
           </div>
-          <label id="example-picker" hidden
-            >示例代码
-            <select id="example-select">
-              <option value="hello">Hello, EasyC</option>
-              <option value="sum">输入与求和</option>
-              <option value="pointer">指针与数组</option>
-            </select></label
-          >
+          <div id="compiler-controls" class="compiler-controls" hidden>
+            <label id="example-picker" hidden>
+              <span>示例代码</span>
+              <select id="example-select">
+                <option value="hello">Hello, EasyC</option>
+                <option value="sum">输入与求和</option>
+                <option value="pointer">指针与数组</option>
+              </select>
+            </label>
+            <button
+              id="compiler-focus"
+              class="button secondary small"
+              type="button"
+              aria-pressed="false"
+              title="收起网站导航，为工作区腾出空间；按 Esc 退出"
+            >专注模式</button>
+          </div>
         </div>
         <div class="lab-grid">
           <aside class="exercise-sidebar practice-only">
@@ -156,14 +165,14 @@
               </button>
             </div>
           </article>
-          <article class="workspace">
+          <article class="workspace" data-feedback-panel="output">
             <div class="editor-panel">
               <div class="panel-heading">
                 <span><span class="file-dot"></span> main.c</span
                 ><small>C · Clang / WebAssembly</small>
               </div>
               <div id="code-editor" class="code-editor"></div>
-              <p id="editor-hint" class="editor-hint">Enter 自动缩进 · 括号 / 引号自动配对 · Tab 缩进 · Shift + Tab 反缩进</p>
+              <p id="editor-hint" class="editor-hint">自动缩进与配对 · Tab / Shift+Tab 调整缩进</p>
               <div class="program-input">
                 <label for="program-input"
                   >程序输入
@@ -194,23 +203,29 @@
                 </div>
               </div>
             </div>
-            <div class="result-panel">
-              <div class="panel-heading">
-                <span>运行结果</span
-                ><span id="result-status" class="result-status">等待运行</span>
+            <div class="feedback-panels">
+              <div class="feedback-tabs" role="group" aria-label="切换运行结果与 AI 助教">
+                <button id="output-view-button" type="button" aria-controls="output-panel" aria-pressed="true">运行结果</button>
+                <button id="assistant-view-button" type="button" aria-controls="assistant-panel" aria-pressed="false">AI 助教</button>
               </div>
-              <div class="result-body">
-                <p id="runtime-progress" role="status" aria-live="polite">
-                  写好代码，点击「运行代码」。
-                </p>
-                <pre
-                  id="program-output"
-                  aria-label="运行结果"
-                  tabindex="0"
-                ></pre>
-                <div id="sample-results"></div>
-              </div>
-              <div class="ai-panel">
+              <section id="output-panel" class="result-panel" aria-label="程序运行结果">
+                <div class="panel-heading">
+                  <span>运行结果</span>
+                  <span id="result-status" class="result-status">等待运行</span>
+                </div>
+                <div class="result-body">
+                  <p id="runtime-progress" role="status" aria-live="polite">
+                    写好代码，点击「运行代码」。
+                  </p>
+                  <pre
+                    id="program-output"
+                    aria-label="运行结果"
+                    tabindex="0"
+                  ></pre>
+                  <div id="sample-results"></div>
+                </div>
+              </section>
+              <section id="assistant-panel" class="ai-panel" aria-label="AI 助教">
                 <div class="ai-heading">
                   <h3>AI 助教</h3>
                   <button id="ai-button" class="button secondary small">
@@ -220,7 +235,7 @@
                 <div id="ai-feedback" class="markdown muted" aria-live="polite">
                   在设置中配置 AI 服务商、模型和 API Key 后，可以请 AI 帮你分析代码。
                 </div>
-              </div>
+              </section>
             </div>
           </article>
         </div>

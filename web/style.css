@@ -883,24 +883,6 @@ select {
 .mode-compiler .practice-only {
   display: none !important;
 }
-.mode-compiler .lab-grid {
-  display: block;
-}
-.mode-compiler .workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
-  align-items: start;
-}
-.mode-compiler .code-editor {
-  height: 430px;
-}
-.mode-compiler .result-body {
-  min-height: 190px;
-  max-height: 410px;
-}
-.mode-compiler .cm-scroller {
-  font-size: 13px;
-}
 .settings-view {
   max-width: 1080px;
   margin: auto;
@@ -1094,12 +1076,6 @@ select {
   .workspace {
     grid-column: 2;
   }
-  .mode-compiler .workspace {
-    display: flex;
-  }
-  .mode-compiler .result-body {
-    min-height: 100px;
-  }
   .hero-code > pre {
     font-size: 11px;
   }
@@ -1250,9 +1226,6 @@ select {
   }
   .code-editor {
     height: 305px;
-  }
-  .mode-compiler .code-editor {
-    height: 350px;
   }
   .program-input {
     padding: 12px 12px 0;

@@ -1,4 +1,5 @@
 import "./style.css";
+import "./compiler-layout.css";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { compiler } from "./browser-compiler.js";
@@ -55,6 +56,7 @@ const setCode = (code) => editor.setCode(code);
 const exerciseNumber = (exercise) =>
   exercise.source?.number ?? exercise.id.replace("ex", "").replace("_", ".");
 function resetOutput() {
+  chooseFeedbackPanel("output");
   state.output = "";
   $("program-output").textContent = "";
   $("sample-results").replaceChildren();
@@ -65,6 +67,16 @@ function resetOutput() {
     ? `当前模型：${state.aiConfig.model}，点击「分析代码」获取帮助。`
     : "在设置中配置 AI 服务商、模型和 API Key 后，可以请 AI 帮你分析代码。";
   $("ai-feedback").classList.add("muted");
+}
+function chooseFeedbackPanel(panel) {
+  document.querySelector(".workspace").dataset.feedbackPanel = panel;
+  $("output-view-button").setAttribute("aria-pressed", String(panel === "output"));
+  $("assistant-view-button").setAttribute("aria-pressed", String(panel === "assistant"));
+}
+function setCompilerFocus(focused) {
+  document.body.classList.toggle("compiler-focus", focused);
+  $("compiler-focus").setAttribute("aria-pressed", String(focused));
+  $("compiler-focus").textContent = focused ? "退出专注" : "专注模式";
 }
 function busy(value) {
   $("run-button").disabled = value;
@@ -189,6 +201,8 @@ function route() {
   const previous = state.mode;
   cancel();
   state.mode = next;
+  document.body.classList.toggle("compiler-active", next === "compiler");
+  if (next !== "compiler") setCompilerFocus(false);
   $("home-view").hidden = next !== "home";
   $("lab-view").hidden = !["practice", "compiler"].includes(next);
   $("settings-view").hidden = next !== "settings";
@@ -205,6 +219,7 @@ function route() {
       ? "一个想法，一次尝试，一点新的发现"
       : "一步一步，把知识写进代码";
   $("example-picker").hidden = next !== "compiler";
+  $("compiler-controls").hidden = next !== "compiler";
   if (next === "practice") {
     const id = state.exercise?.id ?? readStorage("easyc:exercise", "ex1_1");
     const chapter =
@@ -333,6 +348,7 @@ async function run(testing = false) {
   }
 }
 async function analyze() {
+  chooseFeedbackPanel("assistant");
   if (!state.key) {
     $("ai-feedback").innerHTML =
       '请先在<a href="#settings">设置</a>中配置服务商、模型和 API Key，并保存本次设置。';
@@ -457,6 +473,15 @@ function clearAiCredential() {
 }
 
 $("run-button").addEventListener("click", () => void run());
+$("output-view-button").addEventListener("click", () => chooseFeedbackPanel("output"));
+$("assistant-view-button").addEventListener("click", () => chooseFeedbackPanel("assistant"));
+$("compiler-focus").addEventListener("click", () =>
+  setCompilerFocus(!document.body.classList.contains("compiler-focus")),
+);
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !event.isComposing && document.body.classList.contains("compiler-focus"))
+    setCompilerFocus(false);
+});
 $("test-button").addEventListener("click", () => void run(true));
 $("stop-button").addEventListener("click", () => {
   cancel();
