@@ -1,0 +1,28 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_03",
+  "title": "利润分段计算奖金",
+  "difficulty": "medium",
+  "description": "企业按当月利润分段提成，输入利润，计算应发奖金。\n\n### 输入\n\n非负实数利润，单位为元。\n\n### 输出\n\n奖金金额，保留两位小数。\n\n### 补充约定\n\n原目录未列出费率。本练习采用教材常见约定：利润 10 万元以内部分按 10%；10～20 万元部分按 7.5%；20～40 万元部分按 5%；40～60 万元部分按 3%；60～100 万元部分按 1.5%；超过 100 万元部分按 1%。",
+  "source": {
+    "section": "常规题",
+    "number": 3,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "100000",
+      "expected_output": "10000.00"
+    },
+    {
+      "input": "200000",
+      "expected_output": "17500.00"
+    },
+    {
+      "input": "1200000",
+      "expected_output": "41500.00"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    double profit, bonus = 0;\n    double limits[] = {100000, 200000, 400000, 600000, 1000000};\n    double rates[] = {0.10, 0.075, 0.05, 0.03, 0.015, 0.01};\n    scanf(\"%lf\", &profit);\n    double previous = 0;\n    for (int i = 0; i < 5 && profit > previous; i++) {\n        double end = profit < limits[i] ? profit : limits[i];\n        bonus += (end - previous) * rates[i];\n        previous = end;\n    }\n    if (profit > 1000000) bonus += (profit - 1000000) * rates[5];\n    printf(\"%.2f\\n\", bonus);\n    return 0;\n}\n"
+}

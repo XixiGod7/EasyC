@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_06",
+  "title": "平方倒数和求圆周率",
+  "difficulty": "medium",
+  "description": "根据 π²/6 = 1/1² + 1/2² + …，取前 n 项计算 π 的近似值。\n\n### 输入\n\n整数 n，1 ≤ n ≤ 1000000。\n\n### 输出\n\nπ 的近似值，保留六位小数。",
+  "source": {
+    "section": "常规题",
+    "number": 6,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1",
+      "expected_output": "2.449490"
+    },
+    {
+      "input": "1000",
+      "expected_output": "3.140638"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    int n;\n    double sum = 0;\n    scanf(\"%d\", &n);\n    for (int i = 1; i <= n; i++) sum += 1.0 / ((double)i * i);\n    printf(\"%.6f\\n\", sqrt(6 * sum));\n    return 0;\n}\n"
+}

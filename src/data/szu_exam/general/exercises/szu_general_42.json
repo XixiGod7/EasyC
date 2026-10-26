@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_42",
+  "title": "二维数组的鞍点",
+  "difficulty": "medium",
+  "description": "找出二维数组中的鞍点：该元素在所在行最大、所在列最小。\n\n### 输入\n\n第一行 r、c（1～20），随后输入矩阵元素。\n\n### 输出\n\n按行优先顺序输出所有鞍点，每行是元素值、行号、列号，行列从 1 开始；没有时输出 NONE。",
+  "source": {
+    "section": "常规题",
+    "number": 42,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2 3\n1 2 3\n4 5 6",
+      "expected_output": "3 1 3"
+    },
+    {
+      "input": "2 2\n1 2\n2 1",
+      "expected_output": "NONE"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int r, c, a[20][20], found = 0;\n    scanf(\"%d%d\", &r, &c);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) scanf(\"%d\", &a[i][j]);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) {\n        int ok = 1;\n        for (int k = 0; k < c; k++) if (a[i][k] > a[i][j]) ok = 0;\n        for (int k = 0; k < r; k++) if (a[k][j] < a[i][j]) ok = 0;\n        if (ok) { printf(\"%d %d %d\\n\", a[i][j], i + 1, j + 1); found = 1; }\n    }\n    if (!found) puts(\"NONE\");\n    return 0;\n}\n"
+}

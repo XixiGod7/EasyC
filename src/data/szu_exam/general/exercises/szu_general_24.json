@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_24",
+  "title": "十个分数的统计",
+  "difficulty": "easy",
+  "description": "输入 10 个分数，求平均分、最高分和最低分。\n\n### 输入\n\n10 个 0～100 的实数。\n\n### 输出\n\n平均分、最高分、最低分，各保留两位小数。",
+  "source": {
+    "section": "常规题",
+    "number": 24,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "10 20 30 40 50 60 70 80 90 100",
+      "expected_output": "55.00 100.00 10.00"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    double x, sum = 0, high = 0, low = 100;\n    for (int i = 0; i < 10; i++) {\n        scanf(\"%lf\", &x); sum += x;\n        if (x > high) high = x;\n        if (x < low) low = x;\n    }\n    printf(\"%.2f %.2f %.2f\\n\", sum / 10, high, low);\n    return 0;\n}\n"
+}

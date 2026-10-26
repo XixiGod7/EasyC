@@ -1,0 +1,28 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_22",
+  "title": "递归计算阶乘",
+  "difficulty": "medium",
+  "description": "编写递归函数求 n!，其中 0! = 1。\n\n### 输入\n\n整数 n，0 ≤ n ≤ 20。\n\n### 输出\n\nn 的阶乘。",
+  "source": {
+    "section": "常规题",
+    "number": 22,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "0",
+      "expected_output": "1"
+    },
+    {
+      "input": "10",
+      "expected_output": "3628800"
+    },
+    {
+      "input": "20",
+      "expected_output": "2432902008176640000"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nunsigned long long factorial(int n) { return n <= 1 ? 1 : (unsigned long long)n * factorial(n - 1); }\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%llu\\n\", factorial(n));\n    return 0;\n}\n"
+}

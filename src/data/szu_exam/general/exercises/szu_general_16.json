@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_16",
+  "title": "20 个数的数组排序",
+  "difficulty": "easy",
+  "description": "输入 20 个整数，用数组保存并从小到大排列。\n\n### 输入\n\n20 个整数。\n\n### 输出\n\n一行输出排好序的 20 个整数。",
+  "source": {
+    "section": "常规题",
+    "number": 16,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "20 19 18 17 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1",
+      "expected_output": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int a[20];\n    for (int i = 0; i < 20; i++) scanf(\"%d\", &a[i]);\n    for (int i = 0; i < 19; i++) for (int j = 0; j < 19-i; j++)\n        if (a[j] > a[j+1]) { int t = a[j]; a[j] = a[j+1]; a[j+1] = t; }\n    for (int i = 0; i < 20; i++) printf(\"%d%c\", a[i], i == 19 ? '\\n' : ' ');\n    return 0;\n}\n"
+}

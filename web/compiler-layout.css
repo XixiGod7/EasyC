@@ -1,0 +1,397 @@
+/* Keep the practice workspace grouped; the compiler can place each panel. */
+.feedback-panels {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  background: white;
+}
+.feedback-panels > .result-panel {
+  border: 0;
+  border-radius: 0;
+}
+.feedback-tabs {
+  display: none;
+}
+
+.compiler-active {
+  --compiler-header-height: 56px;
+}
+.compiler-active .site-header {
+  height: var(--compiler-header-height);
+  padding: 0 18px;
+  gap: 16px;
+}
+.compiler-active .brand small,
+.compiler-active .brand-divider,
+.compiler-active .runtime-badge,
+.compiler-active .site-footer {
+  display: none;
+}
+.compiler-active main {
+  min-height: 0;
+}
+.mode-compiler {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  height: calc(100vh - var(--compiler-header-height));
+  height: calc(100dvh - var(--compiler-header-height));
+  padding: 12px 16px 8px;
+  gap: 10px;
+}
+.mode-compiler .section-heading {
+  flex: none;
+  min-height: 36px;
+  margin: 0;
+  gap: 10px;
+}
+.mode-compiler .section-heading h1 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.3;
+}
+.mode-compiler .eyebrow {
+  display: none;
+}
+.compiler-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mode-compiler #example-picker {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.mode-compiler #example-select {
+  width: 144px;
+  padding: 7px 8px;
+  font-size: 11px;
+}
+.mode-compiler .lab-grid {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  container: compiler-workspace / size;
+}
+.mode-compiler .workspace {
+  display: grid;
+  grid-column: auto;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(180px, 1.6fr) 30px minmax(96px, 1fr);
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  gap: 8px;
+}
+.mode-compiler .feedback-panels {
+  display: contents;
+}
+.mode-compiler .editor-panel {
+  display: grid;
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-rows: 32px minmax(0, 1fr) auto auto auto;
+  min-width: 0;
+  min-height: 0;
+}
+.mode-compiler .feedback-panels > .result-panel,
+.mode-compiler .ai-panel {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1;
+  grid-row: 3;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  background: white;
+}
+.mode-compiler [data-feedback-panel="output"] .ai-panel,
+.mode-compiler [data-feedback-panel="assistant"] .result-panel {
+  display: none;
+}
+.mode-compiler .feedback-tabs {
+  display: flex;
+  grid-column: 1;
+  grid-row: 2;
+  gap: 8px;
+}
+.feedback-tabs button {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #edf2f8;
+  color: var(--muted);
+  font-size: 11px;
+}
+.feedback-tabs button[aria-pressed="true"] {
+  border-color: #adc4dc;
+  background: white;
+  color: var(--blue);
+  font-weight: 600;
+}
+.mode-compiler .panel-heading {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  gap: 8px;
+}
+.mode-compiler .code-editor {
+  height: auto;
+  min-height: 0;
+}
+.mode-compiler .cm-scroller {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.mode-compiler .cm-content {
+  padding: 8px 0;
+}
+.mode-compiler .editor-hint {
+  padding: 3px 12px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.mode-compiler .program-input {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  padding: 7px 12px 0;
+}
+.mode-compiler .program-input label {
+  margin: 0;
+  padding-top: 8px;
+  white-space: nowrap;
+}
+.mode-compiler .program-input label span {
+  display: none;
+}
+.mode-compiler .program-input textarea {
+  height: 44px;
+  min-height: 36px;
+  max-height: 100px;
+  padding: 5px 8px;
+}
+.mode-compiler .run-toolbar {
+  padding: 7px 12px;
+}
+.mode-compiler .run-toolbar .button {
+  padding: 7px 10px;
+  font-size: 11px;
+}
+.mode-compiler .shortcut {
+  display: inline;
+}
+.mode-compiler .result-body {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  padding: 10px 12px;
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+.mode-compiler .result-body > pre {
+  line-height: 1.65;
+}
+.mode-compiler .ai-panel {
+  padding: 0;
+}
+.mode-compiler .ai-heading {
+  flex: none;
+  min-height: 36px;
+  margin: 0;
+  padding: 5px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.mode-compiler .ai-heading h3 {
+  font-size: 11px;
+}
+.mode-compiler .ai-heading .button {
+  padding: 4px 8px;
+  font-size: 10px;
+}
+.mode-compiler #ai-feedback {
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  padding: 10px 12px;
+  overflow: auto;
+  scrollbar-gutter: stable;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.mode-compiler .lab-note {
+  flex: none;
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+/* Portrait tablets: full-width code above the output and assistant. */
+@container compiler-workspace (min-width: 600px) {
+  .mode-compiler .workspace {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+  .mode-compiler .editor-panel {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .mode-compiler .feedback-tabs {
+    display: none;
+  }
+  .mode-compiler .workspace .result-panel {
+    display: flex;
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .mode-compiler .workspace .ai-panel {
+    display: flex;
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* Decide from the available workspace, including embedded browser widths. */
+@container compiler-workspace (min-width: 700px) and (min-aspect-ratio: 5 / 4) {
+  .mode-compiler .workspace {
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 0.9fr);
+  }
+  .mode-compiler .editor-panel {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+  .mode-compiler .workspace .result-panel {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .mode-compiler .workspace .ai-panel {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* Very wide or short windows can show three independent columns. */
+@container compiler-workspace (min-width: 1360px) and (min-aspect-ratio: 2 / 1) {
+  .mode-compiler .workspace {
+    grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.8fr) minmax(270px, 0.9fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+  .mode-compiler .editor-panel {
+    grid-row: 1;
+  }
+  .mode-compiler .workspace .result-panel {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .mode-compiler .workspace .ai-panel {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+/* Landscape phones need the code and feedback side by side. */
+@container compiler-workspace (min-width: 520px) and (max-width: 819px) and (max-height: 420px) {
+  .mode-compiler .workspace {
+    grid-template-columns: minmax(0, 1.3fr) minmax(200px, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .mode-compiler .editor-panel {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+  .mode-compiler .feedback-tabs {
+    display: none;
+  }
+  .mode-compiler .workspace .result-panel {
+    display: flex;
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .mode-compiler .workspace .ai-panel {
+    display: flex;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .mode-compiler .editor-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .compiler-active {
+    --compiler-header-height: 48px;
+  }
+  .compiler-active .site-header {
+    padding: 0 12px;
+    gap: 10px;
+  }
+  .compiler-active .brand {
+    gap: 6px;
+  }
+  .compiler-active .brand strong {
+    font-size: 18px;
+  }
+  .compiler-active .site-header nav {
+    gap: 12px;
+  }
+  .compiler-active .site-header nav a {
+    font-size: 11px;
+  }
+  .mode-compiler {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  .mode-compiler .section-heading h1 {
+    font-size: 20px;
+  }
+  .compiler-controls {
+    gap: 6px;
+  }
+  .mode-compiler #example-picker > span {
+    display: none;
+  }
+  .mode-compiler #example-select {
+    width: 124px;
+  }
+  .mode-compiler #compiler-focus {
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+  .mode-compiler .lab-note {
+    display: none;
+  }
+}
+@media (max-height: 600px) {
+  .compiler-active {
+    --compiler-header-height: 44px;
+  }
+  .mode-compiler {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    gap: 6px;
+  }
+  .mode-compiler .section-heading {
+    min-height: 32px;
+  }
+  .mode-compiler .lab-note,
+  .mode-compiler .editor-hint {
+    display: none;
+  }
+}
+.compiler-active.compiler-focus {
+  --compiler-header-height: 0px;
+}
+.compiler-focus .site-header {
+  display: none;
+}

@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_05",
+  "title": "通过结构体指针访问成员",
+  "difficulty": "easy",
+  "description": "通过指向结构体变量的指针，访问并输出学生的各成员信息。\n\n### 输入\n\n学号、姓名、实数成绩；姓名不含空白且不超过 31 字符。\n\n### 输出\n\n学号、姓名、成绩（两位小数）。\n\n### 补充约定\n\n原目录未列出结构体字段，本练习补充为学号、姓名、成绩。",
+  "source": {
+    "section": "结构体题",
+    "number": 5,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 Alice 89.5",
+      "expected_output": "1 Alice 89.50"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score; } Student;\n\nint main(void) {\n    Student student, *p = &student;\n    scanf(\"%d%31s%lf\", &p->num, p->name, &p->score);\n    printf(\"%d %s %.2f\\n\", p->num, p->name, p->score);\n    return 0;\n}\n"
+}

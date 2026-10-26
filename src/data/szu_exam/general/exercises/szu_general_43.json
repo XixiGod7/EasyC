@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_43",
+  "title": "折半查找",
+  "difficulty": "medium",
+  "description": "在含 15 个已排序整数的数组中，用折半查找法寻找指定元素。\n\n### 输入\n\n第一行 15 个严格递增整数；第二行目标值。\n\n### 输出\n\n找到时输出下标（从 0 开始），未找到输出 -1。",
+  "source": {
+    "section": "常规题",
+    "number": 43,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1 3 5 7 9 11 13 15 17 19 21 23 25 27 29\n15",
+      "expected_output": "7"
+    },
+    {
+      "input": "1 3 5 7 9 11 13 15 17 19 21 23 25 27 29\n4",
+      "expected_output": "-1"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int a[15], x, left = 0, right = 14, answer = -1;\n    for (int i = 0; i < 15; i++) scanf(\"%d\", &a[i]);\n    scanf(\"%d\", &x);\n    while (left <= right) {\n        int mid = left + (right - left) / 2;\n        if (a[mid] == x) { answer = mid; break; }\n        if (a[mid] < x) left = mid + 1;\n        else right = mid - 1;\n    }\n    printf(\"%d\\n\", answer);\n    return 0;\n}\n"
+}

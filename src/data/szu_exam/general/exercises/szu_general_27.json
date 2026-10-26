@@ -1,0 +1,28 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_27",
+  "title": "平方根的整数部分",
+  "difficulty": "easy",
+  "description": "输入一个小于 1000 的非负整数，输出其平方根；若平方根不是整数，只输出整数部分。\n\n### 输入\n\n整数 n，0 ≤ n < 1000。\n\n### 输出\n\n不超过 √n 的最大整数。",
+  "source": {
+    "section": "常规题",
+    "number": 27,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "999",
+      "expected_output": "31"
+    },
+    {
+      "input": "81",
+      "expected_output": "9"
+    },
+    {
+      "input": "0",
+      "expected_output": "0"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, root = 0;\n    scanf(\"%d\", &n);\n    while ((root + 1) * (root + 1) <= n) root++;\n    printf(\"%d\\n\", root);\n    return 0;\n}\n"
+}

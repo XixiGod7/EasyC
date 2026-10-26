@@ -59,6 +59,10 @@ EasyC
 
 ## 🚀 Quick Start
 
+### Cloudflare (free browser edition)
+
+See [Cloudflare deployment instructions](CLOUDFLARE.md). The browser edition runs C locally with WebAssembly and uses Cloudflare's free hosting. The original Python/Gradio application is also retained.
+
 ### Using Docker (Recommended)
 ```bash
 # Clone the repository

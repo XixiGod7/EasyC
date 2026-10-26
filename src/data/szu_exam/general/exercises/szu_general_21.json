@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_21",
+  "title": "递归求第五个学生年龄",
+  "difficulty": "medium",
+  "description": "五个学生坐在一起，递归求第五个学生的年龄。\n\n### 输入\n\n无输入。\n\n### 输出\n\n第五个学生的年龄。\n\n### 补充约定\n\n原图只给出求第五个学生年龄的目录标题，省略了年龄关系。本练习按常见教材题补充：第一个学生 10 岁，后一个比前一个大 2 岁。",
+  "source": {
+    "section": "常规题",
+    "number": 21,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "18"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nint age(int n) { return n == 1 ? 10 : age(n - 1) + 2; }\n\nint main(void) {\n    printf(\"%d\\n\", age(5));\n    return 0;\n}\n"
+}

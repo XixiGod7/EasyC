@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_41",
+  "title": "奇数阶魔方阵",
+  "difficulty": "hard",
+  "description": "输出由 1～n² 构成的 n 阶魔方阵，使每行、每列和两条对角线的和相等。\n\n### 输入\n\n奇数 n，1 ≤ n ≤ 15。\n\n### 输出\n\n输出 n 行魔方阵。\n\n### 补充约定\n\n采用奇数阶的标准上移右移构造法，首个数放在首行中间，以使输出结果唯一。原目录未限定 n 的范围，本练习只要求奇数阶。",
+  "source": {
+    "section": "常规题",
+    "number": 41,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "3",
+      "expected_output": "8 1 6\n3 5 7\n4 9 2"
+    },
+    {
+      "input": "1",
+      "expected_output": "1"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, a[15][15] = {{0}};\n    scanf(\"%d\", &n);\n    int row = 0, col = n / 2;\n    for (int value = 1; value <= n*n; value++) {\n        a[row][col] = value;\n        int next_row = (row + n - 1) % n, next_col = (col + 1) % n;\n        if (a[next_row][next_col]) row = (row + 1) % n;\n        else { row = next_row; col = next_col; }\n    }\n    for (int i = 0; i < n; i++) for (int j = 0; j < n; j++)\n        printf(\"%d%c\", a[i][j], j + 1 == n ? '\\n' : ' ');\n    return 0;\n}\n"
+}

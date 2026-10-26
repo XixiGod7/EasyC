@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_linked_list",
+  "id": "szu_linked_list_06",
+  "title": "循环链表实现约瑟夫问题",
+  "difficulty": "hard",
+  "description": "13 个人围成一圈，从第 1 人开始报 1、2、3，报到 3 的人退出；其后的人从 1 重新报数。用循环链表找出最后留下者原来的序号。\n\n### 输入\n\n无输入。\n\n### 输出\n\n最后留下者的序号，从 1 开始。",
+  "source": {
+    "section": "链表题",
+    "number": 6,
+    "image": "4.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "13"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node { int number; struct Node *next; } Node;\n\nint main(void) {\n    Node *head = NULL, *tail = NULL;\n    for (int i = 1; i <= 13; i++) {\n        Node *node = malloc(sizeof(*node));\n        if (!node) return 1;\n        node->number = i; node->next = NULL;\n        if (tail) tail->next = node; else head = node;\n        tail = node;\n    }\n    tail->next = head;\n    Node *previous = tail, *current = head;\n    while (current->next != current) {\n        for (int count = 1; count < 3; count++) { previous = current; current = current->next; }\n        previous->next = current->next;\n        free(current); current = previous->next;\n    }\n    printf(\"%d\\n\", current->number);\n    free(current);\n    return 0;\n}\n"
+}

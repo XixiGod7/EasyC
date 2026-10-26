@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_26",
+  "title": "最大公约数与最小公倍数",
+  "difficulty": "easy",
+  "description": "求 m 和 n 的最大公约数和最小公倍数。\n\n### 输入\n\n两个正整数，均不超过 1000000000。\n\n### 输出\n\n最大公约数、最小公倍数。",
+  "source": {
+    "section": "常规题",
+    "number": 26,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "12 18",
+      "expected_output": "6 36"
+    },
+    {
+      "input": "7 11",
+      "expected_output": "1 77"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    long long m, n, a, b;\n    scanf(\"%lld%lld\", &m, &n);\n    a = m; b = n;\n    while (b) { long long r = a % b; a = b; b = r; }\n    printf(\"%lld %lld\\n\", a, m / a * n);\n    return 0;\n}\n"
+}

@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_07",
+  "title": "三角形面积",
+  "difficulty": "easy",
+  "description": "给出三角形的三边长，用海伦公式计算面积。\n\n### 输入\n\n三个正实数边长。\n\n### 输出\n\n能组成三角形时输出面积，保留两位小数；否则输出 INVALID。",
+  "source": {
+    "section": "常规题",
+    "number": 7,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "3 4 5",
+      "expected_output": "6.00"
+    },
+    {
+      "input": "1 2 3",
+      "expected_output": "INVALID"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    double a, b, c;\n    scanf(\"%lf%lf%lf\", &a, &b, &c);\n    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) puts(\"INVALID\");\n    else {\n        double p = (a + b + c) / 2;\n        printf(\"%.2f\\n\", sqrt(p * (p - a) * (p - b) * (p - c)));\n    }\n    return 0;\n}\n"
+}

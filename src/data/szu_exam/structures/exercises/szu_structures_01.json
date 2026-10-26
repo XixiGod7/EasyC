@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_structures",
+  "id": "szu_structures_01",
+  "title": "保存并输出学生信息",
+  "difficulty": "easy",
+  "description": "把一个学生的学号、姓名、住址放入结构体，再输出该学生的信息。\n\n### 输入\n\n学号、姓名、住址；姓名和住址不含空白，长度分别不超过 31、100 字符。\n\n### 输出\n\n一行输出学号、姓名、住址。",
+  "source": {
+    "section": "结构体题",
+    "number": 1,
+    "image": "5.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "1001 Alice Shenzhen",
+      "expected_output": "1001 Alice Shenzhen"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32], address[101]; } Student;\n\nint main(void) {\n    Student student;\n    scanf(\"%d%31s%100s\", &student.num, student.name, student.address);\n    printf(\"%d %s %s\\n\", student.num, student.name, student.address);\n    return 0;\n}\n"
+}

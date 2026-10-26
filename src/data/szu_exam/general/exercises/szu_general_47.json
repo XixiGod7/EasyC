@@ -1,0 +1,24 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_47",
+  "title": "提取元音字母",
+  "difficulty": "easy",
+  "description": "将字符串中的元音字母复制到另一个字符串并输出，保持原有顺序和大小写。\n\n### 输入\n\n一行不超过 1000 个 ASCII 字符的文本。\n\n### 输出\n\n提取出的 a、e、i、o、u（含大写）组成的字符串。",
+  "source": {
+    "section": "常规题",
+    "number": 47,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "Hello EasyC",
+      "expected_output": "eoEa"
+    },
+    {
+      "input": "xyz",
+      "expected_output": ""
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char s[1002], vowels[1002];\n    int n = 0;\n    if (!fgets(s, sizeof(s), stdin)) s[0] = '\\0';\n    for (int i = 0; s[i]; i++) if (strchr(\"aeiouAEIOU\", s[i])) vowels[n++] = s[i];\n    vowels[n] = '\\0';\n    puts(vowels);\n    return 0;\n}\n"
+}

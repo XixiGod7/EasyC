@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_files",
+  "id": "szu_files_03",
+  "title": "字符串排序后存入文件",
+  "difficulty": "medium",
+  "description": "读入若干字符串，按字母顺序排序，再保存到文件。\n\n### 输入\n\n第一行 n（1～100）；随后 n 个不含空白的 ASCII 字符串，每个不超过 100 字符。\n\n### 输出\n\n读回保存的文件，每行输出一个字符串，按 strcmp 的字典序排列。\n\n### 在线练习说明\n\n本题读写浏览器沙箱中的临时文件。原题涉及的已有文件由程序按输入内容初始化；运行后把目标文件内容打印到标准输出，用于检查样例。每次运行的文件互相独立，结束后不保留。",
+  "source": {
+    "section": "文件题",
+    "number": 3,
+    "image": "6.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "4\npear apple banana apple",
+      "expected_output": "apple\napple\nbanana\npear"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nFILE *open_file(const char *path, const char *mode) {\n    FILE *file = fopen(path, mode);\n    if (!file) { perror(path); exit(1); }\n    return file;\n}\nvoid show_file(const char *path) {\n    FILE *file = open_file(path, \"r\");\n    int ch;\n    while ((ch = fgetc(file)) != EOF) putchar(ch);\n    fclose(file);\n}\nvoid copy_file(const char *source, const char *target) {\n    FILE *in = open_file(source, \"rb\"), *out = open_file(target, \"wb\");\n    int ch;\n    while ((ch = fgetc(in)) != EOF) fputc(ch, out);\n    fclose(in); fclose(out);\n}\n\nint main(void) {\n    int n;\n    char words[100][101];\n    scanf(\"%d\", &n);\n    for (int i = 0; i < n; i++) scanf(\"%100s\", words[i]);\n    for (int i = 0; i < n - 1; i++) for (int j = i + 1; j < n; j++)\n        if (strcmp(words[i], words[j]) > 0) {\n            char temporary[101]; strcpy(temporary, words[i]); strcpy(words[i], words[j]); strcpy(words[j], temporary);\n        }\n    FILE *file = open_file(\"words.txt\", \"w\");\n    for (int i = 0; i < n; i++) fprintf(file, \"%s\\n\", words[i]);\n    fclose(file);\n    show_file(\"words.txt\");\n    return 0;\n}\n"
+}

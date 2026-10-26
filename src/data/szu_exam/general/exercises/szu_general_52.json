@@ -1,0 +1,28 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_52",
+  "title": "日期在年内的序号",
+  "difficulty": "medium",
+  "description": "给出年月日，计算该日是当年的第几天，正确处理闰年。\n\n### 输入\n\n三个整数 year、month、day，保证为公元 1～9999 年的合法日期。\n\n### 输出\n\n该日期在当年内的序号，1 月 1 日为第 1 天。",
+  "source": {
+    "section": "常规题",
+    "number": 52,
+    "image": "3.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "2024 3 1",
+      "expected_output": "61"
+    },
+    {
+      "input": "1900 3 1",
+      "expected_output": "60"
+    },
+    {
+      "input": "2023 12 31",
+      "expected_output": "365"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n\nint day_of_year(int year, int month, int day) {\n    int days[] = {31,28,31,30,31,30,31,31,30,31,30,31};\n    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) days[1] = 29;\n    int answer = day;\n    for (int i = 0; i < month - 1; i++) answer += days[i];\n    return answer;\n}\n\nint main(void) {\n    int year, month, day;\n    scanf(\"%d%d%d\", &year, &month, &day);\n    printf(\"%d\\n\", day_of_year(year, month, day));\n    return 0;\n}\n"
+}

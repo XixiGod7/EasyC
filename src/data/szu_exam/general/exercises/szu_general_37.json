@@ -1,0 +1,20 @@
+{
+  "chapter_id": "szu_general",
+  "id": "szu_general_37",
+  "title": "牛顿迭代求方程的根",
+  "difficulty": "medium",
+  "description": "从初值 x₀ = 1.5 开始，用牛顿迭代法求 2x³ - 4x² + 3x + 6 = 0 的根；相邻两次近似值之差小于 10⁻⁸ 时停止。\n\n### 输入\n\n无输入。\n\n### 输出\n\n方程的根，保留六位小数。\n\n### 补充约定\n\n原目录表述为“1.5 附近的根”，本练习将 1.5 作为迭代初值；方程的实根实际为负数。",
+  "source": {
+    "section": "常规题",
+    "number": 37,
+    "image": "2.jpg"
+  },
+  "test_cases": [
+    {
+      "input": "",
+      "expected_output": "-0.801207"
+    }
+  ],
+  "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
+  "solution": "#include <stdio.h>\n#include <math.h>\n\ndouble f(double x) { return 2*x*x*x - 4*x*x + 3*x + 6; }\n\nint main(void) {\n    double x = 1.5, next;\n    do {\n        next = x - f(x) / (6*x*x - 8*x + 3);\n        if (fabs(next - x) < 1e-8) break;\n        x = next;\n    } while (1);\n    printf(\"%.6f\\n\", next);\n    return 0;\n}\n"
+}
