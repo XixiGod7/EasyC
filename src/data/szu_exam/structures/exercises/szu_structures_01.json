@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32], address[101]; } Student;\n\nint main(void) {\n    Student student;\n    scanf(\"%d%31s%100s\", &student.num, student.name, student.address);\n    printf(\"%d %s %s\\n\", student.num, student.name, student.address);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32], address[101]; } Student;\n\nint main(void) {\n    Student student;\n    // 数值成员传地址。字符数组本身就能提供首字符地址，格式宽度给空字符留出一格。\n    scanf(\"%d%31s%100s\", &student.num, student.name, student.address);\n    printf(\"%d %s %s\\n\", student.num, student.name, student.address);\n    return 0;\n}\n"
 }

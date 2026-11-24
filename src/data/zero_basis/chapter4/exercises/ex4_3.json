@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int sum = 0;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int sum = 0, i = 1;\n    do {\n        sum += i;\n        i++;\n    } while (i <= 100);\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int sum = 0, i = 1;\n    // do-while 先执行循环体，i 自增后才检查是否还要继续。\n    do {\n        sum += i;\n        i++;\n    } while (i <= 100);\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
 }

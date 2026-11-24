@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    for (int i = 0; i < n; i++) {\n        long long value = 1;\n        for (int j = 0; j <= i; j++) {\n            printf(\"%s%lld\", j ? \" \" : \"\", value);\n            value = value * (i - j) / (j + 1);\n        }\n        putchar('\\n');\n    }\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    for (int i = 0; i < n; i++) {\n        // 第 i 行从组合数 C(i, 0) = 1 开始。\n        long long value = 1;\n        for (int j = 0; j <= i; j++) {\n            printf(\"%s%lld\", j ? \" \" : \"\", value);\n            // 用 C(i, j+1) = C(i, j) × (i−j) / (j+1) 递推同一行。\n            value = value * (i - j) / (j + 1);\n        }\n        putchar('\\n');\n    }\n    return 0;\n}\n"
 }

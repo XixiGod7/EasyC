@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\nint age(int n) { return n == 1 ? 10 : age(n - 1) + 2; }\n\nint main(void) {\n    printf(\"%d\\n\", age(5));\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n// 第一个学生 10 岁。其他学生的年龄由前一个学生的年龄加 2 得到。\nint age(int n) { return n == 1 ? 10 : age(n - 1) + 2; }\n\nint main(void) {\n    printf(\"%d\\n\", age(5));\n    return 0;\n}\n"
 }

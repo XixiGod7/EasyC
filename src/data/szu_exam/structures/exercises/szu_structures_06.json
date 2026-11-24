@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32], address[101]; } Student;\n\nint main(void) {\n    Student students[3];\n    for (Student *p = students; p < students + 3; p++) scanf(\"%d%31s%100s\", &p->num, p->name, p->address);\n    for (Student *p = students; p < students + 3; p++) printf(\"%d %s %s\\n\", p->num, p->name, p->address);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32], address[101]; } Student;\n\nint main(void) {\n    Student students[3];\n    // 指针每加一就移动一条 Student 记录，students + 3 是遍历的终点。\n    for (Student *p = students; p < students + 3; p++) scanf(\"%d%31s%100s\", &p->num, p->name, p->address);\n    for (Student *p = students; p < students + 3; p++) printf(\"%d %s %s\\n\", p->num, p->name, p->address);\n    return 0;\n}\n"
 }

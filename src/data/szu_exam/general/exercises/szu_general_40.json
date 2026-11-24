@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, a[101], x;\n    scanf(\"%d\", &n);\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    scanf(\"%d\", &x);\n    int pos = n;\n    while (pos > 0 && a[pos - 1] > x) { a[pos] = a[pos - 1]; pos--; }\n    a[pos] = x;\n    for (int i = 0; i <= n; i++) printf(\"%d%c\", a[i], i == n ? '\\n' : ' ');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, a[101], x;\n    scanf(\"%d\", &n);\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    scanf(\"%d\", &x);\n    int pos = n;\n    // 从尾部向前挪动所有比 x 大的元素，为 x 腾出一个位置。\n    while (pos > 0 && a[pos - 1] > x) { a[pos] = a[pos - 1]; pos--; }\n    a[pos] = x;\n    for (int i = 0; i <= n; i++) printf(\"%d%c\", a[i], i == n ? '\\n' : ' ');\n    return 0;\n}\n"
 }

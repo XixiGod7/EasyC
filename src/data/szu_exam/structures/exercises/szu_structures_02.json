@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score; } Student;\n\nint main(void) {\n    Student a, b;\n    scanf(\"%d%31s%lf\", &a.num, a.name, &a.score);\n    scanf(\"%d%31s%lf\", &b.num, b.name, &b.score);\n    Student best = a.score >= b.score ? a : b;\n    printf(\"%d %s %.2f\\n\", best.num, best.name, best.score);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score; } Student;\n\nint main(void) {\n    Student a, b;\n    scanf(\"%d%31s%lf\", &a.num, a.name, &a.score);\n    scanf(\"%d%31s%lf\", &b.num, b.name, &b.score);\n    // 按成绩选出整条学生记录，成绩相同就保留先输入的 a。\n    Student best = a.score >= b.score ? a : b;\n    printf(\"%d %s %.2f\\n\", best.num, best.name, best.score);\n    return 0;\n}\n"
 }

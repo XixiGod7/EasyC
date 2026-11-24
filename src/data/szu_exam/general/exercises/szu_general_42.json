@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int r, c, a[20][20], found = 0;\n    scanf(\"%d%d\", &r, &c);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) scanf(\"%d\", &a[i][j]);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) {\n        int ok = 1;\n        for (int k = 0; k < c; k++) if (a[i][k] > a[i][j]) ok = 0;\n        for (int k = 0; k < r; k++) if (a[k][j] < a[i][j]) ok = 0;\n        if (ok) { printf(\"%d %d %d\\n\", a[i][j], i + 1, j + 1); found = 1; }\n    }\n    if (!found) puts(\"NONE\");\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int r, c, a[20][20], found = 0;\n    scanf(\"%d%d\", &r, &c);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) scanf(\"%d\", &a[i][j]);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) {\n        int ok = 1;\n        // 一个位置必须同时是本行最大值和本列最小值，才算鞍点。\n        for (int k = 0; k < c; k++) if (a[i][k] > a[i][j]) ok = 0;\n        for (int k = 0; k < r; k++) if (a[k][j] < a[i][j]) ok = 0;\n        if (ok) { printf(\"%d %d %d\\n\", a[i][j], i + 1, j + 1); found = 1; }\n    }\n    if (!found) puts(\"NONE\");\n    return 0;\n}\n"
 }

@@ -11,5 +11,5 @@
       }
   ],
   "solution_template": "#include <stdio.h>\n\nint main() {\n    // 请在此处编写类型转换代码\n\n    return 0;\n}",
-  "solution": "#include <stdio.h>\n\nint main() {\n    int a = 5;\n    float b = 2.5;\n    \n    int sum_int = a + b;\n    float sum_float = a + b;\n    \n    printf(\"整型结果：%d\\n\", sum_int);\n    printf(\"浮点型结果：%f\\n\", sum_float);\n    return 0;\n}"
+  "solution": "#include <stdio.h>\n\nint main() {\n    int a = 5;\n    float b = 2.5;\n    \n    // 加法先按浮点数计算。保存为 int 时去掉小数部分，保存为 float 时保留。\n    int sum_int = a + b;\n    float sum_float = a + b;\n    \n    printf(\"整型结果：%d\\n\", sum_int);\n    printf(\"浮点型结果：%f\\n\", sum_float);\n    return 0;\n}"
 }

@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char a[202], b[102];\n    fgets(a, 102, stdin); fgets(b, sizeof(b), stdin);\n    a[strcspn(a, \"\\n\")] = '\\0'; b[strcspn(b, \"\\n\")] = '\\0';\n    int i = 0, j = 0;\n    while (a[i]) i++;\n    do { a[i++] = b[j]; } while (b[j++]);\n    puts(a);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char a[202], b[102];\n    fgets(a, 102, stdin); fgets(b, sizeof(b), stdin);\n    // 去掉 fgets 可能保留的换行，让两段文本直接相接。\n    a[strcspn(a, \"\\n\")] = '\\0'; b[strcspn(b, \"\\n\")] = '\\0';\n    int i = 0, j = 0;\n    // 先找到 a 的结束位置，再从这里复制 b，连同末尾的空字符。\n    while (a[i]) i++;\n    do { a[i++] = b[j]; } while (b[j++]);\n    puts(a);\n    return 0;\n}\n"
 }

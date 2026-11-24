@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int count = 0;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int num, count = 0;\n    for (int i = 0; i < 10; i++) {\n        scanf(\"%d\", &num);\n        if (num % 2 == 0) {\n            count++;\n        }\n    }\n    printf(\"%d\\n\", count);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int num, count = 0;\n    for (int i = 0; i < 10; i++) {\n        scanf(\"%d\", &num);\n        // 只对余数为零的输入计数，处理完十个数后再输出总数。\n        if (num % 2 == 0) {\n            count++;\n        }\n    }\n    printf(\"%d\\n\", count);\n    return 0;\n}"
 }

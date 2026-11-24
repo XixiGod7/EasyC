@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int matrix[3][3];\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int matrix[3][3], sum = 0;\n    \n    // 输入矩阵\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 3; j++) {\n            scanf(\"%d\", &matrix[i][j]);\n        }\n    }\n    \n    // 计算主对角线元素之和\n    for(int i = 0; i < 3; i++) {\n        sum += matrix[i][i];  // 主对角线\n    }\n    \n    printf(\"%d\\n\", sum);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int matrix[3][3], sum = 0;\n    \n    // 输入矩阵\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 3; j++) {\n            scanf(\"%d\", &matrix[i][j]);\n        }\n    }\n    \n    // 计算主对角线元素之和\n    for(int i = 0; i < 3; i++) {\n        // 左上到右下的主对角线上，行下标和列下标相等。\n        sum += matrix[i][i];  // 主对角线\n    }\n    \n    printf(\"%d\\n\", sum);\n    return 0;\n}"
 }

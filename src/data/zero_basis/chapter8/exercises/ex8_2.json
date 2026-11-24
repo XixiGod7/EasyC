@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[5] = {4, 8, 2, 9, 5};\n    int *p = arr;\n    int sum = 0, max = *p;\n    \n    /* 计算和与最大值 */\n    for(int i = 0; i < 5; i++) {\n        sum += *(p + i);\n        if(*(p + i) > max) max = *(p + i);\n    }\n    \n    printf(\"数组元素和：%d\\n\", sum);\n    printf(\"最大值：%d\\n\", max);\n    \n    /* 翻倍并打印 */\n    printf(\"翻倍后：\");\n    for(int i = 0; i < 5; i++) {\n        *(p + i) *= 2;\n        printf(\"%d \", *(p + i));\n    }\n    printf(\"\\n\");\n    \n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[5] = {4, 8, 2, 9, 5};\n    int *p = arr;\n    int sum = 0, max = *p;\n    \n    /* 计算和与最大值 */\n    for(int i = 0; i < 5; i++) {\n        sum += *(p + i);\n        if(*(p + i) > max) max = *(p + i);\n    }\n    \n    printf(\"数组元素和：%d\\n\", sum);\n    printf(\"最大值：%d\\n\", max);\n    \n    /* 翻倍并打印 */\n    printf(\"翻倍后：\");\n    for(int i = 0; i < 5; i++) {\n        // *(p + i) 引用原数组中的第 i 个元素，因此乘法会写回 arr。\n        *(p + i) *= 2;\n        printf(\"%d \", *(p + i));\n    }\n    printf(\"\\n\");\n    \n    return 0;\n}"
 }

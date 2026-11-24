@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    char id = 'M';\n    int chinese = 85;\n    int math = 90;\n    int english = 52;  // 错误的成绩\n    int *p_english = &english;  \n    // 输出错误的成绩\n    printf(\"错误的英语成绩：%d\\n\", english);  \n    // 输出成绩的内存地址\n    printf(\"英语成绩的内存地址：%p\\n\", p_english);  \n    // 使用指针修改成绩\n    *p_english = 92;  \n    // 输出修改后的成绩\n    printf(\"修改后的英语成绩：%d\\n\", english);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    char id = 'M';\n    int chinese = 85;\n    int math = 90;\n    int english = 52;  // 错误的成绩\n    int *p_english = &english;  \n    // 输出错误的成绩\n    printf(\"错误的英语成绩：%d\\n\", english);  \n    // 输出成绩的内存地址\n    printf(\"英语成绩的内存地址：%p\\n\", p_english);  \n    // 使用指针修改成绩\n    // 对 *p_english 赋值会直接改写 english 所在位置的值。\n    *p_english = 92;  \n    // 输出修改后的成绩\n    printf(\"修改后的英语成绩：%d\\n\", english);\n    return 0;\n}"
 }

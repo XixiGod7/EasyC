@@ -15,5 +15,5 @@
       }
   ],
   "solution_template": "",
-  "solution": "#include <stdio.h>\n\nint main() {\n    int chinese, math, english;\n    int sum;\n    float avg;\n    \n    /* 输入三门课成绩 */\n    scanf(\"%d,%d,%d\", &chinese, &math, &english);\n    \n    /* 计算总分和平均分 */\n    sum = chinese + math + english;\n    avg = sum / 3.0;\n    \n    /* 输出结果 */\n    printf(\"总分：%d\\n\", sum);\n    printf(\"平均分：%.2f\\n\", avg);\n    \n    return 0;\n}"
+  "solution": "#include <stdio.h>\n\nint main() {\n    int chinese, math, english;\n    int sum;\n    float avg;\n    \n    /* 输入三门课成绩 */\n    scanf(\"%d,%d,%d\", &chinese, &math, &english);\n    \n    /* 计算总分和平均分 */\n    sum = chinese + math + english;\n    // 用 3.0 作除数，保留平均分的小数部分。\n    avg = sum / 3.0;\n    \n    /* 输出结果 */\n    printf(\"总分：%d\\n\", sum);\n    printf(\"平均分：%.2f\\n\", avg);\n    \n    return 0;\n}"
 }

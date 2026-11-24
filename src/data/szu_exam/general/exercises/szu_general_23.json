@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\nvoid hanoi(int n, char from, char via, char to) {\n    if (n == 0) return;\n    hanoi(n - 1, from, to, via);\n    printf(\"%c->%c\\n\", from, to);\n    hanoi(n - 1, via, from, to);\n}\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    hanoi(n, 'A', 'B', 'C');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\nvoid hanoi(int n, char from, char via, char to) {\n    // 没有盘子时递归结束。\n    if (n == 0) return;\n    // 先把上面的 n−1 个盘子移到中转柱，再移动最大的盘子，最后把其余盘子移到目标柱。\n    hanoi(n - 1, from, to, via);\n    printf(\"%c->%c\\n\", from, to);\n    hanoi(n - 1, via, from, to);\n}\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    hanoi(n, 'A', 'B', 'C');\n    return 0;\n}\n"
 }

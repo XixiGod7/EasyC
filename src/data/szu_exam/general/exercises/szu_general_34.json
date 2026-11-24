@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int peaches = 1;\n    for (int day = 9; day >= 1; day--) peaches = (peaches + 1) * 2;\n    printf(\"%d\\n\", peaches);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int peaches = 1;\n    // 从第十天倒推，先补回多吃的一个，再把数量翻倍。\n    for (int day = 9; day >= 1; day--) peaches = (peaches + 1) * 2;\n    printf(\"%d\\n\", peaches);\n    return 0;\n}\n"
 }

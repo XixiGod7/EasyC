@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, composite[10001] = {0};\n    scanf(\"%d\", &n);\n    for (int p = 2; p <= n / p; p++)\n        if (!composite[p]) for (int k = p*p; k <= n; k += p) composite[k] = 1;\n    for (int p = 2; p <= n; p++) if (!composite[p]) printf(\"%d \", p);\n    putchar('\\n');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    // composite[p] 为 1 表示 p 已被标记为合数。\n    int n, composite[10001] = {0};\n    scanf(\"%d\", &n);\n    // 只用未标记的 p 筛倍数。小于 p² 的倍数已经由更小的因数筛过。\n    for (int p = 2; p <= n / p; p++)\n        if (!composite[p]) for (int k = p*p; k <= n; k += p) composite[k] = 1;\n    for (int p = 2; p <= n; p++) if (!composite[p]) printf(\"%d \", p);\n    putchar('\\n');\n    return 0;\n}\n"
 }

@@ -3,7 +3,7 @@ import "./compiler-layout.css";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { compiler } from "./browser-compiler.js";
-import { createCodeEditor } from "./code-editor.js";
+import { createCodeEditor, renderReferenceCode } from "./code-editor.js";
 import { DEFAULT_AI_CONFIG, normalizeAiConfig, validateApiKey } from "../shared/ai-config.ts";
 import { readAiResponse } from "./ai-client.js";
 
@@ -92,16 +92,17 @@ function cancel() {
   state.runId++;
   busy(false);
 }
-function choosePanel(answer) {
-  $("question-content").hidden = answer;
-  $("answer-content").hidden = !answer;
-  for (const [id, selected] of [
-    ["question-tab", !answer],
-    ["answer-tab", answer],
-  ]) {
-    $(id).classList.toggle("active", selected);
-    $(id).setAttribute("aria-selected", String(selected));
-  }
+function toggleAnswer() {
+  const expanded = $("answer-content").hidden;
+  $("answer-content").hidden = !expanded;
+  $("jump-to-answer").hidden = !expanded;
+  $("toggle-answer").setAttribute("aria-expanded", String(expanded));
+  $("toggle-answer").textContent = expanded ? "收起答案" : "对照参考答案";
+}
+function jumpTo(id) {
+  const target = $(id);
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ block: "start" });
 }
 function showExercise(exercise) {
   if (!exercise) return;
@@ -118,7 +119,7 @@ function showExercise(exercise) {
     ? `来源：所提供的深大复习资料 · ${exercise.source.section}第 ${exercise.source.number} 题（${exercise.source.image}）。输入输出与参考解答为练习补充。`
     : "";
   $("question-source").hidden = !exercise.source;
-  $("reference-code").textContent = exercise.solution;
+  renderReferenceCode($("reference-code"), exercise.solution);
   $("test-cases").replaceChildren();
   for (const [i, item] of exercise.test_cases.entries()) {
     const card = document.createElement("div");
@@ -142,7 +143,8 @@ function showExercise(exercise) {
   setCode(readStorage(draftKey(), exercise.solution_template || emptyProgram));
   $("program-input").value = exercise.test_cases[0]?.input ?? "";
   resetOutput();
-  choosePanel(false);
+  $("question-content").scrollTop = 0;
+  $("answer-scroll").scrollTop = 0;
   for (const button of $("exercise-list").children) {
     button.classList.toggle("active", button.dataset.id === exercise.id);
     button.setAttribute(
@@ -502,8 +504,9 @@ $("chapter-select").addEventListener("change", (e) =>
   showChapter(e.target.value),
 );
 $("category-select").addEventListener("change", (e) => showCategory(e.target.value));
-$("question-tab").addEventListener("click", () => choosePanel(false));
-$("answer-tab").addEventListener("click", () => choosePanel(true));
+$("toggle-answer").addEventListener("click", toggleAnswer);
+$("jump-to-answer").addEventListener("click", () => jumpTo("answer-title"));
+$("jump-to-question").addEventListener("click", () => jumpTo("toggle-answer"));
 $("use-answer").addEventListener("click", () => {
   cancel();
   setCode(state.exercise.solution);

@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (char a = 'X'; a <= 'Z'; a++)\n        for (char b = 'X'; b <= 'Z'; b++)\n            for (char c = 'X'; c <= 'Z'; c++)\n                if (a != b && a != c && b != c && a != 'X' && c != 'X' && c != 'Z')\n                    printf(\"A-%c\\nB-%c\\nC-%c\\n\", a, b, c);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    // 枚举 A、B、C 的所有候选对手，再排除重复配对和题目禁止的配对。\n    for (char a = 'X'; a <= 'Z'; a++)\n        for (char b = 'X'; b <= 'Z'; b++)\n            for (char c = 'X'; c <= 'Z'; c++)\n                if (a != b && a != c && b != c && a != 'X' && c != 'X' && c != 'Z')\n                    printf(\"A-%c\\nB-%c\\nC-%c\\n\", a, b, c);\n    return 0;\n}\n"
 }

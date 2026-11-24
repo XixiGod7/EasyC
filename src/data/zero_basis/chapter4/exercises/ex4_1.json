@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int n;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int n, i = 1;\n    scanf(\"%d\", &n);\n    while (i <= n) {\n        printf(\"%d \", i);\n        i++;\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int n, i = 1;\n    scanf(\"%d\", &n);\n    // 每轮先输出 i 再加一，i 超过 n 时结束循环。\n    while (i <= n) {\n        printf(\"%d \", i);\n        i++;\n    }\n    return 0;\n}"
 }

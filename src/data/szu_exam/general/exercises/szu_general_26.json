@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    long long m, n, a, b;\n    scanf(\"%lld%lld\", &m, &n);\n    a = m; b = n;\n    while (b) { long long r = a % b; a = b; b = r; }\n    printf(\"%lld %lld\\n\", a, m / a * n);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    long long m, n, a, b;\n    scanf(\"%lld%lld\", &m, &n);\n    a = m; b = n;\n    // 欧几里得算法不断计算余数，余数变为 0 时 a 就是最大公约数。\n    while (b) { long long r = a % b; a = b; b = r; }\n    // 最小公倍数等于 m × n / 最大公约数，先除再乘可以减小中间值。\n    printf(\"%lld %lld\\n\", a, m / a * n);\n    return 0;\n}\n"
 }

@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char line[1002], best[1002] = \"\";\n    if (!fgets(line, sizeof(line), stdin)) line[0] = '\\0';\n    char *word = strtok(line, \" \\t\\r\\n\");\n    while (word) {\n        if (strlen(word) > strlen(best)) strcpy(best, word);\n        word = strtok(NULL, \" \\t\\r\\n\");\n    }\n    puts(best);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char line[1002], best[1002] = \"\";\n    if (!fgets(line, sizeof(line), stdin)) line[0] = '\\0';\n    // strtok 以空白字符分词。传 NULL 时继续处理同一行。\n    char *word = strtok(line, \" \\t\\r\\n\");\n    while (word) {\n        // 只在更长时替换，长度并列就保留先出现的单词。\n        if (strlen(word) > strlen(best)) strcpy(best, word);\n        word = strtok(NULL, \" \\t\\r\\n\");\n    }\n    puts(best);\n    return 0;\n}\n"
 }

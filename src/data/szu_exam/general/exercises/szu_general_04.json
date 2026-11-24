@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    double sum = 0;\n    for (int i = 1; i <= 100; i++) sum += (i % 2 ? 1.0 : -1.0) / i;\n    printf(\"%.6f\\n\", sum);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    double sum = 0;\n    // 奇数项加、偶数项减，用小数 1.0 进行浮点除法。\n    for (int i = 1; i <= 100; i++) sum += (i % 2 ? 1.0 : -1.0) / i;\n    printf(\"%.6f\\n\", sum);\n    return 0;\n}\n"
 }

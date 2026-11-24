@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score; } Student;\n\nint main(void) {\n    Student student, *p = &student;\n    scanf(\"%d%31s%lf\", &p->num, p->name, &p->score);\n    printf(\"%d %s %.2f\\n\", p->num, p->name, p->score);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\ntypedef struct { int num; char name[32]; double score; } Student;\n\nint main(void) {\n    Student student, *p = &student;\n    // p 指向 student，p->num 等价于 (*p).num，可以直接读取到该成员。\n    scanf(\"%d%31s%lf\", &p->num, p->name, &p->score);\n    printf(\"%d %s %.2f\\n\", p->num, p->name, p->score);\n    return 0;\n}\n"
 }

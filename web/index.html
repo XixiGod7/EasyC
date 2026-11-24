@@ -126,43 +126,40 @@
             </div>
             <div id="exercise-list" class="exercise-list"></div>
           </aside>
-          <article class="question-panel practice-only">
-            <div class="panel-tabs" role="tablist" aria-label="题目与答案">
-              <button
-                class="active"
-                id="question-tab"
-                role="tab"
-                aria-selected="true"
-                aria-controls="question-content"
-              >
-                题目描述</button
-              ><button
-                id="answer-tab"
-                role="tab"
-                aria-selected="false"
-                aria-controls="answer-content"
-              >
-                参考答案
-              </button>
+          <article class="question-panel practice-only" aria-labelledby="question-title">
+            <div class="question-toolbar">
+              <span>题目描述</span>
+              <div class="question-actions">
+                <button
+                  id="toggle-answer"
+                  class="button secondary small"
+                  type="button"
+                  aria-controls="answer-content"
+                  aria-expanded="false"
+                >对照参考答案</button>
+                <button id="jump-to-answer" class="question-jump" type="button" hidden>跳到答案</button>
+              </div>
             </div>
-            <div id="question-content" class="question-content" role="tabpanel">
-              <span id="question-difficulty" class="difficulty"></span>
-              <h2 id="question-title"></h2>
-              <div id="question-description" class="markdown"></div>
-              <p id="question-source" class="question-source" hidden></p>
-              <div id="test-cases"></div>
-            </div>
-            <div
-              id="answer-content"
-              class="question-content"
-              role="tabpanel"
-              hidden
-            >
-              <p class="muted">先尝试独立完成，再对照答案理解思路。</p>
-              <pre id="reference-code" class="reference-code"></pre>
-              <button id="use-answer" class="button secondary small">
-                将答案放入编辑器
-              </button>
+            <div class="reading-panes">
+              <div id="question-content" class="question-content" role="region" tabindex="0" aria-label="题目描述与样例">
+                <span id="question-difficulty" class="difficulty"></span>
+                <h2 id="question-title"></h2>
+                <div id="question-description" class="markdown"></div>
+                <p id="question-source" class="question-source" hidden></p>
+                <div id="test-cases"></div>
+              </div>
+              <section id="answer-content" class="answer-pane" aria-labelledby="answer-title" hidden>
+                <div class="answer-heading">
+                  <h2 id="answer-title" tabindex="-1">参考答案</h2>
+                  <div class="question-actions">
+                    <button id="jump-to-question" class="question-jump" type="button">回到题目</button>
+                    <button id="use-answer" class="button secondary small" type="button">
+                      将答案放入编辑器
+                    </button>
+                  </div>
+                </div>
+                <pre id="answer-scroll" class="reference-code" tabindex="0" aria-label="C 参考答案代码"><code id="reference-code"></code></pre>
+              </section>
             </div>
           </article>
           <article class="workspace" data-feedback-panel="output">

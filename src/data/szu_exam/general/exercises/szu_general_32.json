@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (int n = 2; n <= 1000; n++) {\n        int sum = 1;\n        for (int d = 2; d <= n / 2; d++) if (n % d == 0) sum += d;\n        if (sum == n) printf(\"%d \", n);\n    }\n    putchar('\\n');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (int n = 2; n <= 1000; n++) {\n        // 1 是所有 n > 1 的真因数，其余真因数最多到 n / 2。\n        int sum = 1;\n        for (int d = 2; d <= n / 2; d++) if (n % d == 0) sum += d;\n        if (sum == n) printf(\"%d \", n);\n    }\n    putchar('\\n');\n    return 0;\n}\n"
 }

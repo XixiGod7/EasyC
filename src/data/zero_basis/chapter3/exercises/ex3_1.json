@@ -15,5 +15,5 @@
       }
   ],
   "solution_template": "#include <stdio.h>\n\nint main() {\n    int a;\n    // 请在此处编写代码\n    return 0;\n}",
-  "solution": "#include <stdio.h>\n\nint main() {\n    int a;\n    scanf(\"%d\", &a);\n    if (a < 0) {\n        a = 0;\n    }\n    printf(\"%d\\n\", a);\n    return 0;\n}"
+  "solution": "#include <stdio.h>\n\nint main() {\n    int a;\n    scanf(\"%d\", &a);\n    // 只有负数进入 if 分支，其他值直接沿用输入。\n    if (a < 0) {\n        a = 0;\n    }\n    printf(\"%d\\n\", a);\n    return 0;\n}"
 }

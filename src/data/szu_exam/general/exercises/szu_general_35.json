@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    double a, x, next;\n    scanf(\"%lf\", &a);\n    x = a > 1 ? a : 1;\n    while (1) {\n        next = (x + a / x) / 2;\n        if (fabs(next - x) < 1e-5) break;\n        x = next;\n    }\n    printf(\"%.6f\\n\", next);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    double a, x, next;\n    scanf(\"%lf\", &a);\n    x = a > 1 ? a : 1;\n    while (1) {\n        // 用当前估计 x 与 a / x 的平均值逼近平方根，前后差足够小时停止。\n        next = (x + a / x) / 2;\n        if (fabs(next - x) < 1e-5) break;\n        x = next;\n    }\n    printf(\"%.6f\\n\", next);\n    return 0;\n}\n"
 }

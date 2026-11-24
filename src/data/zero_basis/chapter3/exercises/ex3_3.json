@@ -23,5 +23,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int score;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int score;\n    scanf(\"%d\", &score);\n    if (score >= 90) {\n        printf(\"A\\n\");\n    } else if (score >= 80) {\n        printf(\"B\\n\");\n    } else if (score >= 60) {\n        printf(\"C\\n\");\n    } else {\n        printf(\"D\\n\");\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int score;\n    scanf(\"%d\", &score);\n    // 从最高分段开始判断，命中某一档后跳过后面的分支。\n    if (score >= 90) {\n        printf(\"A\\n\");\n    } else if (score >= 80) {\n        printf(\"B\\n\");\n    } else if (score >= 60) {\n        printf(\"C\\n\");\n    } else {\n        printf(\"D\\n\");\n    }\n    return 0;\n}"
 }

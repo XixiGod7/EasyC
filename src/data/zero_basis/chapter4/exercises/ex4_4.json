@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int n;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    for (int i = 1; i <= n; i++) {\n        printf(\"%d \", i);\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    // 初始化、结束条件和自增都在 for 括号内，循环体只负责输出。\n    for (int i = 1; i <= n; i++) {\n        printf(\"%d \", i);\n    }\n    return 0;\n}"
 }

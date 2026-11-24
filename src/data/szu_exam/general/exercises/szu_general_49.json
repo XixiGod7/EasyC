@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\ndouble legendre(int n, double x) {\n    if (n == 0) return 1;\n    if (n == 1) return x;\n    return ((2*n - 1)*x*legendre(n-1, x) - (n-1)*legendre(n-2, x)) / n;\n}\n\nint main(void) {\n    int n;\n    double x;\n    scanf(\"%d%lf\", &n, &x);\n    printf(\"%.6f\\n\", legendre(n, x));\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\ndouble legendre(int n, double x) {\n    // P₀(x) = 1、P₁(x) = x 是递归的两个起点，之后每阶由前两阶求得。\n    if (n == 0) return 1;\n    if (n == 1) return x;\n    return ((2*n - 1)*x*legendre(n-1, x) - (n-1)*legendre(n-2, x)) / n;\n}\n\nint main(void) {\n    int n;\n    double x;\n    scanf(\"%d%lf\", &n, &x);\n    printf(\"%.6f\\n\", legendre(n, x));\n    return 0;\n}\n"
 }

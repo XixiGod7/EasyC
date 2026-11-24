@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    double a, b, c;\n    scanf(\"%lf%lf%lf\", &a, &b, &c);\n    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) puts(\"INVALID\");\n    else {\n        double p = (a + b + c) / 2;\n        printf(\"%.2f\\n\", sqrt(p * (p - a) * (p - b) * (p - c)));\n    }\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n#include <math.h>\n\n\n\nint main(void) {\n    double a, b, c;\n    scanf(\"%lf%lf%lf\", &a, &b, &c);\n    // 三边必须为正，且任意两边之和大于第三边。\n    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) puts(\"INVALID\");\n    else {\n        // p 是半周长，下一步用海伦公式计算面积。\n        double p = (a + b + c) / 2;\n        printf(\"%.2f\\n\", sqrt(p * (p - a) * (p - b) * (p - c)));\n    }\n    return 0;\n}\n"
 }

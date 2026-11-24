@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint gcd(int a, int b) {\n    while(b != 0) {\n        int temp = b;\n        b = a % b;\n        a = temp;\n    }\n    return a;\n}\n\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", gcd(a, b));\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint gcd(int a, int b) {\n    // 用 (b, a % b) 替换 (a, b) 时最大公约数相同。余数为 0 时返回 a。\n    while(b != 0) {\n        int temp = b;\n        b = a % b;\n        a = temp;\n    }\n    return a;\n}\n\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", gcd(a, b));\n    return 0;\n}"
 }

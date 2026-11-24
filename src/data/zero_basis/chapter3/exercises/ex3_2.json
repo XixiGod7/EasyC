@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int num;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int num;\n    scanf(\"%d\", &num);\n    if (num % 2 == 0) {\n        printf(\"是偶数\\n\");\n    } else {\n        printf(\"是奇数\\n\");\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int num;\n    scanf(\"%d\", &num);\n    // 除以 2 的余数为 0 时是偶数，其他情况进入 else 分支。\n    if (num % 2 == 0) {\n        printf(\"是偶数\\n\");\n    } else {\n        printf(\"是奇数\\n\");\n    }\n    return 0;\n}"
 }

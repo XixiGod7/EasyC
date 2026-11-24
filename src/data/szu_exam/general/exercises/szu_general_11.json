@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, prime = 1;\n    scanf(\"%d\", &n);\n    for (int d = 2; d <= n / d; d++) if (n % d == 0) { prime = 0; break; }\n    puts(prime ? \"YES\" : \"NO\");\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int n, prime = 1;\n    scanf(\"%d\", &n);\n    // 只检查到平方根。若存在一对因数，较小的那个一定在这个范围内。\n    for (int d = 2; d <= n / d; d++) if (n % d == 0) { prime = 0; break; }\n    puts(prime ? \"YES\" : \"NO\");\n    return 0;\n}\n"
 }

@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int sum = 0;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int sum = 0;\n    for (int i = 1; i <= 100; i++) {\n        sum += i;\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    // 累加器初始为 0，for 循环走完后 sum 就包含 1 到 100 的和。\n    int sum = 0;\n    for (int i = 1; i <= 100; i++) {\n        sum += i;\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
 }

@@ -24,5 +24,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\nint day_of_year(int year, int month, int day) {\n    int days[] = {31,28,31,30,31,30,31,31,30,31,30,31};\n    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) days[1] = 29;\n    int answer = day;\n    for (int i = 0; i < month - 1; i++) answer += days[i];\n    return answer;\n}\n\nint main(void) {\n    int year, month, day;\n    scanf(\"%d%d%d\", &year, &month, &day);\n    printf(\"%d\\n\", day_of_year(year, month, day));\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\nint day_of_year(int year, int month, int day) {\n    int days[] = {31,28,31,30,31,30,31,31,30,31,30,31};\n    // 闰年把二月改成 29 天，再把当前月之前的各整月天数累加进去。\n    if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) days[1] = 29;\n    int answer = day;\n    for (int i = 0; i < month - 1; i++) answer += days[i];\n    return answer;\n}\n\nint main(void) {\n    int year, month, day;\n    scanf(\"%d%d%d\", &year, &month, &day);\n    printf(\"%d\\n\", day_of_year(year, month, day));\n    return 0;\n}\n"
 }

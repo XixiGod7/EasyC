@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int first = 1;\n    for (int n = 100; n <= 200; n++) {\n        int prime = 1;\n        for (int d = 2; d <= n / d; d++) if (n % d == 0) { prime = 0; break; }\n        if (prime) { printf(\"%s%d\", first ? \"\" : \" \", n); first = 0; }\n    }\n    putchar('\\n');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int first = 1;\n    for (int n = 100; n <= 200; n++) {\n        int prime = 1;\n        // 逐个试除到平方根，找到因数就提前结束对当前数的判断。\n        for (int d = 2; d <= n / d; d++) if (n % d == 0) { prime = 0; break; }\n        if (prime) { printf(\"%s%d\", first ? \"\" : \" \", n); first = 0; }\n    }\n    putchar('\\n');\n    return 0;\n}\n"
 }

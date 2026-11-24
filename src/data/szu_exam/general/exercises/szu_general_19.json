@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char s[3][101];\n    scanf(\"%100s%100s%100s\", s[0], s[1], s[2]);\n    int best = 0;\n    for (int i = 1; i < 3; i++) if (strcmp(s[i], s[best]) > 0) best = i;\n    puts(s[best]);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n#include <string.h>\n\n\n\nint main(void) {\n    char s[3][101];\n    scanf(\"%100s%100s%100s\", s[0], s[1], s[2]);\n    int best = 0;\n    // strcmp 大于 0 表示前一个字符串的字典序更大，best 记录其下标。\n    for (int i = 1; i < 3; i++) if (strcmp(s[i], s[best]) > 0) best = i;\n    puts(s[best]);\n    return 0;\n}\n"
 }

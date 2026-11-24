@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    char s[1002];\n    int count = 0, in_word = 0;\n    if (!fgets(s, sizeof(s), stdin)) s[0] = '\\0';\n    for (int i = 0; s[i] && s[i] != '\\n'; i++) {\n        if (s[i] == ' ') in_word = 0;\n        else if (!in_word) { count++; in_word = 1; }\n    }\n    printf(\"%d\\n\", count);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    char s[1002];\n    int count = 0, in_word = 0;\n    if (!fgets(s, sizeof(s), stdin)) s[0] = '\\0';\n    for (int i = 0; s[i] && s[i] != '\\n'; i++) {\n        // 空格结束当前单词。遇到从单词外进入单词内的那一刻才计数。\n        if (s[i] == ' ') in_word = 0;\n        else if (!in_word) { count++; in_word = 1; }\n    }\n    printf(\"%d\\n\", count);\n    return 0;\n}\n"
 }

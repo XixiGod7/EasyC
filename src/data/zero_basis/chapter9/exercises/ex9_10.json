@@ -19,5 +19,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint factorial(int n) {\n    if(n < 0) {\n        printf(\"错误：负数没有阶乘\\n\");\n        return -1;\n    }\n    if(n == 0) return 1;\n    int result = 1;\n    for(int i = 1; i <= n; i++) {\n        result *= i;\n    }\n    return result;\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int result = factorial(n);\n    if(result >= 0) printf(\"%d\\n\", result);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint factorial(int n) {\n    if(n < 0) {\n        printf(\"错误：负数没有阶乘\\n\");\n        return -1;\n    }\n    // 0! 定义为 1。正整数的阶乘通过依次乘上 1 到 n 得到。\n    if(n == 0) return 1;\n    int result = 1;\n    for(int i = 1; i <= n; i++) {\n        result *= i;\n    }\n    return result;\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int result = factorial(n);\n    if(result >= 0) printf(\"%d\\n\", result);\n    return 0;\n}"
 }

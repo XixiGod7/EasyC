@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nvoid doubleArray(int arr[], int size) {\n    for(int i = 0; i < size; i++) {\n        arr[i] *= 2;\n    }\n}\n\nint main() {\n    int arr[5];\n    for(int i = 0; i < 5; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    doubleArray(arr, 5);\n    for(int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\n// 函数接收原数组的首地址，arr[i] 的修改会反映到 main 中。\nvoid doubleArray(int arr[], int size) {\n    for(int i = 0; i < size; i++) {\n        arr[i] *= 2;\n    }\n}\n\nint main() {\n    int arr[5];\n    for(int i = 0; i < 5; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    doubleArray(arr, 5);\n    for(int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    return 0;\n}"
 }

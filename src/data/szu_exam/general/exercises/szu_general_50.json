@@ -24,5 +24,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\nvoid convert(long long n, char *text, int *length) {\n    if (n >= 10) convert(n / 10, text, length);\n    text[(*length)++] = (char)('0' + n % 10);\n}\n\nint main(void) {\n    long long n;\n    char text[32];\n    int length = 0;\n    scanf(\"%lld\", &n);\n    if (n < 0) { text[length++] = '-'; n = -n; }\n    convert(n, text, &length);\n    text[length] = '\\0';\n    puts(text);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\nvoid convert(long long n, char *text, int *length) {\n    // 先递归处理去掉个位后的数，回到当前层时再写入个位。\n    if (n >= 10) convert(n / 10, text, length);\n    text[(*length)++] = (char)('0' + n % 10);\n}\n\nint main(void) {\n    long long n;\n    char text[32];\n    int length = 0;\n    scanf(\"%lld\", &n);\n    if (n < 0) { text[length++] = '-'; n = -n; }\n    convert(n, text, &length);\n    // 所有数字写完后补上空字符，length 记录下一个可写下标。\n    text[length] = '\\0';\n    puts(text);\n    return 0;\n}\n"
 }

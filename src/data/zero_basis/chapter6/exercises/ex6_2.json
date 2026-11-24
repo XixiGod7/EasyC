@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char str[100];\n    scanf(\"%s\", str);\n    printf(\"首字符：%c\\n\", str[0]);\n    printf(\"尾字符：%c\\n\", str[strlen(str)-1]);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char str[100];\n    scanf(\"%s\", str);\n    // 第一个字符的下标是 0。输入非空时，最后一个字符的下标是长度减 1。\n    printf(\"首字符：%c\\n\", str[0]);\n    printf(\"尾字符：%c\\n\", str[strlen(str)-1]);\n    return 0;\n}"
 }

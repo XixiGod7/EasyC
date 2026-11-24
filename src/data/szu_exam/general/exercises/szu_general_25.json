@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\nint next_factorial(void) {\n    static int n = 0, product = 1;\n    product *= ++n;\n    return product;\n}\n\nint main(void) {\n    for (int i = 1; i <= 5; i++) printf(\"%d%c\", next_factorial(), i == 5 ? '\\n' : ' ');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\nint next_factorial(void) {\n    // static 让 n 和 product 在两次调用间保留上次计算的结果。\n    static int n = 0, product = 1;\n    // 先把 n 加 1，再用上一次的阶乘乘以新的 n。\n    product *= ++n;\n    return product;\n}\n\nint main(void) {\n    for (int i = 1; i <= 5; i++) printf(\"%d%c\", next_factorial(), i == 5 ? '\\n' : ' ');\n    return 0;\n}\n"
 }

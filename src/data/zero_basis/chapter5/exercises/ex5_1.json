@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int arr[10];\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[10], max;\n    for(int i = 0; i < 10; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    max = arr[0];\n    for(int i = 1; i < 10; i++) {\n        if(arr[i] > max) max = arr[i];\n    }\n    printf(\"%d\\n\", max);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[10], max;\n    for(int i = 0; i < 10; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // 最大值从首元素开始比较，即使输入全是负数也能正确选出最大值。\n    max = arr[0];\n    for(int i = 1; i < 10; i++) {\n        if(arr[i] > max) max = arr[i];\n    }\n    printf(\"%d\\n\", max);\n    return 0;\n}"
 }

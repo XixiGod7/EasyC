@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (int n = 100; n <= 999; n++) {\n        int a = n / 100, b = n / 10 % 10, c = n % 10;\n        if (n == a*a*a + b*b*b + c*c*c) printf(\"%d \", n);\n    }\n    putchar('\\n');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    for (int n = 100; n <= 999; n++) {\n        // 用整数除法和取余拆出百位、十位、个位，再检查各位立方和。\n        int a = n / 100, b = n / 10 % 10, c = n % 10;\n        if (n == a*a*a + b*b*b + c*c*c) printf(\"%d \", n);\n    }\n    putchar('\\n');\n    return 0;\n}\n"
 }

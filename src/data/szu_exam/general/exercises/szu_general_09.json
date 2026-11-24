@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    double sum = 0, term;\n    int k = 0;\n    do {\n        term = 1.0 / (2 * k + 1);\n        sum += k % 2 ? -term : term;\n        k++;\n    } while (term >= 1e-6);\n    printf(\"%.6f\\n\", 4 * sum);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    double sum = 0, term;\n    int k = 0;\n    do {\n        // 分母是连续的奇数，符号交替。级数求得的是 π / 4。\n        term = 1.0 / (2 * k + 1);\n        sum += k % 2 ? -term : term;\n        k++;\n    } while (term >= 1e-6);\n    printf(\"%.6f\\n\", 4 * sum);\n    return 0;\n}\n"
 }

@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int a = 1, b = 1;\n    for (int i = 0; i < 40; i++) {\n        printf(\"%s%d\", i ? \" \" : \"\", a);\n        int next = a + b; a = b; b = next;\n    }\n    putchar('\\n');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int a = 1, b = 1;\n    for (int i = 0; i < 40; i++) {\n        printf(\"%s%d\", i ? \" \" : \"\", a);\n        // a 和 b 保存相邻两项。先算出下一项，再把两个变量向前推进。\n        int next = a + b; a = b; b = next;\n    }\n    putchar('\\n');\n    return 0;\n}\n"
 }

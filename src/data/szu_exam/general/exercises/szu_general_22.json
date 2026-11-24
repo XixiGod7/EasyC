@@ -24,5 +24,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\nunsigned long long factorial(int n) { return n <= 1 ? 1 : (unsigned long long)n * factorial(n - 1); }\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%llu\\n\", factorial(n));\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n// 用 n × (n−1)! 拆解问题，递归到 0! 或 1! 时返回 1。\nunsigned long long factorial(int n) { return n <= 1 ? 1 : (unsigned long long)n * factorial(n - 1); }\n\nint main(void) {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%llu\\n\", factorial(n));\n    return 0;\n}\n"
 }

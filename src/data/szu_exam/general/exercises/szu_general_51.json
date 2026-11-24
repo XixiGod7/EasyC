@@ -20,5 +20,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    unsigned long long n;\n    scanf(\"%llx\", &n);\n    printf(\"%llu\\n\", n);\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    unsigned long long n;\n    // %llx 按十六进制读取，随后用 %llu 把同一个值按十进制输出。\n    scanf(\"%llx\", &n);\n    printf(\"%llu\\n\", n);\n    return 0;\n}\n"
 }

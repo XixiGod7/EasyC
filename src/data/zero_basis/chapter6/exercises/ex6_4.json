@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    char str[100];\n    \n    scanf(\"%[^\\n]\", str);\n    \n    int length = 0;\n    while(str[length] != '\\0') {\n        length++;\n    }\n    \n    printf(\"%s\\n%d\\n\", str, length);\n    \n    return 0;\n}" 
+    "solution": "#include <stdio.h>\n\nint main() {\n    char str[100];\n    \n    // 使用扫描集读取换行前的所有字符，因此中间的空格会保留。\n    scanf(\"%[^\\n]\", str);\n    \n    int length = 0;\n    while(str[length] != '\\0') {\n        length++;\n    }\n    \n    printf(\"%s\\n%d\\n\", str, length);\n    \n    return 0;\n}"
 }

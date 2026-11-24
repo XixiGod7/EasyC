@@ -16,5 +16,5 @@
     }
   ],
   "solution_template": "#include <stdio.h>\n\nint main(void) {\n    // 根据题目要求读取输入并完成程序\n\n    return 0;\n}\n",
-  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int r, c, a[20][20];\n    scanf(\"%d%d\", &r, &c);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) scanf(\"%d\", &a[i][j]);\n    for (int j = 0; j < c; j++) for (int i = 0; i < r; i++) printf(\"%d%c\", a[i][j], i + 1 == r ? '\\n' : ' ');\n    return 0;\n}\n"
+  "solution": "#include <stdio.h>\n\n\n\nint main(void) {\n    int r, c, a[20][20];\n    scanf(\"%d%d\", &r, &c);\n    for (int i = 0; i < r; i++) for (int j = 0; j < c; j++) scanf(\"%d\", &a[i][j]);\n    // 按原矩阵的列逐行输出，因此原来的第 j 列成为结果的第 j 行。\n    for (int j = 0; j < c; j++) for (int i = 0; i < r; i++) printf(\"%d%c\", a[i][j], i + 1 == r ? '\\n' : ' ');\n    return 0;\n}\n"
 }
