@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    // 请在此处编写关系运算代码\n\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    printf(\"%d\\n\", 5 > 3);\n    printf(\"%d\\n\", 10 == 10.0);\n    printf(\"%d\\n\", 7 != 7);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    // C 的关系表达式在条件成立时得到 1，否则得到 0。\n    printf(\"%d\\n\", 5 > 3);\n    printf(\"%d\\n\", 10 == 10.0);\n    printf(\"%d\\n\", 7 != 7);\n    return 0;\n}"
 }

@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int num = 10;\n    int *p = &num;\n    printf(\"指针指向的值：%d\\n\", *p);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int num = 10;\n    int *p = &num;\n    // *p 会沿着 p 保存的地址读取 num 的值。\n    printf(\"指针指向的值：%d\\n\", *p);\n    return 0;\n}"
 }

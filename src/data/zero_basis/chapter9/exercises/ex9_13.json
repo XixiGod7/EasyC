@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nvoid printChar(char ch, int times, int lines) {\n    for(int i = 0; i < lines; i++) {\n        for(int j = 0; j < times; j++) {\n            printf(\"%c\", ch);\n        }\n        printf(\"\\n\");\n    }\n}\n\nint main() {\n    char ch;\n    int times, lines;\n    scanf(\"%c %d %d\", &ch, &times, &lines);\n    printChar(ch, times, lines);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nvoid printChar(char ch, int times, int lines) {\n    // 外层控制行数，内层控制一行的字符个数。每行输出完再换行。\n    for(int i = 0; i < lines; i++) {\n        for(int j = 0; j < times; j++) {\n            printf(\"%c\", ch);\n        }\n        printf(\"\\n\");\n    }\n}\n\nint main() {\n    char ch;\n    int times, lines;\n    scanf(\"%c %d %d\", &ch, &times, &lines);\n    printChar(ch, times, lines);\n    return 0;\n}"
 }

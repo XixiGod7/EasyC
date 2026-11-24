@@ -1,0 +1,79 @@
+{
+  "id": "szu_structures",
+  "title": "结构体题",
+  "description": "深大复习资料中的结构体题，共 12 题，保留原目录编号。",
+  "exercises": [
+    {
+      "id": "szu_structures_01",
+      "title": "保存并输出学生信息",
+      "difficulty": "easy",
+      "path": "exercises/szu_structures_01.json"
+    },
+    {
+      "id": "szu_structures_02",
+      "title": "成绩较高的学生",
+      "difficulty": "easy",
+      "path": "exercises/szu_structures_02.json"
+    },
+    {
+      "id": "szu_structures_03",
+      "title": "候选人选票统计",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_03.json"
+    },
+    {
+      "id": "szu_structures_04",
+      "title": "学生按成绩降序排列",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_04.json"
+    },
+    {
+      "id": "szu_structures_05",
+      "title": "通过结构体指针访问成员",
+      "difficulty": "easy",
+      "path": "exercises/szu_structures_05.json"
+    },
+    {
+      "id": "szu_structures_06",
+      "title": "指针输出三个学生的信息",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_06.json"
+    },
+    {
+      "id": "szu_structures_07",
+      "title": "平均成绩最高的学生",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_07.json"
+    },
+    {
+      "id": "szu_structures_08",
+      "title": "日期结构体与年内序号",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_08.json"
+    },
+    {
+      "id": "szu_structures_09",
+      "title": "用函数计算日期序号",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_09.json"
+    },
+    {
+      "id": "szu_structures_10",
+      "title": "print 函数输出学生数组",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_10.json"
+    },
+    {
+      "id": "szu_structures_11",
+      "title": "input 函数读入学生数组",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_11.json"
+    },
+    {
+      "id": "szu_structures_12",
+      "title": "十名学生的成绩统计",
+      "difficulty": "medium",
+      "path": "exercises/szu_structures_12.json"
+    }
+  ]
+}

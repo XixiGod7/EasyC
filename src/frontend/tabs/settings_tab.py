@@ -10,7 +10,7 @@ class SettingsTab:
 
     def _save_settings(self, api_key: str):
         """保存设置"""
-        LOG.info(f"Saving settings with API key: {api_key}")
+        LOG.info("Saving AI settings")
         self.feedback_service.update_credentials(api_key)
         if not api_key:
             return gr.update(value="❌ 配置失败！请输入有效的 API Key")

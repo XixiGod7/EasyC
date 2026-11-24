@@ -9,6 +9,8 @@ env/
 venv/
 .venv/
 .env
+.env.*
+!.env.example
 
 # 依赖管理
 Pipfile.lock
@@ -53,3 +55,15 @@ build/
 zzztmp/
 saved_code/
 zzztmp.ipynb
+
+# Cloudflare / Node.js
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+cloudflare-access.local.txt
+.wasmer/
+web/public/vendor/
+web/public/data/
+output/playwright/
+.playwright-cli/

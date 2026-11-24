@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    char str[100];\n    scanf(\"%s\", str);\n    \n    int length = 0;\n    while(str[length] != '\\0') {\n        length++;\n    }\n    \n    printf(\"%d\\n\", length);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    char str[100];\n    // %s 按空白分隔读取一个连续的词，并在末尾补空字符。\n    scanf(\"%s\", str);\n    \n    int length = 0;\n    // 计数到空字符为止。它标记字符串结束，长度只计算正文。\n    while(str[length] != '\\0') {\n        length++;\n    }\n    \n    printf(\"%d\\n\", length);\n    return 0;\n}"
 }

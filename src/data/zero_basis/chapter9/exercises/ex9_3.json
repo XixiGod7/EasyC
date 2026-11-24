@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint isEven(int n) {\n    return n % 2 == 0;\n}\n\nint main() {\n    int num;\n    scanf(\"%d\", &num);\n    printf(\"%d\\n\", isEven(num));\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint isEven(int n) {\n    // 把取余判断的结果直接返回给调用者，偶数返回 1，奇数返回 0。\n    return n % 2 == 0;\n}\n\nint main() {\n    int num;\n    scanf(\"%d\", &num);\n    printf(\"%d\\n\", isEven(num));\n    return 0;\n}"
 }

@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int score;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int score;\n    scanf(\"%d\", &score);\n    switch (score / 10) {\n        case 10:\n        case 9:\n            printf(\"A\\n\");\n            break;\n        case 8:\n            printf(\"B\\n\");\n            break;\n        case 7:\n        case 6:\n            printf(\"C\\n\");\n            break;\n        default:\n            printf(\"D\\n\");\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int score;\n    scanf(\"%d\", &score);\n    // 整数除以 10 得到分数档位。相邻 case 可共用一段输出，break 结束该档。\n    switch (score / 10) {\n        case 10:\n        case 9:\n            printf(\"A\\n\");\n            break;\n        case 8:\n            printf(\"B\\n\");\n            break;\n        case 7:\n        case 6:\n            printf(\"C\\n\");\n            break;\n        default:\n            printf(\"D\\n\");\n    }\n    return 0;\n}"
 }

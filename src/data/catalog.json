@@ -1,0 +1,16 @@
+{
+  "categories": [
+    {
+      "id": "zero_basis",
+      "title": "零基础练习",
+      "description": "9 个章节，从第一行 C 代码到函数与指针。",
+      "path": "zero_basis"
+    },
+    {
+      "id": "szu_exam",
+      "title": "深大考题",
+      "description": "所提供的深大复习资料，共 84 题，按常规、链表、结构体和文件分类。",
+      "path": "szu_exam"
+    }
+  ]
+}

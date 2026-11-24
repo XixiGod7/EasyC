@@ -1,0 +1,24 @@
+{
+  "chapters": [
+    {
+      "id": "szu_general",
+      "title": "常规题",
+      "path": "general"
+    },
+    {
+      "id": "szu_linked_list",
+      "title": "链表题",
+      "path": "linked_list"
+    },
+    {
+      "id": "szu_structures",
+      "title": "结构体题",
+      "path": "structures"
+    },
+    {
+      "id": "szu_files",
+      "title": "文件题",
+      "path": "files"
+    }
+  ]
+}

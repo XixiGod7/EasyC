@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 4; j++) {\n            scanf(\"%d\", &arr[i][j]);\n        }\n    }\n    for(int i = 0; i < 3; i++) {\n        int sum = 0;\n        for(int j = 0; j < 4; j++) {\n            sum += arr[i][j];\n        }\n        printf(\"%d\\n\", sum);\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 4; j++) {\n            scanf(\"%d\", &arr[i][j]);\n        }\n    }\n    for(int i = 0; i < 3; i++) {\n        // 进入新的一行时把 sum 归零，再沿列下标累加这一行的四个值。\n        int sum = 0;\n        for(int j = 0; j < 4; j++) {\n            sum += arr[i][j];\n        }\n        printf(\"%d\\n\", sum);\n    }\n    return 0;\n}"
 }

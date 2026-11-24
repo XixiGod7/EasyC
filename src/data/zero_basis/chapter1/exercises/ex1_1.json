@@ -11,5 +11,5 @@
       }
   ],
   "solution_template": "#include <stdio.h>\n\nint main() {\n    // 请在此处定义变量\n\n    return 0;\n}",
-  "solution": "#include <stdio.h>\n\nint main() {\n    int num = 42;\n    float pi = 3.14;\n    char letter = 'A';\n    \n    printf(\"整型变量: %d\\n\", num);\n    printf(\"浮点型变量: %.2f\\n\", pi);\n    printf(\"字符型变量: %c\\n\", letter);\n    return 0;\n}"
+  "solution": "#include <stdio.h>\n\nint main() {\n    // int 保存整数，float 保存小数，char 保存单个字符。\n    int num = 42;\n    float pi = 3.14;\n    char letter = 'A';\n    \n    // printf 的格式符要与值的类型对应，%.2f 将小数显示为两位。\n    printf(\"整型变量: %d\\n\", num);\n    printf(\"浮点型变量: %.2f\\n\", pi);\n    printf(\"字符型变量: %c\\n\", letter);\n    return 0;\n}"
 }

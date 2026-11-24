@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int a = 10, b = 20;\n    int *p1 = &a, *p2 = &b;\n    printf(\"交换前：a = %d, b = %d\\n\", a, b);\n    int temp = *p1;\n    *p1 = *p2;\n    *p2 = temp;\n    printf(\"交换后：a = %d, b = %d\\n\", a, b);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int a = 10, b = 20;\n    int *p1 = &a, *p2 = &b;\n    printf(\"交换前：a = %d, b = %d\\n\", a, b);\n    // 暂存 p1 指向的值，避免第一次赋值时丢失交换所需的原值。\n    int temp = *p1;\n    *p1 = *p2;\n    *p2 = temp;\n    printf(\"交换后：a = %d, b = %d\\n\", a, b);\n    return 0;\n}"
 }

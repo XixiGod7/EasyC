@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    char c;\n    for(int i = 0; i < 6; i++) {\n        scanf(\"%c\", &c);\n        printf(\"%c\", c - 32);\n    }\n    printf(\"\\n\");\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    char c;\n    for(int i = 0; i < 6; i++) {\n        scanf(\"%c\", &c);\n        // 在 ASCII 编码里，小写字母的编码比对应大写字母大 32。\n        printf(\"%c\", c - 32);\n    }\n    printf(\"\\n\");\n    return 0;\n}"
 }

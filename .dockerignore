@@ -50,3 +50,10 @@ poetry.lock
 # 其他
 zzztmp/
 saved_code/
+
+# Cloudflare / Node.js / local credentials
+node_modules/
+.wrangler/
+.dev.vars*
+cloudflare-access.local.txt
+.github/

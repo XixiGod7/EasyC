@@ -1,0 +1,319 @@
+{
+  "id": "szu_general",
+  "title": "常规题",
+  "description": "深大复习资料中的常规题，共 52 题，保留原目录编号。",
+  "exercises": [
+    {
+      "id": "szu_general_01",
+      "title": "一元二次方程的根",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_01.json"
+    },
+    {
+      "id": "szu_general_02",
+      "title": "判断闰年",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_02.json"
+    },
+    {
+      "id": "szu_general_03",
+      "title": "利润分段计算奖金",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_03.json"
+    },
+    {
+      "id": "szu_general_04",
+      "title": "交错调和级数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_04.json"
+    },
+    {
+      "id": "szu_general_05",
+      "title": "不用第三变量交换两数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_05.json"
+    },
+    {
+      "id": "szu_general_06",
+      "title": "平方倒数和求圆周率",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_06.json"
+    },
+    {
+      "id": "szu_general_07",
+      "title": "三角形面积",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_07.json"
+    },
+    {
+      "id": "szu_general_08",
+      "title": "三个数从小到大输出",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_08.json"
+    },
+    {
+      "id": "szu_general_09",
+      "title": "莱布尼茨公式求圆周率",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_09.json"
+    },
+    {
+      "id": "szu_general_10",
+      "title": "斐波那契数列前 40 项",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_10.json"
+    },
+    {
+      "id": "szu_general_11",
+      "title": "判断素数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_11.json"
+    },
+    {
+      "id": "szu_general_12",
+      "title": "100～200 之间的素数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_12.json"
+    },
+    {
+      "id": "szu_general_13",
+      "title": "数组逆序输出",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_13.json"
+    },
+    {
+      "id": "szu_general_14",
+      "title": "数组实现斐波那契数列",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_14.json"
+    },
+    {
+      "id": "szu_general_15",
+      "title": "矩阵转置",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_15.json"
+    },
+    {
+      "id": "szu_general_16",
+      "title": "20 个数的数组排序",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_16.json"
+    },
+    {
+      "id": "szu_general_17",
+      "title": "矩阵最大元素及位置",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_17.json"
+    },
+    {
+      "id": "szu_general_18",
+      "title": "统计单词数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_18.json"
+    },
+    {
+      "id": "szu_general_19",
+      "title": "三个字符串的最大者",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_19.json"
+    },
+    {
+      "id": "szu_general_20",
+      "title": "嵌套调用求四数最大值",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_20.json"
+    },
+    {
+      "id": "szu_general_21",
+      "title": "递归求第五个学生年龄",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_21.json"
+    },
+    {
+      "id": "szu_general_22",
+      "title": "递归计算阶乘",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_22.json"
+    },
+    {
+      "id": "szu_general_23",
+      "title": "汉诺塔",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_23.json"
+    },
+    {
+      "id": "szu_general_24",
+      "title": "十个分数的统计",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_24.json"
+    },
+    {
+      "id": "szu_general_25",
+      "title": "static 变量计算阶乘",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_25.json"
+    },
+    {
+      "id": "szu_general_26",
+      "title": "最大公约数与最小公倍数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_26.json"
+    },
+    {
+      "id": "szu_general_27",
+      "title": "平方根的整数部分",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_27.json"
+    },
+    {
+      "id": "szu_general_28",
+      "title": "杨辉三角",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_28.json"
+    },
+    {
+      "id": "szu_general_29",
+      "title": "字符分类统计",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_29.json"
+    },
+    {
+      "id": "szu_general_30",
+      "title": "重复数字构成数列的和",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_30.json"
+    },
+    {
+      "id": "szu_general_31",
+      "title": "水仙花数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_31.json"
+    },
+    {
+      "id": "szu_general_32",
+      "title": "1000 以内的完数",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_32.json"
+    },
+    {
+      "id": "szu_general_33",
+      "title": "小球反弹的总路程",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_33.json"
+    },
+    {
+      "id": "szu_general_34",
+      "title": "猴子吃桃",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_34.json"
+    },
+    {
+      "id": "szu_general_35",
+      "title": "迭代法求平方根",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_35.json"
+    },
+    {
+      "id": "szu_general_36",
+      "title": "二分法求方程的根",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_36.json"
+    },
+    {
+      "id": "szu_general_37",
+      "title": "牛顿迭代求方程的根",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_37.json"
+    },
+    {
+      "id": "szu_general_38",
+      "title": "两队比赛名单",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_38.json"
+    },
+    {
+      "id": "szu_general_39",
+      "title": "筛法求素数",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_39.json"
+    },
+    {
+      "id": "szu_general_40",
+      "title": "有序数组插入元素",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_40.json"
+    },
+    {
+      "id": "szu_general_41",
+      "title": "奇数阶魔方阵",
+      "difficulty": "hard",
+      "path": "exercises/szu_general_41.json"
+    },
+    {
+      "id": "szu_general_42",
+      "title": "二维数组的鞍点",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_42.json"
+    },
+    {
+      "id": "szu_general_43",
+      "title": "折半查找",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_43.json"
+    },
+    {
+      "id": "szu_general_44",
+      "title": "连接两个字符串",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_44.json"
+    },
+    {
+      "id": "szu_general_45",
+      "title": "复制字符串（含终止符）",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_45.json"
+    },
+    {
+      "id": "szu_general_46",
+      "title": "字符串反序输出",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_46.json"
+    },
+    {
+      "id": "szu_general_47",
+      "title": "提取元音字母",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_47.json"
+    },
+    {
+      "id": "szu_general_48",
+      "title": "最长单词",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_48.json"
+    },
+    {
+      "id": "szu_general_49",
+      "title": "递归求勒让德多项式",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_49.json"
+    },
+    {
+      "id": "szu_general_50",
+      "title": "递归将整数转为字符串",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_50.json"
+    },
+    {
+      "id": "szu_general_51",
+      "title": "十六进制转十进制",
+      "difficulty": "easy",
+      "path": "exercises/szu_general_51.json"
+    },
+    {
+      "id": "szu_general_52",
+      "title": "日期在年内的序号",
+      "difficulty": "medium",
+      "path": "exercises/szu_general_52.json"
+    }
+  ]
+}

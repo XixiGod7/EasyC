@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint sum(int a, int b) {\n    return a + b;\n}\n\nint main() {\n    int x, y;\n    scanf(\"%d %d\", &x, &y);\n    printf(\"%d\\n\", sum(x, y));\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint sum(int a, int b) {\n    return a + b;\n}\n\nint main() {\n    int x, y;\n    scanf(\"%d %d\", &x, &y);\n    // main 传入两个整数。sum 的返回值可直接作为 printf 的参数。\n    printf(\"%d\\n\", sum(x, y));\n    return 0;\n}"
 }

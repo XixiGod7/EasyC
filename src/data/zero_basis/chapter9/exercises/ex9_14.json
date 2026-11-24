@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nvoid swapEvenIndex(int arr1[], int arr2[], int size) {\n    for(int i = 0; i < size; i += 2) {\n        int temp = arr1[i];\n        arr1[i] = arr2[i];\n        arr2[i] = temp;\n    }\n}\n\nint main() {\n    int arr1[5], arr2[5];\n    for(int i = 0; i < 5; i++) scanf(\"%d\", &arr1[i]);\n    for(int i = 0; i < 5; i++) scanf(\"%d\", &arr2[i]);\n    swapEvenIndex(arr1, arr2, 5);\n    printf(\"数组1：\");\n    for(int i = 0; i < 5; i++) printf(\"%d \", arr1[i]);\n    printf(\"\\n数组2：\");\n    for(int i = 0; i < 5; i++) printf(\"%d \", arr2[i]);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nvoid swapEvenIndex(int arr1[], int arr2[], int size) {\n    // 下标从 0 开始，每次加 2，只交换 0、2、4 等偶数下标处的元素。\n    for(int i = 0; i < size; i += 2) {\n        int temp = arr1[i];\n        arr1[i] = arr2[i];\n        arr2[i] = temp;\n    }\n}\n\nint main() {\n    int arr1[5], arr2[5];\n    for(int i = 0; i < 5; i++) scanf(\"%d\", &arr1[i]);\n    for(int i = 0; i < 5; i++) scanf(\"%d\", &arr2[i]);\n    swapEvenIndex(arr1, arr2, 5);\n    printf(\"数组1：\");\n    for(int i = 0; i < 5; i++) printf(\"%d \", arr1[i]);\n    printf(\"\\n数组2：\");\n    for(int i = 0; i < 5; i++) printf(\"%d \", arr2[i]);\n    return 0;\n}"
 }

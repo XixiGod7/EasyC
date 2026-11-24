@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int arr[10], sum = 0;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[10], sum = 0;\n    for(int i = 0; i < 10; i++) {\n        scanf(\"%d\", &arr[i]);\n        if(arr[i] % 2 == 0) {\n            sum += arr[i];\n        }\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[10], sum = 0;\n    for(int i = 0; i < 10; i++) {\n        scanf(\"%d\", &arr[i]);\n        // 余数为 0 的元素才累加。0 和负偶数也满足这个条件。\n        if(arr[i] % 2 == 0) {\n            sum += arr[i];\n        }\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
 }

@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 4; j++) {\n            scanf(\"%d\", &arr[i][j]);\n        }\n    }\n    for(int i = 0; i < 3; i++) {\n        double sum = 0;\n        for(int j = 0; j < 4; j++) {\n            sum += arr[i][j];\n        }\n        printf(\"%.2f\\n\", sum / 4);\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 4; j++) {\n            scanf(\"%d\", &arr[i][j]);\n        }\n    }\n    for(int i = 0; i < 3; i++) {\n        // 每行单独累加。sum 用 double，除以 4 后也能保留小数部分。\n        double sum = 0;\n        for(int j = 0; j < 4; j++) {\n            sum += arr[i][j];\n        }\n        printf(\"%.2f\\n\", sum / 4);\n    }\n    return 0;\n}"
 }

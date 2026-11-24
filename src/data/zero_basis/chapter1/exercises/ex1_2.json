@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    // 请在此处编写计算代码\n\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int sum = 15 + 25;\n    int result1 = sum * 2;\n    int result2 = 50 / 3;\n    float result3 = 50.0 / 3;\n    printf(\"%d\\n\", result1);\n    printf(\"%d\\n\", result2);\n    printf(\"%f\\n\", result3);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int sum = 15 + 25;\n    int result1 = sum * 2;\n    // 两个整数相除会舍去小数部分。写成 50.0 就会做浮点除法。\n    int result2 = 50 / 3;\n    float result3 = 50.0 / 3;\n    printf(\"%d\\n\", result1);\n    printf(\"%d\\n\", result2);\n    printf(\"%f\\n\", result3);\n    return 0;\n}"
 }

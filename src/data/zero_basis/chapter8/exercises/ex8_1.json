@@ -11,5 +11,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    // 定义并初始化数组\n    int arr[5] = {1, 2, 3, 4, 5};\n    // 定义指向数组的指针\n    int *p = arr;\n\n    // 使用数组下标方式输出\n    printf(\"数组下标方式：\");\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    printf(\"\\n\");\n\n    // 使用指针方式输出\n    printf(\"指针方式：\");\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", *(p + i));  // 也可以写成 p[i]\n    }\n    printf(\"\\n\");\n\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    // 定义并初始化数组\n    int arr[5] = {1, 2, 3, 4, 5};\n    // 定义指向数组的指针\n    // arr 在赋值时提供首元素地址，p + i 向后移动 i 个 int 元素。\n    int *p = arr;\n\n    // 使用数组下标方式输出\n    printf(\"数组下标方式：\");\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    printf(\"\\n\");\n\n    // 使用指针方式输出\n    printf(\"指针方式：\");\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d \", *(p + i));  // 也可以写成 p[i]\n    }\n    printf(\"\\n\");\n\n    return 0;\n}"
 }

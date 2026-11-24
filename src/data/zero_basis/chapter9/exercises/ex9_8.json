@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nvoid swap(int *a, int *b) {\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}\n\nint main() {\n    int x, y;\n    scanf(\"%d %d\", &x, &y);\n    swap(&x, &y);\n    printf(\"交换后：%d %d\\n\", x, y);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nvoid swap(int *a, int *b) {\n    // 函数通过传入的地址交换两个整数，temp 用来保存覆盖前的值。\n    int temp = *a;\n    *a = *b;\n    *b = temp;\n}\n\nint main() {\n    int x, y;\n    scanf(\"%d %d\", &x, &y);\n    swap(&x, &y);\n    printf(\"交换后：%d %d\\n\", x, y);\n    return 0;\n}"
 }

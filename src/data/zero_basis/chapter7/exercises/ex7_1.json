@@ -11,6 +11,6 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int num = 10;\n    int *p = &num;\n    printf(\"指针变量的地址：%p\\n\", &p);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int num = 10;\n    int *p = &num;\n    // &p 是指针变量本身的地址，p 的内容则是 num 的地址。\n    printf(\"指针变量的地址：%p\\n\", &p);\n    return 0;\n}"
 
 }

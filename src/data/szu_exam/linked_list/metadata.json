@@ -1,0 +1,43 @@
+{
+  "id": "szu_linked_list",
+  "title": "链表题",
+  "description": "深大复习资料中的链表题，共 6 题，保留原目录编号。",
+  "exercises": [
+    {
+      "id": "szu_linked_list_01",
+      "title": "建立三个学生的简单链表",
+      "difficulty": "medium",
+      "path": "exercises/szu_linked_list_01.json"
+    },
+    {
+      "id": "szu_linked_list_02",
+      "title": "动态链表的创建、删除和插入",
+      "difficulty": "hard",
+      "path": "exercises/szu_linked_list_02.json"
+    },
+    {
+      "id": "szu_linked_list_03",
+      "title": "合并链表并按学号排序",
+      "difficulty": "hard",
+      "path": "exercises/szu_linked_list_03.json"
+    },
+    {
+      "id": "szu_linked_list_04",
+      "title": "删除两个链表的同学号结点",
+      "difficulty": "hard",
+      "path": "exercises/szu_linked_list_04.json"
+    },
+    {
+      "id": "szu_linked_list_05",
+      "title": "按年龄删除链表结点",
+      "difficulty": "hard",
+      "path": "exercises/szu_linked_list_05.json"
+    },
+    {
+      "id": "szu_linked_list_06",
+      "title": "循环链表实现约瑟夫问题",
+      "difficulty": "hard",
+      "path": "exercises/szu_linked_list_06.json"
+    }
+  ]
+}

@@ -19,5 +19,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int num, sum = 0;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int num, sum = 0;\n    scanf(\"%d\", &num);\n    while (num > 0) {\n        sum += num % 10;\n        num /= 10;\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int num, sum = 0;\n    scanf(\"%d\", &num);\n    while (num > 0) {\n        // 对 10 取余取出个位，再整除 10 去掉该位，依次处理所有数字。\n        sum += num % 10;\n        num /= 10;\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}"
 }

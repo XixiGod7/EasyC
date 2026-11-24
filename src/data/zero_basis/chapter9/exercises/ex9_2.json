@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint max(int a, int b) {\n    return a > b ? a : b;\n}\n\nint main() {\n    int x, y;\n    scanf(\"%d %d\", &x, &y);\n    printf(\"%d\\n\", max(x, y));\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint max(int a, int b) {\n    // 条件运算符按比较结果选择 a 或 b，返回值就是两数的最大值。\n    return a > b ? a : b;\n}\n\nint main() {\n    int x, y;\n    scanf(\"%d %d\", &x, &y);\n    printf(\"%d\\n\", max(x, y));\n    return 0;\n}"
 }

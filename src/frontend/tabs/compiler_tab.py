@@ -80,7 +80,6 @@ class CompilerTab:
                         with gr.Row(elem_classes=["button-group"]):
                             get_ai_feedback_button = gr.Button(
                                 "🤖 AI 分析",  # 添加图标并修改文本
-                                value=False,
                                 interactive=True,
                                 variant="primary",
                             )

@@ -19,5 +19,5 @@
         }
     ],
     "solution_template": "",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[10], max, min;\n    \n    // 输入数组元素\n    for(int i = 0; i < 10; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    \n    // 初始化最大值和最小值为第一个元素\n    max = min = arr[0];\n    \n    // 遍历数组找出最大值和最小值\n    for(int i = 1; i < 10; i++) {\n        if(arr[i] > max) max = arr[i];\n        if(arr[i] < min) min = arr[i];\n    }\n    \n    // 输出结果\n    printf(\"最大值：%d\\n\", max);\n    printf(\"最小值：%d\\n\", min);\n    \n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[10], max, min;\n    \n    // 输入数组元素\n    for(int i = 0; i < 10; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    \n    // 初始化最大值和最小值为第一个元素\n    // 使用真实的首元素作为初值，正数、负数和零都能按同一规则比较。\n    max = min = arr[0];\n    \n    // 遍历数组找出最大值和最小值\n    for(int i = 1; i < 10; i++) {\n        if(arr[i] > max) max = arr[i];\n        if(arr[i] < min) min = arr[i];\n    }\n    \n    // 输出结果\n    printf(\"最大值：%d\\n\", max);\n    printf(\"最小值：%d\\n\", min);\n    \n    return 0;\n}"
 }

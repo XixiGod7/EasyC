@@ -19,5 +19,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int a, b, c;\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int a, b, c, max;\n    scanf(\"%d %d %d\", &a, &b, &c);\n    max = a;\n    if (b > max) max = b;\n    if (c > max) max = c;\n    printf(\"%d\\n\", max);\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int a, b, c, max;\n    scanf(\"%d %d %d\", &a, &b, &c);\n    // 先把第一个数当作当前最大值，再逐一比较其余两个数。\n    max = a;\n    if (b > max) max = b;\n    if (c > max) max = c;\n    printf(\"%d\\n\", max);\n    return 0;\n}"
 }

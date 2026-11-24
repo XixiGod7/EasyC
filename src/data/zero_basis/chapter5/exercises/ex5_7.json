@@ -15,5 +15,5 @@
         }
     ],
     "solution_template": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    // 请在此处编写代码\n    return 0;\n}",
-    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 4; j++) {\n            scanf(\"%d\", &arr[i][j]);\n        }\n    }\n    for(int i = 0; i < 3; i++) {\n        int max = arr[i][0];\n        for(int j = 1; j < 4; j++) {\n            if(arr[i][j] > max) max = arr[i][j];\n        }\n        printf(\"%d\\n\", max);\n    }\n    return 0;\n}"
+    "solution": "#include <stdio.h>\n\nint main() {\n    int arr[3][4];\n    for(int i = 0; i < 3; i++) {\n        for(int j = 0; j < 4; j++) {\n            scanf(\"%d\", &arr[i][j]);\n        }\n    }\n    for(int i = 0; i < 3; i++) {\n        // 用每行第一个值初始化该行的最大值，比较这一行的其余元素。\n        int max = arr[i][0];\n        for(int j = 1; j < 4; j++) {\n            if(arr[i][j] > max) max = arr[i][j];\n        }\n        printf(\"%d\\n\", max);\n    }\n    return 0;\n}"
 }
